@@ -11,13 +11,13 @@ st.set_page_config(
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(r"C:\Users\mikej\Desktop\fantrax\proj_wk7.csv",usecols=['dk_name','total_points'])
+    dg_proj = pd.read_csv(r"proj_wk7.csv",usecols=['dk_name','total_points'])
     return dg_proj
 dg_proj = get_projections()
 
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"C:\Users\mikej\Desktop\fantrax\fx_wk7.csv",usecols=['Player','Status','Roster Status'])
+    teams = pd.read_csv(r"fx_wk7.csv",usecols=['Player','Status','Roster Status'])
     return teams
 teams = get_fantrax()
 
@@ -102,7 +102,7 @@ fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'
           hover_name=top_6_proj.player,
           template='plotly_white',
           labels = {'_index':" ",'player': '','proj_pts':'Projected Pts'},
-          title = f"Top 6 Projected Plays by Team<br>mean:<b>{mean_starter}</b>",
+          title = f"<b>Mean: {mean_starter}</b>",
           text_auto=True,
           height=400,
           color_discrete_map=team_color
