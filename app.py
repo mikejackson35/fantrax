@@ -24,7 +24,7 @@ def get_fantrax():
 teams = get_fantrax()
 
 teams.columns = ['player','team','active_reserve']
-teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'Sneads Shoe','NT 8':'New Team 8','txms':'txmoonshine','MG':'Team Gamble','GRR':'Putt Pirates','[AW]':'AlphaWired'}
+teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'New Team 8','NT 8':'Sneads Shoe','txms':'txmoonshine','MG':'Team Gamble','grrr':'Putt Pirates','[AW]':'AlphaWired'}
 teams['team'] = teams.team.map(teams_dict)
 teams.set_index('player',inplace=True)
 
@@ -46,7 +46,7 @@ team_color={
                 "txmoonshine": 'rgb(0,134,139)',
                 "Putt Pirates": 'rgb(165,170,153)'}
 
-active_color={"Active":'rgb(93,105,177)',"Reserve":'rgb(218,165,27)'}
+active_color={"Active":'rgb(146,146,143)',"Reserve":'rgb(220,222,202)'}
 
 # TOP PROJ PLAYERS
 top_6_proj = pd.DataFrame()
@@ -73,28 +73,27 @@ fig1 = px.bar(week.sort_values(by = 'proj_pts',ascending=False).reset_index(),
        color = 'active_reserve',
        color_discrete_map=active_color,
        labels = {'_index':"", 'proj_pts':'Projected Pts'},
-       height=400,
+       height=350,
        log_y=True
        ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
                                    ).update_xaxes(showticklabels=False
-                                                  ).update_yaxes(showgrid=False)
+                                                  ).update_yaxes(showgrid=False, tickvals=[50,60,70,80,90,100])
 
 # BAR - ALL PLAYERS BY TEAM
-fig2 = px.bar(week.sort_values(by = 'proj_pts',ascending=False).reset_index(),
+fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
-      labels = {'_index':"", 'proj_pts':'Projected Pts'},
+      labels = {'index':"", 'proj_pts':'Projected Pts'},
       text_auto = ",.0f",
       template = 'plotly_white',
-      height=400,
+      height=350,
       log_y=True,
-      title='All Mexico Open Players on Rosters',
       hover_name='player'
       ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
                                    ).update_xaxes(showticklabels=False
-                                                  ).update_layout(title_x=.25
-                                                                  ).update_yaxes(showgrid=False)
+                                                  ).update_yaxes(showgrid=False
+                                                                 ).update_layout(legend=dict(y=1.5, orientation='h'))
 
 # BAR - TOP 6 PROJECTED PLAYERS BY TEAM
 fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'],ascending=False),
@@ -104,14 +103,13 @@ fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'
           hover_name=top_6_proj.player,
           template='plotly_white',
           labels = {'_index':" ",'player': '','proj_pts':'Projected Pts'},
-          title = f"<b>Mean: {mean_starter}</b>",
           text_auto=True,
-          height=400,
+          height=350,
           color_discrete_map=team_color
           ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
                                    ).update_xaxes(showticklabels=False
-                                                  ).update_layout(title_x=.25
-                                                                  ).update_yaxes(showgrid=False)
+                                                  ).update_yaxes(showgrid=False
+                                                                 ).update_layout(legend=dict(y=1.5, orientation='h'))
 
 # BAR - HORIZONTAL ACTIVE ROSTERS
 fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort_values(by='proj_pts',ascending=False),
@@ -120,10 +118,11 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
     color='team', 
     template='plotly_white',
     text_auto=True,
-    title = "Current Roster",
+    title = "Current Rosters",
     labels = {'team': ' ', 'proj_pts':''},
     color_discrete_map=team_color,
-    log_x=True
+    log_x=True,
+    height=400
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
 
@@ -134,9 +133,11 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
     text_auto=True,
     color='team',
     template='plotly_white',
-    title = "Optimal Roster",
+    title = "Optimal Rosters",
     labels = {'team': ' ', 'proj_pts':''},
     color_discrete_map=team_color,
+    height=400,
+    log_x=True
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
 
@@ -151,23 +152,29 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       text='player',
       template = 'plotly_white',
       hover_name='proj_pts',
+      height=350,
       title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
 
-matchup = ['Sneads Shoe','Philly919']
-fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
+matchup2 = ['Sneads Shoe','Philly919']
+fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
       labels = {'_index':"", 'proj_pts':'Projected Pts'},
+#       text_auto = ",.0f",
       text='player',
       template = 'plotly_white',
       hover_name='proj_pts',
+      height=350,
+      title=f"{matchup2[0]} v {matchup2[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
 
-st.title("Fantrax Wk7 - The Mexico Open")
+st.write("#")
+st.markdown("Fantrax Week 7")
+st.header("The Mexico Open")
 "---"
-col1, blank, col2 = st.columns([2,1,2])
+col1, col2, blank = st.columns([2,2,1])
 with col1:
     st.plotly_chart(fig4,use_container_width=True)
 with blank:
@@ -175,22 +182,27 @@ with blank:
 with col2:  
     st.plotly_chart(fig5, use_container_width=True)
 
-st.subheader("All Mexico Open Players on Rosters")
+num_players = len(week)
+
+st.markdown(f"<h5>Start/Sit by Projected Pts - {num_players} Players</h5>",unsafe_allow_html=True)
 st.plotly_chart(fig1,use_container_width=True)
 
-st.subheader("Optimal Player Projections")
+st.markdown("<h5>Optimal Player Projections</h5>",unsafe_allow_html=True)
+st.markdown(f"Mean: {mean_starter}",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['by Team', 'by Points'])
 with tab1:
     st.plotly_chart(fig3,use_container_width=True)
 with tab2:
     st.plotly_chart(fig2,use_container_width=True)
 
-st.subheader("Our Matchups")
+st.markdown("<h5>Our Matchups</h5>",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['Phil', 'Mike'])
 with tab1:
     st.plotly_chart(fig7,use_container_width=True)
 with tab2:
     st.plotly_chart(fig6,use_container_width=True)
+
+st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
 
 dg_proj_copy = round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
 st.dataframe(dg_proj_copy,use_container_width=True)
