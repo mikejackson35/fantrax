@@ -165,7 +165,7 @@ fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       hover_name='proj_pts',
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
 
-st.markdown("<h1>Fantrax Wk7 - The Mexico Open</h1>")
+st.title("Fantrax Wk7 - The Mexico Open")
 "---"
 col1, blank, col2 = st.columns([2,1,2])
 with col1:
