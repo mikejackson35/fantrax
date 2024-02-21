@@ -11,9 +11,11 @@ st.set_page_config(
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(r"proj_wk7.csv",usecols=['dk_name','total_points'])
+    dg_proj = pd.read_csv(r"proj_wk7.csv")#,usecols=['dk_name','total_points'])
     return dg_proj
 dg_proj = get_projections()
+dg_proj_copy = dg_proj.copy()
+dg_proj = dg_proj[['dk_name','total_points']]
 
 st.cache_data()
 def get_fantrax():
@@ -189,6 +191,9 @@ with tab1:
     st.plotly_chart(fig7,use_container_width=True)
 with tab2:
     st.plotly_chart(fig6,use_container_width=True)
+
+dg_proj_copy = round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
+st.dataframe(dg_proj_copy,use_container_width=True)
 
 
 
