@@ -19,7 +19,7 @@ dg_proj = dg_proj[['dk_name','total_points']]
 
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fx_wk8.csv",usecols=['Player','Status','Roster Status'])
+    teams = pd.read_csv(r"fx_wk8_.csv",usecols=['Player','Status','Roster Status'])
     return teams
 teams = get_fantrax()
 
@@ -142,7 +142,7 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
                     ).update_xaxes(showticklabels=False)
 
 # My Matchup
-matchup = ['txmoonshine','unit_circle']
+matchup = ['Team Gamble','unit_circle']
 fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
@@ -156,7 +156,7 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
 
-matchup2 = ['Sneads Shoe','Philly919']
+matchup2 = ['New Team 8','Philly919']
 fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
