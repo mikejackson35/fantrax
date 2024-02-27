@@ -4,14 +4,14 @@ import plotly.express as px
 import streamlit as st
 
 st.set_page_config(
-    page_title="PGA Pressure",
+    page_title="Pip/Jacko",
     layout="centered",
     initial_sidebar_state="expanded",
 )
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(r"proj_wk7.csv")#,usecols=['dk_name','total_points'])
+    dg_proj = pd.read_csv(r"proj_wk8.csv")#,usecols=['dk_name','total_points'])
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
@@ -19,7 +19,7 @@ dg_proj = dg_proj[['dk_name','total_points']]
 
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fx_wk7.csv",usecols=['Player','Status','Roster Status'])
+    teams = pd.read_csv(r"fx_wk8.csv",usecols=['Player','Status','Roster Status'])
     return teams
 teams = get_fantrax()
 
@@ -171,8 +171,8 @@ fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))]
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
 
 st.write("#")
-st.markdown("Fantrax Week 7")
-st.header("The Mexico Open")
+st.markdown("Fantrax Week 8")
+st.header("Cognizant Classic in The Palm Beaches")
 "---"
 col1, col2, blank = st.columns([2,2,1])
 with col1:
