@@ -19,7 +19,7 @@ dg_proj = dg_proj[['dk_name','total_points']]
 
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fx_wk8_.csv",usecols=['Player','Status','Roster Status'])
+    teams = pd.read_csv(r"fx_wk8.csv",usecols=['Player','Status','Roster Status'])
     return teams
 teams = get_fantrax()
 
@@ -205,7 +205,18 @@ with tab2:
 st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
 
 dg_proj_copy = round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
-st.dataframe(dg_proj_copy,use_container_width=True)
+st.dataframe(dg_proj_copy.style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
+             hide_index=True,
+             column_config={
+                 'dk_name':'Name',
+                'dk_salary': 'DK Salary',
+                'early_late_wave':'Early/Late Wave',
+                'total_points':'Proj Pts',
+                'value': 'Value',
+                'projected_ownership':'pOwn'
+                },
+                use_container_width=True
+                )
 
 
 
