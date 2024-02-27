@@ -24,7 +24,7 @@ def get_fantrax():
 teams = get_fantrax()
 
 teams.columns = ['player','team','active_reserve']
-teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'New Team 8','NT 8':'Sneads Shoe','txms':'txmoonshine','MG':'Team Gamble','grrr':'Putt Pirates','[AW]':'AlphaWired'}
+teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'New Team 4','NT 8':'Sneads Shoe','txms':'txmoonshine','MG':'Team Gamble','grrr':'Putt Pirates','[AW]':'AlphaWired'}
 teams['team'] = teams.team.map(teams_dict)
 teams.set_index('player',inplace=True)
 
@@ -41,7 +41,7 @@ team_color={
                 "unit_cirle": 'rgb(17,165,121)',
                 "AlphaWired": 'rgb(57,105,172)',
                 "Sneads Shoe": 'rgb(242,183,1)',
-                "New Team 8": 'rgb(231,63,116)',
+                "New Team 4": 'rgb(231,63,116)',
                 "Team Gamble": 'rgb(230,131,16)',
                 "txmoonshine": 'rgb(0,134,139)',
                 "Putt Pirates": 'rgb(165,170,153)'}
@@ -156,7 +156,7 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
 
-matchup2 = ['New Team 8','Philly919']
+matchup2 = ['New Team 4','Philly919']
 fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
