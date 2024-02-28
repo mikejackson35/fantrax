@@ -204,7 +204,7 @@ with tab2:
 
 st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
 
-dg_proj_copy = round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
+dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
 st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
              hide_index=True,
              column_config={
