@@ -212,7 +212,7 @@ fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascendi
                 y = 'proj_pts', 
                 height=350,
                 width=600,
-                title = f"Choices for New Team 4", 
+                title = f"Choices for unit_circle", 
                 color='active_reserve', 
                 text_auto=True,
                 template = 'plotly_dark',
@@ -226,7 +226,7 @@ fig10 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascendi
                 y = 'proj_pts', 
                 height=350,
                 width=600,
-                title = f"Choices for unit_circle", 
+                title = f"Choices for New Team 4", 
                 color='active_reserve', 
                 text_auto=True,
                 template = 'plotly_dark',
@@ -266,7 +266,7 @@ st.markdown(f"Rostered Players: {num_players}",unsafe_allow_html=True)
 st.markdown(f"<h5>Who is Being Used?</h5>",unsafe_allow_html=True)
 st.plotly_chart(fig1,use_container_width=True)
 
-st.markdown("<h5>Optimal Player Projections</h5>",unsafe_allow_html=True)
+st.markdown("<h5>OPTIMAL PROJECTIONS</h5>",unsafe_allow_html=True)
 st.markdown(f"Mean: {mean_starter}",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['by Team', 'by Points'])
 with tab1:
@@ -274,14 +274,14 @@ with tab1:
 with tab2:
     st.plotly_chart(fig2,use_container_width=True)
 
-st.markdown("<h5>Our Matchups</h5>",unsafe_allow_html=True)
+st.markdown("<h5>MATCHUPS</h5>",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['Phil', 'Mike'])
 with tab1:
     st.plotly_chart(fig7,use_container_width=True)
 with tab2:
     st.plotly_chart(fig6,use_container_width=True)
 
-st.markdown("<h5>Our Choices</h5>",unsafe_allow_html=True)
+st.markdown("<h5>CHOICES</h5>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4 = st.tabs(['Phil', 'Phil Opponent', 'Mike','Mike Opponent'])
 with tab1:
     st.plotly_chart(fig8,use_container_width=True)
