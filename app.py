@@ -268,7 +268,7 @@ st.plotly_chart(fig1,use_container_width=True)
 
 st.markdown("<h5>OPTIMAL PROJECTIONS</h5>",unsafe_allow_html=True)
 st.markdown(f"Mean: {mean_starter}",unsafe_allow_html=True)
-tab1, tab2 = st.tabs(['by Team', 'by Points'])
+tab1, tab2 = st.tabs(['Top 6 by Team', 'All Available by Proj Points'])
 with tab1:
     st.plotly_chart(fig3,use_container_width=True)
 with tab2:
