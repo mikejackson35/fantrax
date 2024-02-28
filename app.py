@@ -208,15 +208,18 @@ dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','early_lat
 st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
              hide_index=True,
              column_config={
-                 'dk_name':'Name',
-                'dk_salary': 'DK Salary',
-                'early_late_wave':'Early/Late Wave',
-                'total_points':'Proj Pts',
-                'value': 'Value',
-                'projected_ownership':'pOwn'
-                },
-                use_container_width=True
-                )
+                  'dk_name':'Name',
+                  'dk_salary': st.column_config.NumberColumn(
+                       'DK Salary',
+                       format = "$ %.0f"
+                    ),
+                   'early_late_wave':'Early/Late Wave',
+                   'total_points':'Proj Pts',
+                   'value': 'Value',
+                   'projected_ownership':'pOwn'
+             },
+             use_container_width=True
+        )
 
 
 
