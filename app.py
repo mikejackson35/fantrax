@@ -9,6 +9,28 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+st.markdown("""
+<style>
+            
+[data-baseweb="tab-list"] {
+    gap: 4px;
+}
+
+[data-baseweb="tab"] {
+    height: 25px;
+    width: 500px;
+    white-space: pre-wrap;
+    background-color: #A29F99;
+    # background-color: #E8E6E3;
+    border-radius: 4px 4px 0px 0px;
+    gap: 1px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+            
+</style>
+        """, unsafe_allow_html=True)
+
 st.cache_data()
 def get_projections():
     dg_proj = pd.read_csv(r"proj_wk8.csv")#,usecols=['dk_name','total_points'])
