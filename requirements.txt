@@ -2,4 +2,4 @@ plotly
 streamlit
 pandas
 numpy
-matplotlib
+matplotlib==3.3.2
