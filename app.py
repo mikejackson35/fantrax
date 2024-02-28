@@ -17,7 +17,7 @@ st.markdown("""
 }
 
 [data-baseweb="tab"] {
-    height: 25px;
+    height: 30px;
     width: 500px;
     white-space: pre-wrap;
     background-color: #A29F99;
@@ -176,7 +176,7 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       hover_name='proj_pts',
       height=350,
       title=f"{matchup[0]} v {matchup[1]}",
-      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
+      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999")
 
 matchup2 = ['New Team 4','Philly919']
 fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
@@ -190,7 +190,63 @@ fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))]
       hover_name='proj_pts',
       height=350,
       title=f"{matchup2[0]} v {matchup2[1]}",
-      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100])
+      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999")
+
+# PHIL CHOICES
+fig8 = px.bar(week[week.team == 'Philly919'].sort_values(by='proj_pts',ascending=False), 
+                x = 'player', 
+                y = 'proj_pts', 
+                height=350,
+                width=600,
+                title = f"Choices for Philly919", 
+                color='active_reserve', 
+                text_auto=True,
+                template = 'plotly_dark',
+                color_discrete_map=active_color,
+                log_y=True,
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+
+# MIKE CHOICES
+fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascending=False), 
+                x = 'player', 
+                y = 'proj_pts', 
+                height=350,
+                width=600,
+                title = f"Choices for New Team 4", 
+                color='active_reserve', 
+                text_auto=True,
+                template = 'plotly_dark',
+                color_discrete_map=active_color,
+                log_y=True,
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+
+# PHIL OPPONENT CHOICES
+fig10 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascending=False), 
+                x = 'player', 
+                y = 'proj_pts', 
+                height=350,
+                width=600,
+                title = f"Choices for unit_circle", 
+                color='active_reserve', 
+                text_auto=True,
+                template = 'plotly_dark',
+                color_discrete_map=active_color,
+                log_y=True,
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+
+# MIKE CHOICES
+fig11 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascending=False), 
+                x = 'player', 
+                y = 'proj_pts', 
+                height=350,
+                width=600,
+                title = f"Choices for Team Gamble", 
+                color='active_reserve', 
+                text_auto=True,
+                template = 'plotly_dark',
+                color_discrete_map=active_color,
+                log_y=True,
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
 
 st.write("#")
 st.markdown("Fantrax Week 8")
@@ -206,7 +262,8 @@ with col2:
 
 num_players = len(week)
 
-st.markdown(f"<h5>Start/Sit by Projected Pts - {num_players} Players</h5>",unsafe_allow_html=True)
+st.markdown(f"Rostered Players: {num_players}",unsafe_allow_html=True)
+st.markdown(f"<h5>Who is Being Used?</h5>",unsafe_allow_html=True)
 st.plotly_chart(fig1,use_container_width=True)
 
 st.markdown("<h5>Optimal Player Projections</h5>",unsafe_allow_html=True)
@@ -223,6 +280,17 @@ with tab1:
     st.plotly_chart(fig7,use_container_width=True)
 with tab2:
     st.plotly_chart(fig6,use_container_width=True)
+
+st.markdown("<h5>Our Choices</h5>",unsafe_allow_html=True)
+tab1, tab2, tab3, tab4 = st.tabs(['Phil', 'Phil Opponent', 'Mike','Mike Opponent'])
+with tab1:
+    st.plotly_chart(fig8,use_container_width=True)
+with tab2:
+    st.plotly_chart(fig10,use_container_width=True)
+with tab3:
+    st.plotly_chart(fig9,use_container_width=True)
+with tab4:
+    st.plotly_chart(fig11,use_container_width=True)
 
 st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
 
