@@ -262,8 +262,9 @@ with col2:
 
 num_players = len(week)
 
-st.markdown(f"Rostered Players: {num_players}",unsafe_allow_html=True)
-st.markdown(f"<h5>Who is Being Used?</h5>",unsafe_allow_html=True)
+# st.markdown(f"Rostered Players: {num_players}",unsafe_allow_html=True)
+st.markdown(f"<h5>WHO IS BEING USED?</h5>",unsafe_allow_html=True)
+st.markdown(f"of the {num_players} Rostered Players",unsafe_allow_html=True)
 st.plotly_chart(fig1,use_container_width=True)
 
 st.markdown("<h5>OPTIMAL PROJECTIONS</h5>",unsafe_allow_html=True)
@@ -294,7 +295,7 @@ with tab4:
 
 st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
 
-dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
+dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership','adj_from_baseline']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
 st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
              hide_index=True,
              column_config={
@@ -306,7 +307,8 @@ st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cm
                    'early_late_wave':'Early/Late Wave',
                    'total_points':'Proj Pts',
                    'value': 'Value',
-                   'projected_ownership':'pOwn'
+                   'projected_ownership':'pOwn',
+                   'adj_from_baseline': 'Baseline Adj'
              },
              use_container_width=True
         )
