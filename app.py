@@ -132,7 +132,8 @@ fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'
           labels = {'_index':" ",'player': '','proj_pts':'Projected Pts'},
           text_auto=True,
           height=350,
-          color_discrete_map=team_color
+          color_discrete_map=team_color,
+          log_y=True
           ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
                                    ).update_xaxes(showticklabels=False
                                                   ).update_yaxes(showgrid=False
@@ -288,7 +289,7 @@ with tab2:
     st.plotly_chart(fig6,use_container_width=True)
 
 st.markdown("<h5>CHOICES</h5>",unsafe_allow_html=True)
-tab1, tab2, tab3, tab4 = st.tabs(['Phil', 'Phil Opponent', 'Mike','Mike Opponent'])
+tab1, tab2, tab3, tab4 = st.tabs(['Phil', 'Phil Opp', 'Mike','Mike Opp'])
 with tab1:
     st.plotly_chart(fig8,use_container_width=True)
 with tab2:
