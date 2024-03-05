@@ -33,7 +33,7 @@ st.markdown("""
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(r"proj_wk8.csv")#,usecols=['dk_name','total_points'])
+    dg_proj = pd.read_csv(r"proj_wk9.csv")#,usecols=['dk_name','total_points'])
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
@@ -41,7 +41,7 @@ dg_proj = dg_proj[['dk_name','total_points']]
 
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fx_wk8.csv",usecols=['Player','Status','Roster Status'])
+    teams = pd.read_csv(r"fx_wk9.csv",usecols=['Player','Status','Roster Status'])
     return teams
 teams = get_fantrax()
 
@@ -69,6 +69,11 @@ team_color={
                 "Putt Pirates": 'rgb(165,170,153)'}
 
 active_color={"Active":'rgb(146,146,143)',"Reserve":'rgb(220,222,202)'}
+
+### opponent inputs ###
+mike_opp = 'AlphaWired'
+phil_opp = 'txmoonshine'
+current_week = 9
 
 # TOP PROJ PLAYERS
 top_6_proj = pd.DataFrame()
@@ -164,7 +169,7 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
                     ).update_xaxes(showticklabels=False)
 
 # My Matchup
-matchup = ['Team Gamble','unit_circle']
+matchup = [mike_opp,'unit_circle']
 fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
@@ -178,7 +183,7 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999")
 
-matchup2 = ['New Team 4','Philly919']
+matchup2 = [phil_opp,'Philly919']
 fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
@@ -221,12 +226,12 @@ fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascendi
                 labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
 
 # PHIL OPPONENT CHOICES
-fig10 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascending=False), 
+fig10 = px.bar(week[week.team == phil_opp].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
                 height=350,
                 width=600,
-                title = f"Choices for New Team 4", 
+                title = f"Choices for {phil_opp}", 
                 color='active_reserve', 
                 text_auto=True,
                 template = 'plotly_dark',
@@ -235,12 +240,12 @@ fig10 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascendi
                 labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
 
 # MIKE CHOICES
-fig11 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascending=False), 
+fig11 = px.bar(week[week.team == mike_opp].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
                 height=350,
                 width=600,
-                title = f"Choices for Team Gamble", 
+                title = f"Choices for {mike_opp}", 
                 color='active_reserve', 
                 text_auto=True,
                 template = 'plotly_dark',
@@ -249,8 +254,8 @@ fig11 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascend
                 labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
 
 st.write("#")
-st.markdown("Fantrax Week 8")
-st.header("Cognizant Classic in The Palm Beaches")
+st.markdown(f"Fantrax Week {current_week}")
+st.header("The Arnold Palmer Invitational")
 "---"
 col1, col2, blank = st.columns([2,2,1])
 with col1:
@@ -295,7 +300,7 @@ with tab4:
 
 st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
 
-dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership','adj_from_baseline']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
+dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
 st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
              hide_index=True,
              column_config={
