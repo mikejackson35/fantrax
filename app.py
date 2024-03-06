@@ -9,6 +9,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+config = {'displayModeBar': False}
+
 st.markdown("""
 <style>
             
@@ -260,48 +262,48 @@ st.header("The Arnold Palmer Invitational")
 "---"
 col1, col2, blank = st.columns([2,2,1])
 with col1:
-    st.plotly_chart(fig4,use_container_width=True)
+    st.plotly_chart(fig4,use_container_width=True,config = config)
 with blank:
     st.markdown("##")
 with col2:  
-    st.plotly_chart(fig5, use_container_width=True)
+    st.plotly_chart(fig5, use_container_width=True,config = config)
 
 num_players = len(week)
 
 # st.markdown(f"Rostered Players: {num_players}",unsafe_allow_html=True)
 st.markdown(f"<h5>WHO IS BEING USED?</h5>",unsafe_allow_html=True)
 st.markdown(f"of the {num_players} Rostered Players",unsafe_allow_html=True)
-st.plotly_chart(fig1,use_container_width=True)
+st.plotly_chart(fig1,use_container_width=True,config = config)
 
 st.markdown("<h5>OPTIMAL PROJECTIONS</h5>",unsafe_allow_html=True)
 st.markdown(f"Mean: {mean_starter}",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['Top 6 by Team', 'All Available by Proj Points'])
 with tab1:
-    st.plotly_chart(fig3,use_container_width=True)
+    st.plotly_chart(fig3,use_container_width=True,config = config)
 with tab2:
-    st.plotly_chart(fig2,use_container_width=True)
+    st.plotly_chart(fig2,use_container_width=True,config = config)
 
 st.markdown("<h5>MATCHUPS</h5>",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['Phil', 'Mike'])
 with tab1:
-    st.plotly_chart(fig7,use_container_width=True)
+    st.plotly_chart(fig7,use_container_width=True,config = config)
 with tab2:
-    st.plotly_chart(fig6,use_container_width=True)
+    st.plotly_chart(fig6,use_container_width=True,config = config)
 
-st.markdown("<h5>CHOICES</h5>",unsafe_allow_html=True)
+st.markdown("<h5>PLAYING THIS WEEK</h5>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4 = st.tabs(['Phil', 'Phil Opp', 'Mike','Mike Opp'])
 with tab1:
-    st.plotly_chart(fig8,use_container_width=True)
+    st.plotly_chart(fig8,use_container_width=True,config = config)
 with tab2:
-    st.plotly_chart(fig10,use_container_width=True)
+    st.plotly_chart(fig10,use_container_width=True,config = config)
 with tab3:
-    st.plotly_chart(fig9,use_container_width=True)
+    st.plotly_chart(fig9,use_container_width=True,config = config)
 with tab4:
-    st.plotly_chart(fig11,use_container_width=True)
+    st.plotly_chart(fig11,use_container_width=True,config = config)
 
 st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
 
-dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','early_late_wave','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
+dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
 st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
              hide_index=True,
              height=1000,
@@ -311,7 +313,7 @@ st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cm
                        'DK Salary',
                        format = "$ %.0f"
                     ),
-                   'early_late_wave':'Early/Late Wave',
+                #    'early_late_wave':'Early/Late Wave',
                    'total_points':'Proj Pts',
                    'value': 'Value',
                    'projected_ownership':'pOwn',
