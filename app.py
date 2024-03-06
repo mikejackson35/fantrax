@@ -5,7 +5,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Pip/Jacko",
-    layout="centered",
+    layout="wide",
     initial_sidebar_state="expanded",
 )
 
@@ -13,6 +13,10 @@ config = {'displayModeBar': False}
 
 st.markdown("""
 <style>
+            
+[data-testid="stAppViewContainer"] {
+    padding: 0px 400px 0px 400px;
+}
             
 [data-baseweb="tab-list"] {
     gap: 4px;
@@ -271,26 +275,26 @@ with col2:
 num_players = len(week)
 
 # st.markdown(f"Rostered Players: {num_players}",unsafe_allow_html=True)
-st.markdown(f"<h5>WHO IS BEING USED?</h5>",unsafe_allow_html=True)
-st.markdown(f"of the {num_players} Rostered Players",unsafe_allow_html=True)
+st.markdown(f"<center><h5>WHO IS BEING USED?</h5></center>",unsafe_allow_html=True)
+st.markdown(f"<center>of the {num_players} Rostered Players</center>",unsafe_allow_html=True)
 st.plotly_chart(fig1,use_container_width=True,config = config)
 
-st.markdown("<h5>OPTIMAL PROJECTIONS</h5>",unsafe_allow_html=True)
-st.markdown(f"Mean: {mean_starter}",unsafe_allow_html=True)
+st.markdown("<center><h5>OPTIMAL PROJECTIONS</h5></center>",unsafe_allow_html=True)
+st.markdown(f"<center>Mean: {mean_starter}</center>",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['Top 6 by Team', 'All Available by Proj Points'])
 with tab1:
     st.plotly_chart(fig3,use_container_width=True,config = config)
 with tab2:
     st.plotly_chart(fig2,use_container_width=True,config = config)
 
-st.markdown("<h5>MATCHUPS</h5>",unsafe_allow_html=True)
+st.markdown("<center><h5>MATCHUPS</h5></center>",unsafe_allow_html=True)
 tab1, tab2 = st.tabs(['Phil', 'Mike'])
 with tab1:
     st.plotly_chart(fig7,use_container_width=True,config = config)
 with tab2:
     st.plotly_chart(fig6,use_container_width=True,config = config)
 
-st.markdown("<h5>PLAYING THIS WEEK</h5>",unsafe_allow_html=True)
+st.markdown("<center><h5>PLAYING THIS WEEK</h5></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4 = st.tabs(['Phil', 'Phil Opp', 'Mike','Mike Opp'])
 with tab1:
     st.plotly_chart(fig8,use_container_width=True,config = config)
