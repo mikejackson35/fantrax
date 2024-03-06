@@ -14,9 +14,9 @@ config = {'displayModeBar': False}
 st.markdown("""
 <style>
             
-[data-testid="stAppViewContainer"] {
-    padding: 0px 400px 0px 400px;
-}
+# [data-testid="stAppViewContainer"] {
+#     padding: 0px 400px 0px 400px;
+# }
             
 [data-baseweb="tab-list"] {
     gap: 4px;
