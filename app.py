@@ -5,7 +5,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Pip/Jacko",
-    layout="center",
+    layout="centered",
     initial_sidebar_state="expanded",
 )
 
