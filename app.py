@@ -18,6 +18,10 @@ st.markdown("""
 #     padding: 0px 400px 0px 400px;
 # }
             
+[data-testid="stElementToolbar"] {
+    display: none;
+}
+            
 [data-baseweb="tab-list"] {
     gap: 4px;
 }
@@ -261,8 +265,8 @@ fig11 = px.bar(week[week.team == mike_opp].sort_values(by='proj_pts',ascending=F
                 labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
 
 st.write("#")
-st.markdown(f"Fantrax Week {current_week}")
-st.markdown("<center><h2>The Arnold Palmer Invitational</h2></center>")
+st.markdown(f"<center>Fantrax Week {current_week}</center>",unsafe_allow_html=True)
+st.markdown("<center><h2>The Arnold Palmer Invitational</h2></center>",unsafe_allow_html=True)
 "---"
 col1, col2, blank = st.columns([2,2,1])
 with col1:
