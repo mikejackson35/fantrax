@@ -262,7 +262,7 @@ fig11 = px.bar(week[week.team == mike_opp].sort_values(by='proj_pts',ascending=F
 
 st.write("#")
 st.markdown(f"Fantrax Week {current_week}")
-st.header("<center>The Arnold Palmer Invitational</center>")
+st.markdown("<center><h2>The Arnold Palmer Invitational</h2></center>")
 "---"
 col1, col2, blank = st.columns([2,2,1])
 with col1:
