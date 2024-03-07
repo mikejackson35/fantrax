@@ -22,6 +22,10 @@ st.markdown("""
     display: none;
 }
             
+.stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+font-size:1.15rem;
+}
+            
 [data-baseweb="tab-list"] {
     gap: 4px;
 }
@@ -298,7 +302,7 @@ with tab1:
 with tab2:
     st.plotly_chart(fig6,use_container_width=True,config = config)
 
-st.markdown("<center><h5>PLAYING THIS WEEK</h5></center>",unsafe_allow_html=True)
+st.markdown("<center><h5>CHOICES THIS WEEK</h5></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4 = st.tabs(['Phil', 'Phil Opp', 'Mike','Mike Opp'])
 with tab1:
     st.plotly_chart(fig8,use_container_width=True,config = config)
@@ -309,7 +313,8 @@ with tab3:
 with tab4:
     st.plotly_chart(fig11,use_container_width=True,config = config)
 
-st.markdown("<h5>Draft Kings Projections</h5>",unsafe_allow_html=True)
+st.markdown("##")
+st.markdown("<center><h5>DRAFT KINGS PROJECTIONS</h5></center>",unsafe_allow_html=True)
 
 dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
 st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
