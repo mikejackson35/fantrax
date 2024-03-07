@@ -88,10 +88,10 @@ for team in week.team.unique():
     top_6_proj = pd.concat([top_6_proj,temp])
     top_6_proj = top_6_proj.sort_values('proj_pts',ascending=False).reset_index(drop=True)
 
-# TOP ACTIVE PLAYERS
+# ACTIVE PLAYERS BY TEAM
 top_6_active = pd.DataFrame()
 for team in week.team.unique():
-    temp = week[(week.team==team) & (week.active_reserve=='Active')][['team','player','proj_pts','active_reserve']]#.sort_values(by=['active_reserve','proj_pts'],ascending=False)[:6]
+    temp = week[(week.team==team) & (week.active_reserve=='Active')][['team','player','proj_pts','active_reserve']]
     top_6_active = pd.concat([top_6_active,temp])
 
 # NEEDED METRICS
@@ -262,7 +262,7 @@ fig11 = px.bar(week[week.team == mike_opp].sort_values(by='proj_pts',ascending=F
 
 st.write("#")
 st.markdown(f"Fantrax Week {current_week}")
-st.header("The Arnold Palmer Invitational")
+st.header("<center>The Arnold Palmer Invitational</center>")
 "---"
 col1, col2, blank = st.columns([2,2,1])
 with col1:
