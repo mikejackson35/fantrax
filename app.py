@@ -384,6 +384,17 @@ with tab4:
 #              },
 #              use_container_width=True
 #         )
+    
+# ---- REMOVE UNWANTED STREAMLIT STYLING ----
+hide_st_style = """
+            <style>
+            Main Menu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+            
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 
 
