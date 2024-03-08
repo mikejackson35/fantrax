@@ -307,8 +307,8 @@ fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascen
                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 
-st.write("#")
-blank0, col1, blank1, col2, blank2, col3, blank3 = st.columns([2,1,.75,.75,.75,1,2])
+# st.write("#")
+blank0, col1, blank1, col2, blank2, col3, blank3 = st.columns([1,1,.4,.75,.4,1,1])
 with blank0:
     st.markdown("")
 with col1:
@@ -318,14 +318,15 @@ with blank1:
 with col2:
     st.markdown("###")
     st.markdown("###")
-    st.markdown(f"<center>Fantrax Week {current_week}</center>",unsafe_allow_html=True)
-    st.markdown("<center><h2>The Arnold Palmer Invitational</h2></center>",unsafe_allow_html=True)
+    st.markdown(f"<center><h5>Fantrax Week {current_week}</h5></center>",unsafe_allow_html=True)
+    st.markdown("<center><h2>Arnold Palmer Invitational</h2></center>",unsafe_allow_html=True)
 with blank2:
     st.markdown("")
 with col3:
     st.plotly_chart(fig5, use_container_width=True,config = config)
 with blank3:
     st.markdown("")
+# "---"
 
 st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
 blank0, col1, blank1 = st.columns([1.5,4,1.5])
@@ -341,53 +342,55 @@ with col1:
         st.plotly_chart(fig3,use_container_width=True,config = config)
 with blank1:
     st.markdown("")
+"---"
 
 st.markdown("<center><h5>TEAM DECISIONS</h5></center>",unsafe_allow_html=True)
 blank0, col1, blank1 = st.columns([1.5,4,1.5])
 
 with blank0:
     st.markdown("")
-with col1:
-    teams = st.radio(
-        "",
-        ['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'],
-        horizontal=True)
-    if teams == '919':
-        st.plotly_chart(fig8,use_container_width=True,config = config)
-    elif teams == 'u_c':
-        st.plotly_chart(fig9,use_container_width=True,config = config)
-    elif teams == 'txms':
-        st.plotly_chart(fig10,use_container_width=True,config = config)
-    elif teams == '[AW]':
-        st.plotly_chart(fig11,use_container_width=True,config = config)
-    elif teams == 'NT4':
-        st.plotly_chart(fig12,use_container_width=True,config = config)
-    elif teams == 'MG':
-        st.plotly_chart(fig13,use_container_width=True,config = config)
-    elif teams == 'foot':
-        st.plotly_chart(fig14,use_container_width=True,config = config)
-    elif teams == 'grrr':
-        st.plotly_chart(fig15,use_container_width=True,config = config)
 # with col1:
-#     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
-#     with tab1:
+#     teams = st.radio(
+#         "",
+#         ['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'],
+#         horizontal=True)
+#     if teams == '919':
 #         st.plotly_chart(fig8,use_container_width=True,config = config)
-#     with tab2:
+#     elif teams == 'u_c':
 #         st.plotly_chart(fig9,use_container_width=True,config = config)
-#     with tab3:
+#     elif teams == 'txms':
 #         st.plotly_chart(fig10,use_container_width=True,config = config)
-#     with tab4:
+#     elif teams == '[AW]':
 #         st.plotly_chart(fig11,use_container_width=True,config = config)
-#     with tab5:
+#     elif teams == 'NT4':
 #         st.plotly_chart(fig12,use_container_width=True,config = config)
-#     with tab6:
+#     elif teams == 'MG':
 #         st.plotly_chart(fig13,use_container_width=True,config = config)
-#     with tab7:
+#     elif teams == 'foot':
 #         st.plotly_chart(fig14,use_container_width=True,config = config)
-#     with tab8:
+#     elif teams == 'grrr':
 #         st.plotly_chart(fig15,use_container_width=True,config = config)
-# with blank1:
-#     st.markdown("")
+with col1:
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
+    with tab1:
+        st.plotly_chart(fig8,use_container_width=True,config = config)
+    with tab2:
+        st.plotly_chart(fig9,use_container_width=True,config = config)
+    with tab3:
+        st.plotly_chart(fig10,use_container_width=True,config = config)
+    with tab4:
+        st.plotly_chart(fig11,use_container_width=True,config = config)
+    with tab5:
+        st.plotly_chart(fig12,use_container_width=True,config = config)
+    with tab6:
+        st.plotly_chart(fig13,use_container_width=True,config = config)
+    with tab7:
+        st.plotly_chart(fig14,use_container_width=True,config = config)
+    with tab8:
+        st.plotly_chart(fig15,use_container_width=True,config = config)
+with blank1:
+    st.markdown("")
+"---"
 
 st.markdown("<center><h5>MATCHUPS</h5></center>",unsafe_allow_html=True)
 blank0, col1, blank1 = st.columns([1.5,4,1.5])
