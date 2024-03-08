@@ -79,7 +79,7 @@ fig1 = px.bar(week.sort_values(by = 'proj_pts',ascending=False).reset_index(),
        hover_name = 'player',
        color = 'active_reserve',
        color_discrete_map=active_color,
-       labels = {'_index':"", 'proj_pts':'Projected Pts'},
+       labels = {'_index':"", 'proj_pts':''},
        height=300,
        log_y=True,
        ).update_xaxes(showticklabels=False,
@@ -92,7 +92,7 @@ fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=T
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
-      labels = {'index':"", 'proj_pts':'Projected Pts'},
+      labels = {'index':"", 'proj_pts':''},
     #   text_auto = ",.0f",
       template = 'plotly_dark',
       height=300,
@@ -111,7 +111,7 @@ fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'
           color='team',
           hover_name=top_6_proj.player,
           template='plotly_dark',
-          labels = {'_index':" ",'player': '','proj_pts':'Projected Pts'},
+          labels = {'_index':" ",'player': '','proj_pts':''},
           height=300,
           color_discrete_map=team_color,
           log_y=True
@@ -157,7 +157,7 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
-      labels = {'_index':"", 'proj_pts':'Projected Pts'},
+      labels = {'_index':"", 'proj_pts':''},
 #       text_auto = ",.0f",
       text='player',
       template = 'plotly_dark',
@@ -171,7 +171,7 @@ fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))]
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
-      labels = {'_index':"", 'proj_pts':'Projected Pts'},
+      labels = {'_index':"", 'proj_pts':''},
 #       text_auto = ",.0f",
       text='player',
       template = 'plotly_dark',
@@ -186,7 +186,7 @@ fig16 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup3))
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
-      labels = {'_index':"", 'proj_pts':'Projected Pts'},
+      labels = {'_index':"", 'proj_pts':''},
 #       text_auto = ",.0f",
       text='player',
       template = 'plotly_dark',
@@ -200,7 +200,7 @@ fig17 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup4))
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
-      labels = {'_index':"", 'proj_pts':'Projected Pts'},
+      labels = {'_index':"", 'proj_pts':''},
 #       text_auto = ",.0f",
       text='player',
       template = 'plotly_dark',
@@ -318,17 +318,14 @@ with blank1:
 with col2:
     st.markdown("###")
     st.markdown("###")
-    st.markdown(f"<center><h5>Fantrax Week {current_week}</h5></center>",unsafe_allow_html=True)
+    st.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
     st.markdown("<center><h2>Arnold Palmer Invitational</h2></center>",unsafe_allow_html=True)
+    st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
 with blank2:
     st.markdown("")
 with col3:
     st.plotly_chart(fig5, use_container_width=True,config = config)
-with blank3:
-    st.markdown("")
-# "---"
 
-st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
 blank0, col1, blank1 = st.columns([1.5,4,1.5])
 with blank0:
     st.markdown("")
@@ -342,34 +339,24 @@ with col1:
         st.plotly_chart(fig3,use_container_width=True,config = config)
 with blank1:
     st.markdown("")
-"---"
 
-st.markdown("<center><h5>TEAM DECISIONS</h5></center>",unsafe_allow_html=True)
+st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
+blank0, col1, col2, blank1 = st.columns(4)
+blank0.markdown("#")
+col1.plotly_chart(fig16,use_container_width=True,config = config)
+col2.plotly_chart(fig17,use_container_width=True,config = config)
+blank1.markdown("#")
+
+blank0, col3, col4, blank1 = st.columns(4)
+blank0.markdown("#")
+col3.plotly_chart(fig7,use_container_width=True,config = config)
+col4.plotly_chart(fig6,use_container_width=True,config = config)
+blank1.markdown("#")
+
+st.markdown("<center><h3>ACTIVE/RESERVE</h3></center>",unsafe_allow_html=True)
 blank0, col1, blank1 = st.columns([1.5,4,1.5])
-
 with blank0:
     st.markdown("")
-# with col1:
-#     teams = st.radio(
-#         "",
-#         ['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'],
-#         horizontal=True)
-#     if teams == '919':
-#         st.plotly_chart(fig8,use_container_width=True,config = config)
-#     elif teams == 'u_c':
-#         st.plotly_chart(fig9,use_container_width=True,config = config)
-#     elif teams == 'txms':
-#         st.plotly_chart(fig10,use_container_width=True,config = config)
-#     elif teams == '[AW]':
-#         st.plotly_chart(fig11,use_container_width=True,config = config)
-#     elif teams == 'NT4':
-#         st.plotly_chart(fig12,use_container_width=True,config = config)
-#     elif teams == 'MG':
-#         st.plotly_chart(fig13,use_container_width=True,config = config)
-#     elif teams == 'foot':
-#         st.plotly_chart(fig14,use_container_width=True,config = config)
-#     elif teams == 'grrr':
-#         st.plotly_chart(fig15,use_container_width=True,config = config)
 with col1:
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
     with tab1:
@@ -388,24 +375,6 @@ with col1:
         st.plotly_chart(fig14,use_container_width=True,config = config)
     with tab8:
         st.plotly_chart(fig15,use_container_width=True,config = config)
-with blank1:
-    st.markdown("")
-"---"
-
-st.markdown("<center><h5>MATCHUPS</h5></center>",unsafe_allow_html=True)
-blank0, col1, blank1 = st.columns([1.5,4,1.5])
-with blank0:
-    st.markdown("")
-with col1:
-    tab1, tab2, tab3, tab4 = st.tabs(['Match 1', 'Match 2', 'Match 3', 'Match 4'])
-    with tab1:
-        st.plotly_chart(fig7,use_container_width=True,config = config)
-    with tab2:
-        st.plotly_chart(fig6,use_container_width=True,config = config)
-    with tab3:
-        st.plotly_chart(fig16,use_container_width=True,config = config)
-    with tab4:
-        st.plotly_chart(fig17,use_container_width=True,config = config)
 with blank1:
     st.markdown("")
 
