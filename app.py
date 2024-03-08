@@ -146,7 +146,7 @@ fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'
           template='plotly_white',
           labels = {'_index':" ",'player': '','proj_pts':'Projected Pts'},
           text_auto=True,
-          height=350,
+          height=300,
           color_discrete_map=team_color,
           log_y=True
           ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
@@ -165,7 +165,7 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
     labels = {'team': ' ', 'proj_pts':''},
     color_discrete_map=team_color,
     log_x=True,
-    height=400
+    height=350
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
 
@@ -179,7 +179,7 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
     title = "Optimal Rosters",
     labels = {'team': ' ', 'proj_pts':''},
     color_discrete_map=team_color,
-    height=400,
+    height=350,
     log_x=True
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
@@ -224,7 +224,7 @@ fig8 = px.bar(week[week.team == 'Philly919'].sort_values(by='proj_pts',ascending
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # unit_circle
 fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascending=False), 
@@ -236,7 +236,7 @@ fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # PHIL OPPONENT CHOICES
 fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascending=False), 
@@ -248,7 +248,7 @@ fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # MIKE CHOICES
 fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascending=False), 
@@ -260,7 +260,7 @@ fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # PHIL CHOICES
 fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascending=False), 
@@ -272,7 +272,7 @@ fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # MIKE CHOICES
 fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascending=False), 
@@ -284,7 +284,7 @@ fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # PHIL OPPONENT CHOICES
 fig14 = px.bar(week[week.team == 'Sneads Shoe'].sort_values(by='proj_pts',ascending=False), 
@@ -296,7 +296,7 @@ fig14 = px.bar(week[week.team == 'Sneads Shoe'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # MIKE CHOICES
 fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascending=False), 
@@ -308,7 +308,7 @@ fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascen
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(gridcolor="#B1A999")
+                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 st.write("#")
 st.markdown(f"<center>Fantrax Week {current_week}</center>",unsafe_allow_html=True)
