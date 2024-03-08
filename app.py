@@ -354,7 +354,7 @@ col4.plotly_chart(fig6,use_container_width=True,config = config)
 blank1.markdown("#")
 
 st.markdown("<center><h3>ACTIVE/RESERVE</h3></center>",unsafe_allow_html=True)
-blank0, col1, blank1 = st.columns([1.5,4,1.5])
+blank0, col1, blank1 = st.columns([1.5,3,1.5])
 with blank0:
     st.markdown("")
 with col1:
