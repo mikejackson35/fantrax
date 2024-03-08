@@ -16,7 +16,7 @@ config = {'displayModeBar': False}
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(r"proj_wk9.csv")#,usecols=['dk_name','total_points'])
+    dg_proj = pd.read_csv(r"proj_wk9.csv")
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
@@ -49,16 +49,6 @@ team_color={
                 "Team Gamble": 'rgb(38,147,190)',
                 "txmoonshine": 'rgb(219,197,48)',
                 "Putt Pirates": 'rgb(115,112,106)'}
-
-# team_color={
-#                 "Philly919": '#0ec3d2',
-#                 "unit_cirle": '#c28bdd',
-#                 "AlphaWired": '#f7a05d',
-#                 "Sneads Shoe": '#46d671',
-#                 "New Team 4": '#f75e38',
-#                 "Team Gamble": '#2693be',
-#                 "txmoonshine": 'dbc530',
-#                 "Putt Pirates": '#73706a'}
 
 active_color={"Active":'rgb(146,146,143)',"Reserve":'rgb(220,222,202)'}
 
@@ -96,9 +86,8 @@ fig1 = px.bar(week.sort_values(by = 'proj_pts',ascending=False).reset_index(),
        height=300,
        log_y=True,
     #    title=f"Avg Proj Pts {mean_starter}"
-       ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey',line_width=.5,
-                                   ).update_xaxes(showticklabels=False
-                                                  ).update_yaxes(showgrid=False, tickvals=[50,60,70,80,90,100]
+       ).update_xaxes(showticklabels=False
+                      ).update_yaxes(showgrid=False, tickvals=[50,60,70,80,90,100]
                                                                  ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.37))
 
 # BAR - ALL PLAYERS BY TEAM
@@ -324,19 +313,23 @@ st.write("#")
 st.markdown(f"<center>Fantrax Week {current_week}</center>",unsafe_allow_html=True)
 st.markdown("<center><h2>The Arnold Palmer Invitational</h2></center>",unsafe_allow_html=True)
 st.markdown("###")
-st.markdown("###")
+col1, col2 = st.columns(2)
+with col1:
+    st.plotly_chart(fig4,use_container_width=True,config = config)
+with col2:  
+    st.plotly_chart(fig5, use_container_width=True,config = config)
 st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
 st.markdown("")
 
 num_players = len(week)
-tab1, tab2, tab3 = st.tabs(['Sit/Start', 'by Proj Points', 'by Team'])
+tab1, tab2, tab3 = st.tabs(['Sit/Start', 'by Proj Points', 'Optimal'])
 with tab1:
     st.plotly_chart(fig1,use_container_width=True,config = config)
 with tab2:
     st.plotly_chart(fig2,use_container_width=True,config = config)
 with tab3:
     st.plotly_chart(fig3,use_container_width=True,config = config)
-# "---"
+"---"
 
 st.markdown("<center><h5>TEAM DECISIONS</h5></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
@@ -357,12 +350,6 @@ with tab7:
 with tab8:
     st.plotly_chart(fig15,use_container_width=True,config = config)
 "---"
-
-col1, col2 = st.columns(2)
-with col1:
-    st.plotly_chart(fig4,use_container_width=True,config = config)
-with col2:  
-    st.plotly_chart(fig5, use_container_width=True,config = config)
 
 st.markdown("<center><h5>MATCHUPS</h5></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4 = st.tabs(['Match 1', 'Match 2', 'Match 3', 'Match 4'])
