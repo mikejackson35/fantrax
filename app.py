@@ -129,7 +129,7 @@ fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=T
       labels = {'index':"", 'proj_pts':'Projected Pts'},
       text_auto = ",.0f",
       template = 'plotly_white',
-      height=350,
+      height=300,
       log_y=True,
       hover_name='player'
       ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
