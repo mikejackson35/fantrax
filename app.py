@@ -220,7 +220,7 @@ fig8 = px.bar(week[week.team == 'Philly919'].sort_values(by='proj_pts',ascending
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
 # unit_circle
 fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascending=False), 
@@ -232,9 +232,9 @@ fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# PHIL OPPONENT CHOICES
+# txmoonshine
 fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
@@ -244,9 +244,9 @@ fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# MIKE CHOICES
+# AlphaWired
 fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
@@ -256,9 +256,9 @@ fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# PHIL CHOICES
+# New Team 4
 fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
@@ -268,9 +268,9 @@ fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# MIKE CHOICES
+# Team Gamble
 fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
@@ -280,9 +280,9 @@ fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# PHIL OPPONENT CHOICES
+# Sneads Foot
 fig14 = px.bar(week[week.team == 'Sneads Foot'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
@@ -292,9 +292,9 @@ fig14 = px.bar(week[week.team == 'Sneads Foot'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# MIKE CHOICES
+# Putt Pirates
 fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
@@ -304,7 +304,7 @@ fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascen
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
 
 # st.write("#")
