@@ -9,41 +9,44 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# CSS and PLOTLY CONFIGS
+with open(r"styles/main.css") as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 config = {'displayModeBar': False}
 
-st.markdown("""
-<style>
+# st.markdown("""
+# <style>
             
-# [data-testid="stAppViewContainer"] {
-#     padding: 0px 400px 0px 400px;
+# # [data-testid="stAppViewContainer"] {
+# #     padding: 0px 400px 0px 400px;
+# # }
+            
+# [data-testid="stElementToolbar"] {
+#     display: none;
 # }
             
-[data-testid="stElementToolbar"] {
-    display: none;
-}
+# .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+# font-size:1rem;
+# }
             
-.stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
-font-size:1rem;
-}
-            
-[data-baseweb="tab-list"] {
-    gap: 4px;
-}
+# [data-baseweb="tab-list"] {
+#     gap: 4px;
+# }
 
-[data-baseweb="tab"] {
-    height: 30px;
-    width: 500px;
-    white-space: pre-wrap;
-    background-color: #A29F99;
-    # background-color: #E8E6E3;
-    border-radius: 4px 4px 0px 0px;
-    gap: 1px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
+# [data-baseweb="tab"] {
+#     height: 30px;
+#     width: 500px;
+#     white-space: pre-wrap;
+#     background-color: #A29F99;
+#     # background-color: #E8E6E3;
+#     border-radius: 4px 4px 0px 0px;
+#     gap: 1px;
+#     padding-top: 8px;
+#     padding-bottom: 8px;
+# }
             
-</style>
-        """, unsafe_allow_html=True)
+# </style>
+#         """, unsafe_allow_html=True)
 
 st.cache_data()
 def get_projections():
@@ -224,7 +227,7 @@ fig8 = px.bar(week[week.team == 'Philly919'].sort_values(by='proj_pts',ascending
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # unit_circle
 fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascending=False), 
@@ -236,7 +239,7 @@ fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # PHIL OPPONENT CHOICES
 fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascending=False), 
@@ -248,7 +251,7 @@ fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # MIKE CHOICES
 fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascending=False), 
@@ -260,7 +263,7 @@ fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # PHIL CHOICES
 fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascending=False), 
@@ -272,7 +275,7 @@ fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascendi
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # MIKE CHOICES
 fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascending=False), 
@@ -284,7 +287,7 @@ fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # PHIL OPPONENT CHOICES
 fig14 = px.bar(week[week.team == 'Sneads Shoe'].sort_values(by='proj_pts',ascending=False), 
@@ -296,7 +299,7 @@ fig14 = px.bar(week[week.team == 'Sneads Shoe'].sort_values(by='proj_pts',ascend
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # MIKE CHOICES
 fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascending=False), 
@@ -308,7 +311,8 @@ fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascen
                 template = 'plotly_dark',
                 color_discrete_map=active_color,
                 log_y=True,
-                labels = {'proj_pts':'Projected Points','player':"Eligible Players"}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
+
 
 st.write("#")
 st.markdown(f"<center>Fantrax Week {current_week}</center>",unsafe_allow_html=True)
@@ -319,7 +323,7 @@ num_players = len(week)
 st.markdown(f"<center>of the {num_players} Rostered Players</center>",unsafe_allow_html=True)
 st.plotly_chart(fig1,use_container_width=True,config = config)
 "---"
-st.markdown("<center><h5>CHOICES THIS WEEK</h5></center>",unsafe_allow_html=True)
+st.markdown("<center><h5>PROJECTED POINTS</h5></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
 with tab1:
     st.plotly_chart(fig8,use_container_width=True,config = config)
@@ -345,7 +349,6 @@ with col2:
     st.plotly_chart(fig5, use_container_width=True,config = config)
 "---"
 st.markdown("<center><h5>OPTIMAL PROJECTIONS</h5></center>",unsafe_allow_html=True)
-# st.markdown(f"<center>Mean: {mean_starter}</center>",unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(['Top 6 by Team', 'All Available by Proj Points'])
 with tab1:
@@ -361,27 +364,27 @@ with tab2:
     st.plotly_chart(fig6,use_container_width=True,config = config)
 
 
-st.markdown("##")
-st.markdown("<center><h5>DRAFT KINGS PROJECTIONS</h5></center>",unsafe_allow_html=True)
+# st.markdown("##")
+# st.markdown("<center><h5>DRAFT KINGS PROJECTIONS</h5></center>",unsafe_allow_html=True)
 
-dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
-st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
-             hide_index=True,
-             height=1000,
-             column_config={
-                  'dk_name':'Name',
-                  'dk_salary': st.column_config.NumberColumn(
-                       'DK Salary',
-                       format = "$ %.0f"
-                    ),
-                #    'early_late_wave':'Early/Late Wave',
-                   'total_points':'Proj Pts',
-                   'value': 'Value',
-                   'projected_ownership':'pOwn',
-                   'adj_from_baseline': 'Baseline Adj'
-             },
-             use_container_width=True
-        )
+# dg_proj_copy = pd.DataFrame(round(dg_proj_copy[['dk_name','dk_salary','total_points','value','projected_ownership']],2)).sort_values(by='dk_salary',ascending=False).reset_index(drop=True)
+# st.dataframe(dg_proj_copy.round(2).style.background_gradient(subset=['value'],cmap='Greys').format(precision=2),
+#              hide_index=True,
+#              height=1000,
+#              column_config={
+#                   'dk_name':'Name',
+#                   'dk_salary': st.column_config.NumberColumn(
+#                        'DK Salary',
+#                        format = "$ %.0f"
+#                     ),
+#                 #    'early_late_wave':'Early/Late Wave',
+#                    'total_points':'Proj Pts',
+#                    'value': 'Value',
+#                    'projected_ownership':'pOwn',
+#                    'adj_from_baseline': 'Baseline Adj'
+#              },
+#              use_container_width=True
+#         )
 
 
 
