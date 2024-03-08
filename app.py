@@ -29,7 +29,7 @@ def get_fantrax():
 teams = get_fantrax()
 
 teams.columns = ['player','team','active_reserve']
-teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'New Team 4','NT 8':'Sneads Shoe','txms':'txmoonshine','MG':'Team Gamble','grrr':'Putt Pirates','[AW]':'AlphaWired'}
+teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'New Team 4','NT 8':'Sneads Foot','txms':'txmoonshine','MG':'Team Gamble','grrr':'Putt Pirates','[AW]':'AlphaWired'}
 teams['team'] = teams.team.map(teams_dict)
 teams.set_index('player',inplace=True)
 
@@ -44,7 +44,7 @@ team_color={
                 "Philly919": 'rgb(14,195,210)',
                 "unit_cirle": 'rgb(194,139,221)',
                 "AlphaWired": 'rgb(247,160,93)',
-                "Sneads Shoe": 'rgb(70,214,113)',
+                "Sneads Foot": 'rgb(70,214,113)',
                 "New Team 4": 'rgb(247,94,56)',
                 "Team Gamble": 'rgb(38,147,190)',
                 "txmoonshine": 'rgb(219,197,48)',
@@ -197,7 +197,7 @@ fig16 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup3))
     #   title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
-matchup4 = ['Team Gamble','Sneads Shoe']
+matchup4 = ['Team Gamble','Sneads Foot']
 fig17 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup4))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
@@ -285,7 +285,7 @@ fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascend
                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33)).update_traces(width=.7)
 
 # PHIL OPPONENT CHOICES
-fig14 = px.bar(week[week.team == 'Sneads Shoe'].sort_values(by='proj_pts',ascending=False), 
+fig14 = px.bar(week[week.team == 'Sneads Foot'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
                 y = 'proj_pts', 
                 height=height,
@@ -318,9 +318,9 @@ with col1:
     st.plotly_chart(fig4,use_container_width=True,config = config)
 with col2:  
     st.plotly_chart(fig5, use_container_width=True,config = config)
+
 st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
 st.markdown("")
-
 num_players = len(week)
 tab1, tab2, tab3 = st.tabs(['Sit/Start', 'by Proj Points', 'Optimal'])
 with tab1:
@@ -349,7 +349,7 @@ with tab7:
     st.plotly_chart(fig14,use_container_width=True,config = config)
 with tab8:
     st.plotly_chart(fig15,use_container_width=True,config = config)
-"---"
+# "---"
 
 st.markdown("<center><h5>MATCHUPS</h5></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4 = st.tabs(['Match 1', 'Match 2', 'Match 3', 'Match 4'])
