@@ -195,9 +195,9 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       text='player',
       template = 'plotly_white',
       hover_name='proj_pts',
-      height=350,
-      title=f"{matchup[0]} v {matchup[1]}",
-      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999")
+      height=300,
+    #   title=f"{matchup[0]} v {matchup[1]}",
+      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 matchup2 = [phil_opp,'Philly919']
 fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
@@ -209,9 +209,9 @@ fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))]
       text='player',
       template = 'plotly_white',
       hover_name='proj_pts',
-      height=350,
-      title=f"{matchup2[0]} v {matchup2[1]}",
-      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999")
+      height=300,
+    #   title=f"{matchup2[0]} v {matchup2[1]}",
+      log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 height = 250
 # PHILLY919
@@ -345,7 +345,7 @@ with col2:
     st.plotly_chart(fig5, use_container_width=True,config = config)
 "---"
 st.markdown("<center><h5>OPTIMAL PROJECTIONS</h5></center>",unsafe_allow_html=True)
-st.markdown(f"<center>Mean: {mean_starter}</center>",unsafe_allow_html=True)
+# st.markdown(f"<center>Mean: {mean_starter}</center>",unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(['Top 6 by Team', 'All Available by Proj Points'])
 with tab1:
