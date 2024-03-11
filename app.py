@@ -104,7 +104,7 @@ fig1 = px.bar(week.drop(columns='player').sort_values(by = 'proj_pts',ascending=
        )
 
 # BAR - ALL PLAYERS BY TEAM
-fig2 = px.bar(week.drop(columns='player').sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
+fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
