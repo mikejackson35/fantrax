@@ -19,6 +19,7 @@ dg_dk_proj = r"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour
 st.cache_data()
 def get_projections():
     dg_proj = pd.read_csv(dg_dk_proj,usecols=['player_name','proj_points_total'])
+    dg_proj.columns = ['player','proj_pts']
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
@@ -34,7 +35,7 @@ teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'New Team 4','NT 8':'
 teams['team'] = teams.team.map(teams_dict)
 teams.set_index('player',inplace=True)
 
-dg_proj.columns = ['player','proj_pts']
+# dg_proj.columns = ['player','proj_pts']
 
 names = dg_proj['player'].str.split(expand=True)
 names[0] = names[0].str.rstrip(",")
