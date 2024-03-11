@@ -22,7 +22,6 @@ def get_projections():
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
-dg_proj = dg_proj[['dk_name','total_points']]
 
 st.cache_data()
 def get_fantrax():
