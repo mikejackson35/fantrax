@@ -109,7 +109,7 @@ fig2 = px.bar(week.drop(columns='player').sort_values(by='proj_pts',ascending=Fa
       template = 'plotly_dark',
       height=300,
       log_y=True,
-      hover_name='player'
+    #   hover_name='player'
       ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
                                    ).update_xaxes(showticklabels=False
                                                   ).update_yaxes(showgrid=False
