@@ -14,9 +14,11 @@ with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 config = {'displayModeBar': False}
 
+dg_dk_proj = r"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key=e297e933c3ad47d71ec1626c299e"
+
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(r"proj_wk10.csv")
+    dg_proj = pd.read_csv(dg_dk_proj,usecols=['player_name','proj_points_total'])
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
@@ -34,10 +36,21 @@ teams['team'] = teams.team.map(teams_dict)
 teams.set_index('player',inplace=True)
 
 dg_proj.columns = ['player','proj_pts']
-dg_proj.set_index('player',inplace=True)
 
-week = pd.merge(teams,dg_proj, left_index=True, right_index=True).reset_index()
+names = dg_proj['player'].str.split(expand=True)
+names[0] = names[0].str.rstrip(",")
+names[1] = names[1].str.rstrip(",")
+names['player'] = names[1] + " " + names[0]
+
+names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
+names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
+names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
+
+dg_proj.set_index(names.player,inplace=True)
+
+week = pd.merge(teams,dg_proj, left_index=True, right_index=True)#.reset_index()
 week[['player','team','active_reserve']] = week[['player','team','active_reserve']].astype('string')
+week.sort_values('proj_pts',ascending=False,inplace=True)
 
 current_week = 10
 num_players = len(week)
@@ -51,8 +64,7 @@ team_color={
                 "New Team 4": 'rgb(231,63,116)',
                 "Team Gamble": 'rgb(230,131,16)',
                 "txmoonshine": 'rgb(0,134,139)',
-                "Putt Pirates": 'rgb(165,170,153)'
-                }
+                "Putt Pirates": 'rgb(165,170,153)'}
 
 active_color={
     "Active":'rgb(146,146,143)',
