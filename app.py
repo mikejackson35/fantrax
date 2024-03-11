@@ -329,15 +329,16 @@ col1,col2,col3 = st.columns(3)
 # with blank0:
 #     st.markdown("")
 # with col1:
-col1.plotly_chart(fig4,use_container_width=True,config = config)
+col2.plotly_chart(fig4,use_container_width=True,config = config)
 # with blank1:
 #     st.markdown("")
 # with col2:
-col2.markdown("###")
-col2.markdown("###")
-col2.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
-col2.markdown("<center><h2>Players Championship</h2></center>",unsafe_allow_html=True)
-col2.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
+col1.markdown("###")
+col1.markdown("###")
+col1.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
+col1.markdown("<center><h5>Players Championship</h5></center>",unsafe_allow_html=True)
+# col1.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
+col1.markdown(f"<center>{num_players} Rostered Players</center>",unsafe_allow_html=True)
 # with blank2:
 #     st.markdown("")
 # with col3:
