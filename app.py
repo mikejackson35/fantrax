@@ -44,6 +44,8 @@ names[0] = names[0].str.rstrip(",")
 names[1] = names[1].str.rstrip(",")
 names['player'] = names[1] + " " + names[0]
 
+names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
+names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
 names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
 names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
 names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
