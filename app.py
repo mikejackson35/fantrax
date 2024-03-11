@@ -20,10 +20,13 @@ dg_key = st.secrets.dg_key
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key={dg_key}",usecols=['player_name','proj_points_total'])
+    dg_proj = pd.read_csv(f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key={dg_key}")
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
+
+dg_proj = dg_proj[['player_name','proj_points_total']]
+dg_proj.columns = ['player','proj_pts']
 
 st.cache_data()
 def get_fantrax():
@@ -35,8 +38,6 @@ teams.columns = ['player','team','active_reserve']
 teams_dict = {'919':'Philly919','u_c':'unit_circle','NT 4':'New Team 4','NT 8':'Sneads Foot','txms':'txmoonshine','MG':'Team Gamble','grrr':'Putt Pirates','[AW]':'AlphaWired'}
 teams['team'] = teams.team.map(teams_dict)
 teams.set_index('player',inplace=True)
-
-dg_proj.columns = ['player','proj_pts']
 
 names = dg_proj['player'].str.split(expand=True)
 names[0] = names[0].str.rstrip(",")
