@@ -61,14 +61,14 @@ num_players = len(week)
 
 ##  color dictionaries for teams and active/incactive
 team_color={
-                "Philly919": 'rgb(127,60,141)',
-                "unit_cicle": 'rgb(17,165,121)',
-                "AlphaWired": 'rgb(57,105,172)',
-                "Sneads Foot": 'rgb(242,183,1)',
-                "New Team 4": 'rgb(231,63,116)',
-                "Team Gamble": 'rgb(230,131,16)',
-                "txmoonshine": 'rgb(0,134,139)',
-                "Putt Pirates": 'rgb(165,170,153)'}
+                "Philly919": 'rgb(14,195,210)',
+                "unit_circle": 'rgb(194,139,221)',
+                "AlphaWired": 'rgb(247,160,93)',
+                "Sneads Foot": 'rgb(70,214,113)',
+                "New Team 4": 'rgb(247,94,56)',
+                "Team Gamble": 'rgb(38,147,190)',
+                "txmoonshine": 'rgb(219,197,48)',
+                "Putt Pirates": 'rgb(115,112,106)'}
 
 active_color={
     "Active":'rgb(146,146,143)',
