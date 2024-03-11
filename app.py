@@ -16,7 +16,7 @@ config = {'displayModeBar': False}
 
 
 dg_key = st.secrets.dg_key
-dg = f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&key={dg_key}"
+dg = f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&format=csv&key={dg_key}"
 
 st.cache_data()
 def get_projections():
