@@ -143,12 +143,12 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
     x='proj_pts', 
     color='team', 
     template='plotly_dark',
-    text_auto=True,
+    text_auto='.0s',
     title = "Current Rosters",
     labels = {'team': ' ', 'proj_pts':''},
     color_discrete_map=team_color,
     log_x=True,
-    height=350
+    height=300
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
 
@@ -156,17 +156,18 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
 fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_values(by='proj_pts',ascending=False),
     y = 'team',
     x = 'proj_pts',
-    text_auto=True,
+    text_auto='.0s',
     color='team',
     template='plotly_dark',
     title = "Optimal Rosters",
     labels = {'team': ' ', 'proj_pts':''},
     color_discrete_map=team_color,
-    height=350,
+    height=300,
     log_x=True
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
 
+height = 250
 # My Matchup
 matchup = ['New Team 4','unit_circle']
 fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
@@ -178,7 +179,7 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
       text='player',
       template = 'plotly_dark',
       hover_name='proj_pts',
-      height=300,
+      height=height,
     #   title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
@@ -192,7 +193,7 @@ fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))]
       text='player',
       template = 'plotly_dark',
       hover_name='proj_pts',
-      height=300,
+      height=height,
     #   title=f"{matchup2[0]} v {matchup2[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
@@ -207,7 +208,7 @@ fig16 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup3))
       text='player',
       template = 'plotly_dark',
       hover_name='proj_pts',
-      height=300,
+      height=height,
     #   title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
@@ -221,11 +222,10 @@ fig17 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup4))
       text='player',
       template = 'plotly_dark',
       hover_name='proj_pts',
-      height=300,
+      height=height,
     #   title=f"{matchup2[0]} v {matchup2[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
-height = 250
 # PHILLY919
 fig8 = px.bar(week[week.team == 'Philly919'].sort_values(by='proj_pts',ascending=False), 
                 x = 'player', 
