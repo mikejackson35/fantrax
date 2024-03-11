@@ -113,7 +113,7 @@ fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=T
       template = 'plotly_dark',
       height=300,
       log_y=True,
-    #   hover_name='player'
+      hover_name='player'
       ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
                                    ).update_xaxes(showticklabels=False
                                                   ).update_yaxes(showgrid=False
@@ -168,7 +168,7 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
                     ).update_xaxes(showticklabels=False)
 
 # My Matchup
-matchup = ['AlphaWired','unit_circle']
+matchup = ['New Team 4','unit_circle']
 fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
@@ -182,7 +182,7 @@ fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].
     #   title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
-matchup2 = ['txmoonshine','Philly919']
+matchup2 = ['txmoonshine','Team Gamble']
 fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
@@ -197,7 +197,7 @@ fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))]
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # My Matchup
-matchup3 = ['Putt Pirates','New Team 4']
+matchup3 = ['Putt Pirates','Philly919']
 fig16 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup3))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
@@ -211,7 +211,7 @@ fig16 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup3))
     #   title=f"{matchup[0]} v {matchup[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
-matchup4 = ['Team Gamble','Sneads Foot']
+matchup4 = ['AlphaWired','Sneads Foot']
 fig17 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup4))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
       y = 'proj_pts',
       color = 'team',
