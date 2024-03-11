@@ -14,11 +14,13 @@ with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 config = {'displayModeBar': False}
 
-dg_dk_proj = r"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key=e297e933c3ad47d71ec1626c299e"
+
+dg_key = st.secrets.dg_key
+dg = "https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&key={dg_key}"
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(dg_dk_proj,usecols=['player_name','proj_points_total'])
+    dg_proj = pd.read_csv(dg,usecols=['player_name','proj_points_total'])
     dg_proj.columns = ['player','proj_pts']
     return dg_proj
 dg_proj = get_projections()
