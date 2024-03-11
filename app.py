@@ -6,7 +6,7 @@ import secrets
 
 st.set_page_config(
     page_title="Fantrax Wk10",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="expanded",
 )
 
@@ -323,25 +323,25 @@ fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascen
                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
 
-# st.write("#")
+st.write("#")
 # blank0, col1, blank1, col2, blank2, col3, blank3 = st.columns([1,1,.4,.75,.4,1,1])
-
+col1,col2,col3 = st.columns(3)
 # with blank0:
 #     st.markdown("")
 # with col1:
-st.plotly_chart(fig4,use_container_width=True,config = config)
+col1.plotly_chart(fig4,use_container_width=True,config = config)
 # with blank1:
 #     st.markdown("")
 # with col2:
-st.markdown("###")
-st.markdown("###")
-st.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
-st.markdown("<center><h2>Players Championship</h2></center>",unsafe_allow_html=True)
-st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
+col2.markdown("###")
+col2.markdown("###")
+col2.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
+col2.markdown("<center><h2>Players Championship</h2></center>",unsafe_allow_html=True)
+col2.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
 # with blank2:
 #     st.markdown("")
 # with col3:
-st.plotly_chart(fig5, use_container_width=True,config = config)
+col3.plotly_chart(fig5, use_container_width=True,config = config)
 
 # blank0, col1, blank1 = st.columns([1.5,4,1.5])
 
@@ -360,19 +360,20 @@ with tab3:
 
 st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
 # blank0, col1, col2, blank1 = st.columns(4)
+col1,col2 = st.columns(2)
 # blank0.markdown("#")
 # col1.plotly_chart(fig16,use_container_width=True,config = config)
 # col2.plotly_chart(fig17,use_container_width=True,config = config)
-st.plotly_chart(fig16,use_container_width=True,config = config)
-st.plotly_chart(fig17,use_container_width=True,config = config)
+col1.plotly_chart(fig16,use_container_width=True,config = config)
+col1.plotly_chart(fig17,use_container_width=True,config = config)
 # blank1.markdown("#")
 
 # blank0, col3, col4, blank1 = st.columns(4)
 # blank0.markdown("#")
 # col3.plotly_chart(fig7,use_container_width=True,config = config)
 # col4.plotly_chart(fig6,use_container_width=True,config = config)
-st.plotly_chart(fig7,use_container_width=True,config = config)
-st.plotly_chart(fig6,use_container_width=True,config = config)
+col2.plotly_chart(fig7,use_container_width=True,config = config)
+col2.plotly_chart(fig6,use_container_width=True,config = config)
 # blank1.markdown("#")
 
 st.markdown("<center><h3>ACTIVE/RESERVE</h3></center>",unsafe_allow_html=True)
