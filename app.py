@@ -85,7 +85,7 @@ for team in week.team.unique():
     top_6_active = pd.concat([top_6_active,temp])
 
 # BAR - ALL PLAYERS ACTIVE/RESERVE
-fig1 = px.bar(week.sort_values(by = 'proj_pts',ascending=False).reset_index(),
+fig1 = px.bar(week.drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
        y = 'proj_pts',
        template='plotly_dark',
        hover_name = 'player',
@@ -100,7 +100,7 @@ fig1 = px.bar(week.sort_values(by = 'proj_pts',ascending=False).reset_index(),
        )
 
 # BAR - ALL PLAYERS BY TEAM
-fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
+fig2 = px.bar(week.drop(columns='player').sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
       y = 'proj_pts',
       color = 'team',
       color_discrete_map=team_color,
