@@ -4,7 +4,7 @@ import plotly.express as px
 import streamlit as st
 
 st.set_page_config(
-    page_title="Fantrax Wk9",
+    page_title="Fantrax Wk10",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -16,7 +16,7 @@ config = {'displayModeBar': False}
 
 st.cache_data()
 def get_projections():
-    dg_proj = pd.read_csv(r"proj_wk9.csv")
+    dg_proj = pd.read_csv(r"proj_wk10.csv")
     return dg_proj
 dg_proj = get_projections()
 dg_proj_copy = dg_proj.copy()
@@ -24,7 +24,7 @@ dg_proj = dg_proj[['dk_name','total_points']]
 
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fx_wk9.csv",usecols=['Player','Status','Roster Status'])
+    teams = pd.read_csv(r"fx_wk10.csv",usecols=['Player','Status','Roster Status'])
     return teams
 teams = get_fantrax()
 
@@ -39,20 +39,20 @@ dg_proj.set_index('player',inplace=True)
 week = pd.merge(teams,dg_proj, left_index=True, right_index=True).reset_index()
 week[['player','team','active_reserve']] = week[['player','team','active_reserve']].astype('string')
 
-current_week = 9
+current_week = 10
 num_players = len(week)
 
 ##  color dictionaries for teams and active/incactive
 team_color={
-            "Philly919": 'rgb(14,195,210)',
-            "unit_cirle": 'rgb(194,139,221)',
-            "AlphaWired": 'rgb(247,160,93)',
-            "Sneads Foot": 'rgb(70,214,113)',
-            "New Team 4": 'rgb(247,94,56)',
-            "Team Gamble": 'rgb(38,147,190)',
-            "txmoonshine": 'rgb(219,197,48)',
-            "Putt Pirates": 'rgb(115,112,106)'
-            }
+                "Philly919": 'rgb(127,60,141)',
+                "unit_circle": 'rgb(17,165,121)',
+                "AlphaWired": 'rgb(57,105,172)',
+                "Sneads Foot": 'rgb(242,183,1)',
+                "New Team 4": 'rgb(231,63,116)',
+                "Team Gamble": 'rgb(230,131,16)',
+                "txmoonshine": 'rgb(0,134,139)',
+                "Putt Pirates": 'rgb(165,170,153)'
+                }
 
 active_color={
     "Active":'rgb(146,146,143)',
@@ -319,7 +319,7 @@ with col2:
     st.markdown("###")
     st.markdown("###")
     st.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
-    st.markdown("<center><h2>Arnold Palmer Invitational</h2></center>",unsafe_allow_html=True)
+    st.markdown("<center><h2>Players Championship</h2></center>",unsafe_allow_html=True)
     st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
 with blank2:
     st.markdown("")
