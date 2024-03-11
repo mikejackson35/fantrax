@@ -324,75 +324,81 @@ fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascen
 
 
 # st.write("#")
-blank0, col1, blank1, col2, blank2, col3, blank3 = st.columns([1,1,.4,.75,.4,1,1])
-with blank0:
-    st.markdown("")
-with col1:
-    st.plotly_chart(fig4,use_container_width=True,config = config)
-with blank1:
-    st.markdown("")
-with col2:
-    st.markdown("###")
-    st.markdown("###")
-    st.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
-    st.markdown("<center><h2>Players Championship</h2></center>",unsafe_allow_html=True)
-    st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
-with blank2:
-    st.markdown("")
-with col3:
-    st.plotly_chart(fig5, use_container_width=True,config = config)
+# blank0, col1, blank1, col2, blank2, col3, blank3 = st.columns([1,1,.4,.75,.4,1,1])
 
-blank0, col1, blank1 = st.columns([1.5,4,1.5])
-with blank0:
-    st.markdown("")
-with col1:
-    tab1, tab2, tab3 = st.tabs(['by Proj Points', 'Sit / Start', 'Optimal'])
-    with tab1:
-        st.plotly_chart(fig2,use_container_width=True,config = config)
-    with tab2:
-        st.plotly_chart(fig1,use_container_width=True,config = config)
-    with tab3:
-        st.plotly_chart(fig3,use_container_width=True,config = config)
-with blank1:
-    st.markdown("")
+# with blank0:
+#     st.markdown("")
+# with col1:
+st.plotly_chart(fig4,use_container_width=True,config = config)
+# with blank1:
+#     st.markdown("")
+# with col2:
+st.markdown("###")
+st.markdown("###")
+st.markdown(f"<center><small>Fantrax Week {current_week}</small></center>",unsafe_allow_html=True)
+st.markdown("<center><h2>Players Championship</h2></center>",unsafe_allow_html=True)
+st.markdown(f"<center><h5>{num_players} Rostered Players</h5></center>",unsafe_allow_html=True)
+# with blank2:
+#     st.markdown("")
+# with col3:
+st.plotly_chart(fig5, use_container_width=True,config = config)
+
+# blank0, col1, blank1 = st.columns([1.5,4,1.5])
+
+# with blank0:
+#     st.markdown("")
+# with col1:
+tab1, tab2, tab3 = st.tabs(['by Proj Points', 'Sit / Start', 'Optimal'])
+with tab1:
+    st.plotly_chart(fig2,use_container_width=True,config = config)
+with tab2:
+    st.plotly_chart(fig1,use_container_width=True,config = config)
+with tab3:
+    st.plotly_chart(fig3,use_container_width=True,config = config)
+# with blank1:
+#     st.markdown("")
 
 st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
-blank0, col1, col2, blank1 = st.columns(4)
-blank0.markdown("#")
-col1.plotly_chart(fig16,use_container_width=True,config = config)
-col2.plotly_chart(fig17,use_container_width=True,config = config)
-blank1.markdown("#")
+# blank0, col1, col2, blank1 = st.columns(4)
+# blank0.markdown("#")
+# col1.plotly_chart(fig16,use_container_width=True,config = config)
+# col2.plotly_chart(fig17,use_container_width=True,config = config)
+st.plotly_chart(fig16,use_container_width=True,config = config)
+st.plotly_chart(fig17,use_container_width=True,config = config)
+# blank1.markdown("#")
 
-blank0, col3, col4, blank1 = st.columns(4)
-blank0.markdown("#")
-col3.plotly_chart(fig7,use_container_width=True,config = config)
-col4.plotly_chart(fig6,use_container_width=True,config = config)
-blank1.markdown("#")
+# blank0, col3, col4, blank1 = st.columns(4)
+# blank0.markdown("#")
+# col3.plotly_chart(fig7,use_container_width=True,config = config)
+# col4.plotly_chart(fig6,use_container_width=True,config = config)
+st.plotly_chart(fig7,use_container_width=True,config = config)
+st.plotly_chart(fig6,use_container_width=True,config = config)
+# blank1.markdown("#")
 
 st.markdown("<center><h3>ACTIVE/RESERVE</h3></center>",unsafe_allow_html=True)
-blank0, col1, blank1 = st.columns([1.5,3,1.5])
-with blank0:
-    st.markdown("")
-with col1:
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
-    with tab1:
-        st.plotly_chart(fig8,use_container_width=True,config = config)
-    with tab2:
-        st.plotly_chart(fig9,use_container_width=True,config = config)
-    with tab3:
-        st.plotly_chart(fig10,use_container_width=True,config = config)
-    with tab4:
-        st.plotly_chart(fig11,use_container_width=True,config = config)
-    with tab5:
-        st.plotly_chart(fig12,use_container_width=True,config = config)
-    with tab6:
-        st.plotly_chart(fig13,use_container_width=True,config = config)
-    with tab7:
-        st.plotly_chart(fig14,use_container_width=True,config = config)
-    with tab8:
-        st.plotly_chart(fig15,use_container_width=True,config = config)
-with blank1:
-    st.markdown("")
+# blank0, col1, blank1 = st.columns([1.5,3,1.5])
+# with blank0:
+#     st.markdown("")
+# with col1:
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
+with tab1:
+    st.plotly_chart(fig8,use_container_width=True,config = config)
+with tab2:
+    st.plotly_chart(fig9,use_container_width=True,config = config)
+with tab3:
+    st.plotly_chart(fig10,use_container_width=True,config = config)
+with tab4:
+    st.plotly_chart(fig11,use_container_width=True,config = config)
+with tab5:
+    st.plotly_chart(fig12,use_container_width=True,config = config)
+with tab6:
+    st.plotly_chart(fig13,use_container_width=True,config = config)
+with tab7:
+    st.plotly_chart(fig14,use_container_width=True,config = config)
+with tab8:
+    st.plotly_chart(fig15,use_container_width=True,config = config)
+# with blank1:
+#     st.markdown("")
 
 
 # st.markdown("##")
