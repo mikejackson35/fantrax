@@ -100,7 +100,7 @@ fig1 = px.bar(week.drop(columns='player').sort_values(by = 'proj_pts',ascending=
               log_y=True,
               ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
               ).update_yaxes(showgrid=False, tickvals=[50,60,70,80,90,100],tickfont=dict(color='#5A5856')
-              ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.37))
+              ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.37,font_color='#5A5856'))
 
 # BAR - ALL PLAYERS BY TEAM
 fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
@@ -115,7 +115,7 @@ fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=T
               ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
               ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
               ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
-              ).update_layout(legend=dict(y=1.2, orientation='h',title=''))
+              ).update_layout(legend=dict(y=1.2, orientation='h',title='',font_color='#5A5856'))
 
 # BAR - ALL PLAYERS TOP 6 BY TEAM
 fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'],ascending=False),
@@ -130,7 +130,7 @@ fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'
               ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
               ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
               ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
-              ).update_layout(legend=dict(y=1.5, orientation='h',title=''))
+              ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
 
 # BAR - HORIZONTAL ACTIVE ROSTERS
 fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort_values(by='proj_pts',ascending=False),
@@ -145,7 +145,7 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
               height=325
               ).update_layout(showlegend=False
               ).update_xaxes(showticklabels=False
-              ).update_yaxes(tickfont=dict(color='#5A5856'))
+              ).update_yaxes(tickfont=dict(color='#5A5856'),title_font_color='#5A5856')
 
 # BAR - HORIZONTAL PROJECTED ROSTERS
 fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_values(by='proj_pts',ascending=False),
@@ -160,7 +160,7 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
               log_x=True
               ).update_layout(showlegend=False
               ).update_xaxes(showticklabels=False
-              ).update_yaxes(tickfont=dict(color='#5A5856'))
+              ).update_yaxes(tickfont=dict(color='#5A5856'),title_font_color='#5A5856')
 
 
 height = 250
