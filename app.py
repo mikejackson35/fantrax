@@ -261,6 +261,7 @@ col3.plotly_chart(fig5, use_container_width=True,config = config)
 
 
 ### WIDE BAR CHARTS  ###
+st.markdown("<center><h3>ALL PLAYERS</h3></center>",unsafe_allow_html=True)
 tab1, tab2, tab3 = st.tabs(['by Proj Points', 'Sit / Start', 'Optimal'])
 tab1.plotly_chart(fig2,use_container_width=True,config = config)
 tab2.plotly_chart(fig1,use_container_width=True,config = config)
@@ -278,7 +279,7 @@ col2.plotly_chart(fig7,use_container_width=True,config = config)
 col2.plotly_chart(fig6,use_container_width=True,config = config)
 
 ###  ACTIVE / RESERVE TABS  ###
-st.markdown("<center><h3>ACTIVE/RESERVE</h3></center>",unsafe_allow_html=True)
+st.markdown("<center><h3>ACTIVE/RESERVE CHOICES</h3></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
 tab1.plotly_chart(get_team_bar('Philly919'),use_container_width=True,config = config)
 tab2.plotly_chart(get_team_bar('unit_circle'),use_container_width=True,config = config)
