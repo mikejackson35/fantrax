@@ -98,7 +98,7 @@ fig1 = px.bar(week.drop(columns='player').sort_values(by = 'proj_pts',ascending=
               labels = {'_index':"", 'proj_pts':''},
               height=300,
               log_y=True,
-              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')#, size=14)
+              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
               ).update_yaxes(showgrid=False, tickvals=[50,60,70,80,90,100],tickfont=dict(color='#5A5856')
               ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.37))
 
@@ -117,7 +117,7 @@ fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=T
               ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
               ).update_layout(legend=dict(y=1.2, orientation='h',title=''))
 
-# BAR - TOP 6 PROJECTED PLAYERS BY TEAM
+# BAR - ALL PLAYERS TOP 6 BY TEAM
 fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'],ascending=False),
               y = 'proj_pts',
               color='team',
@@ -144,102 +144,92 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
               log_x=True,
               height=325
               ).update_layout(showlegend=False
-              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
-              ).update_yaxes(tickfont=dict(color='#5A5856'))
+              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856')
+              ).update_yaxes(tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856'))
 
 # BAR - HORIZONTAL PROJECTED ROSTERS
 fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_values(by='proj_pts',ascending=False),
-    y = 'team',
-    x = 'proj_pts',
-    text_auto='.3s',
-    color='team',
-    template='plotly_dark',
-    # title = "Optimal Rosters",
-    labels = {'team': 'Optimal Rosters', 'proj_pts':''},
-    color_discrete_map=team_color,
-    height=325,
-    log_x=True
-    ).update_layout(showlegend=False
-    ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
-    ).update_yaxes(tickfont=dict(color='#5A5856'))
+              y = 'team',
+              x = 'proj_pts',
+              text_auto='.3s',
+              color='team',
+              template='plotly_dark',
+              labels = {'team': 'Optimal Rosters', 'proj_pts':''},
+              color_discrete_map=team_color,
+              height=325,
+              log_x=True
+              ).update_layout(showlegend=False
+              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856')
+              ).update_yaxes(tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856'))
 
 
+height = 250
 
 ###  MATCHKUPS ###
-height = 250
-# My Matchup
 matchup = ['New Team 4','unit_circle']
 fig6 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
-      y = 'proj_pts',
-      color = 'team',
-      color_discrete_map=team_color,
-      labels = {'index':"", 'proj_pts':''},
-#       text_auto = ",.0f",
-      text='player',
-      template = 'plotly_dark',
-      hover_name='proj_pts',
-      height=height,
-    #   title=f"{matchup[0]} v {matchup[1]}",
-      log_y=True
-      ).update_xaxes(showticklabels=False
-      ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
-      ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
-      ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+              y = 'proj_pts',
+              color = 'team',
+              color_discrete_map=team_color,
+              labels = {'index':"", 'proj_pts':''},
+              text='player',
+              template = 'plotly_dark',
+              hover_name='proj_pts',
+              height=height,
+              log_y=True
+              ).update_xaxes(showticklabels=False
+              ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
+              ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
+              ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 matchup2 = ['txmoonshine','Team Gamble']
 fig7 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup2))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
-      y = 'proj_pts',
-      color = 'team',
-      color_discrete_map=team_color,
-      labels = {'index':"", 'proj_pts':''},
-#       text_auto = ",.0f",
-      text='player',
-      template = 'plotly_dark',
-      hover_name='proj_pts',
-      height=height,
-    #   title=f"{matchup2[0]} v {matchup2[1]}",
-      log_y=True
-      ).update_xaxes(showticklabels=False
-      ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
-      ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
-      ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+              y = 'proj_pts',
+              color = 'team',
+              color_discrete_map=team_color,
+              labels = {'index':"", 'proj_pts':''},
+              text='player',
+              template = 'plotly_dark',
+              hover_name='proj_pts',
+              height=height,
+              log_y=True
+              ).update_xaxes(showticklabels=False
+              ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
+              ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
+              ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 # My Matchup
 matchup3 = ['Putt Pirates','Philly919']
 fig16 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup3))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
-      y = 'proj_pts',
-      color = 'team',
-      color_discrete_map=team_color,
-      labels = {'index':"", 'proj_pts':''},
-#       text_auto = ",.0f",
-      text='player',
-      template = 'plotly_dark',
-      hover_name='proj_pts',
-      height=height,
-    #   title=f"{matchup[0]} v {matchup[1]}",
-      log_y=True
-      ).update_xaxes(showticklabels=False
-      ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
-      ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
-      ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+               y = 'proj_pts',
+               color = 'team',
+               color_discrete_map=team_color,
+               labels = {'index':"", 'proj_pts':''},
+               text='player',
+               template = 'plotly_dark',
+               hover_name='proj_pts',
+               height=height,
+               log_y=True
+               ).update_xaxes(showticklabels=False
+               ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
+               ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
+               ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 matchup4 = ['AlphaWired','Sneads Foot']
 fig17 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup4))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
-      y = 'proj_pts',
-      color = 'team',
-      color_discrete_map=team_color,
-      labels = {'index':"", 'proj_pts':''},
-#       text_auto = ",.0f",
-      text='player',
-      template = 'plotly_dark',
-      hover_name='proj_pts',
-      height=height,
-    #   title=f"{matchup2[0]} v {matchup2[1]}",
-      log_y=True
-      ).update_xaxes(showticklabels=False
-      ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
-      ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
-      ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
+               y = 'proj_pts',
+               color = 'team',
+               color_discrete_map=team_color,
+               labels = {'index':"", 'proj_pts':''},
+               text='player',
+               template = 'plotly_dark',
+               hover_name='proj_pts',
+               height=height,
+               log_y=True
+               ).update_xaxes(showticklabels=False
+               ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
+               ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
+               ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
 ### makes individual team bars ###
 def get_team_bar(team):
@@ -260,7 +250,7 @@ def get_team_bar(team):
         return fig
 
 
-st.write("#")
+# st.write("#")
 ### TITLE AND ROSTERS  ###
 col1,col2,col3 = st.columns(3)
 
@@ -286,10 +276,8 @@ tab3.plotly_chart(fig3,use_container_width=True,config = config)
 ### MATCHUPS  ###
 st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
 col1,col2 = st.columns(2)
-
 col1.plotly_chart(fig16,use_container_width=True,config = config)
 col1.plotly_chart(fig17,use_container_width=True,config = config)
-
 col2.plotly_chart(fig7,use_container_width=True,config = config)
 col2.plotly_chart(fig6,use_container_width=True,config = config)
 
