@@ -90,18 +90,17 @@ for team in week.team.unique():
 
 # BAR - ALL PLAYERS ACTIVE/RESERVE
 fig1 = px.bar(week.drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
-       y = 'proj_pts',
-       template='plotly_dark',
-       hover_name = 'player',
-       color = 'active_reserve',
-       color_discrete_map=active_color,
-       labels = {'_index':"", 'proj_pts':''},
-       height=300,
-       log_y=True,
-       ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'#, size=14)
-       ).update_yaxes(showgrid=False, tickvals=[50,60,70,80,90,100],tickfont=dict(color='#5A5856'
-       ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.37)
-       )
+              y = 'proj_pts',
+              template='plotly_dark',
+              hover_name = 'player',
+              color = 'active_reserve',
+              color_discrete_map=active_color,
+              labels = {'_index':"", 'proj_pts':''},
+              height=300,
+              log_y=True,
+              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')#, size=14)
+              ).update_yaxes(showgrid=False, tickvals=[50,60,70,80,90,100],tickfont=dict(color='#5A5856')
+              ).update_layout(legend=dict(orientation='h',title='',y=1.2,x=.37))
 
 # BAR - ALL PLAYERS BY TEAM
 fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
@@ -135,19 +134,18 @@ fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'
 
 # BAR - HORIZONTAL ACTIVE ROSTERS
 fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort_values(by='proj_pts',ascending=False),
-    y='team',
-    x='proj_pts', 
-    color='team', 
-    template='plotly_dark',
-    text_auto='.3s',
-    # title = "Current Rosters",
-    labels = {'team': 'Current Rosters', 'proj_pts':''},
-    color_discrete_map=team_color,
-    log_x=True,
-    height=325
-    ).update_layout(showlegend=False
-    ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
-    ).update_yaxes(tickfont=dict(color='#5A5856'))
+              y='team',
+              x='proj_pts', 
+              color='team', 
+              template='plotly_dark',
+              text_auto='.3s',
+              labels = {'team': 'Current Rosters', 'proj_pts':''},
+              color_discrete_map=team_color,
+              log_x=True,
+              height=325
+              ).update_layout(showlegend=False
+              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
+              ).update_yaxes(tickfont=dict(color='#5A5856'))
 
 # BAR - HORIZONTAL PROJECTED ROSTERS
 fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_values(by='proj_pts',ascending=False),
