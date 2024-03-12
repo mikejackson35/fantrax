@@ -238,7 +238,7 @@ def get_team_bar(team):
                                 color_discrete_map=active_color,
                                 log_y=True,
                                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
-        fig.show()
+        return fig
 
 
 
@@ -376,7 +376,7 @@ team_names = week.team.unique()
 ###  ACTIVE / RESERVE TABS  ###
 st.markdown("<center><h3>ACTIVE/RESERVE</h3></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
-tab1.plotly_chart(get_team_bar(team_names[6]),use_container_width=True,config = config)
+tab1.plotly_chart(get_team_bar('Philly919'),use_container_width=True,config = config)
 tab2.plotly_chart(get_team_bar('unit_circle'),use_container_width=True,config = config)
 tab3.plotly_chart(get_team_bar('txmoonshine'),use_container_width=True,config = config)
 tab4.plotly_chart(get_team_bar('AlphaWired'),use_container_width=True,config = config)
