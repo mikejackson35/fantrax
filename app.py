@@ -144,11 +144,11 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
     color='team', 
     template='plotly_dark',
     text_auto='.0s',
-    title = "Current Rosters",
-    labels = {'team': ' ', 'proj_pts':''},
+    # title = "Current Rosters",
+    labels = {'team': 'Current Rosters', 'proj_pts':''},
     color_discrete_map=team_color,
     log_x=True,
-    height=300
+    height=325
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
 
@@ -159,10 +159,10 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
     text_auto='.0s',
     color='team',
     template='plotly_dark',
-    title = "Optimal Rosters",
-    labels = {'team': ' ', 'proj_pts':''},
+    # title = "Optimal Rosters",
+    labels = {'team': 'Optimal Rosters', 'proj_pts':''},
     color_discrete_map=team_color,
-    height=300,
+    height=325,
     log_x=True
     ).update_layout(showlegend=False, title_x=.33
                     ).update_xaxes(showticklabels=False)
