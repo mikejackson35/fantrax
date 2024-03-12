@@ -144,7 +144,7 @@ fig4 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
               log_x=True,
               height=325
               ).update_layout(showlegend=False
-              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
+              ).update_xaxes(showticklabels=False
               ).update_yaxes(tickfont=dict(color='#5A5856'))
 
 # BAR - HORIZONTAL PROJECTED ROSTERS
@@ -159,7 +159,7 @@ fig5 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
               height=325,
               log_x=True
               ).update_layout(showlegend=False
-              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
+              ).update_xaxes(showticklabels=False
               ).update_yaxes(tickfont=dict(color='#5A5856'))
 
 
