@@ -226,101 +226,117 @@ fig17 = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup4))
     #   title=f"{matchup2[0]} v {matchup2[1]}",
       log_y=True).update_xaxes(showticklabels=False).update_yaxes(tickvals=[50,60,70,80,90,100]).update_yaxes(gridcolor="#B1A999").update_layout(legend=dict(orientation='h',title='',y=1.2,x=.33))
 
-# PHILLY919
-fig8 = px.bar(week[week.team == 'Philly919'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# unit_circle
-fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+def get_team_bar(team):
+        fig = px.bar(week[week.team == team].sort_values(by='proj_pts',ascending=False), 
+                                x = 'player', 
+                                y = 'proj_pts', 
+                                height=250,
+                                color='active_reserve', 
+                                text_auto='.2s',
+                                template = 'plotly_dark',
+                                color_discrete_map=active_color,
+                                log_y=True,
+                                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+        fig.show()
 
-# txmoonshine
-fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# AlphaWired
-fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# New Team 4
-fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+# # PHILLY919
+# fig8 = px.bar(week[week.team == 'Philly919'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# Team Gamble
-fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+# # unit_circle
+# fig9 = px.bar(week[week.team == 'unit_circle'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# Sneads Foot
-fig14 = px.bar(week[week.team == 'Sneads Foot'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+# # txmoonshine
+# fig10 = px.bar(week[week.team == 'txmoonshine'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
-# Putt Pirates
-fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascending=False), 
-                x = 'player', 
-                y = 'proj_pts', 
-                height=height,
-                color='active_reserve', 
-                text_auto=True,
-                template = 'plotly_dark',
-                color_discrete_map=active_color,
-                log_y=True,
-                labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+# # AlphaWired
+# fig11 = px.bar(week[week.team == 'AlphaWired'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+
+# # New Team 4
+# fig12 = px.bar(week[week.team == 'New Team 4'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+
+# # Team Gamble
+# fig13 = px.bar(week[week.team == 'Team Gamble'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+
+# # Sneads Foot
+# fig14 = px.bar(week[week.team == 'Sneads Foot'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
+
+# # Putt Pirates
+# fig15 = px.bar(week[week.team == 'Putt Pirates'].sort_values(by='proj_pts',ascending=False), 
+#                 x = 'player', 
+#                 y = 'proj_pts', 
+#                 height=height,
+#                 color='active_reserve', 
+#                 text_auto=True,
+#                 template = 'plotly_dark',
+#                 color_discrete_map=active_color,
+#                 log_y=True,
+#                 labels = {'proj_pts':'','player':""}).update_yaxes(showticklabels=False,showgrid=False ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)).update_traces(width=.7)
 
 
 st.write("#")
@@ -360,14 +376,14 @@ col2.plotly_chart(fig6,use_container_width=True,config = config)
 ###  ACTIVE / RESERVE TABS  ###
 st.markdown("<center><h3>ACTIVE/RESERVE</h3></center>",unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
-tab1.plotly_chart(fig8,use_container_width=True,config = config)
-tab2.plotly_chart(fig9,use_container_width=True,config = config)
-tab3.plotly_chart(fig10,use_container_width=True,config = config)
-tab4.plotly_chart(fig11,use_container_width=True,config = config)
-tab5.plotly_chart(fig12,use_container_width=True,config = config)
-tab6.plotly_chart(fig13,use_container_width=True,config = config)
-tab7.plotly_chart(fig14,use_container_width=True,config = config)
-tab8.plotly_chart(fig15,use_container_width=True,config = config)
+tab1.plotly_chart(get_team_bar('Philly919'),use_container_width=True,config = config)
+tab2.plotly_chart(get_team_bar('unit_circle'),use_container_width=True,config = config)
+tab3.plotly_chart(get_team_bar('txmoonshine'),use_container_width=True,config = config)
+tab4.plotly_chart(get_team_bar('AlphaWired'),use_container_width=True,config = config)
+tab5.plotly_chart(get_team_bar('New Team 4'),use_container_width=True,config = config)
+tab6.plotly_chart(get_team_bar('Team Gamble'),use_container_width=True,config = config)
+tab7.plotly_chart(get_team_bar('Sneads Foot'),use_container_width=True,config = config)
+tab8.plotly_chart(get_team_bar('Putt Pirates'),use_container_width=True,config = config)
 
 
 # st.markdown("##")
