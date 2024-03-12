@@ -117,7 +117,6 @@ fig2 = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=T
       ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
       ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
       ).update_layout(legend=dict(y=1.2, orientation='h',title=''))
-                                                                                 )
 
 # BAR - TOP 6 PROJECTED PLAYERS BY TEAM
 fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'],ascending=False),
