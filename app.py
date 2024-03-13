@@ -16,11 +16,12 @@ with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 config = {'displayModeBar': False}
 
-
+dg_key = "e297e933c3ad47d71ec1626c299e"
 ####  LIVE SCORING DATA FROM DATAGOLF API AND PREP FOR MERGE  ####
-dg_key = st.secrets.dg_key
+# dg_key = st.secrets.dg_key
 st.cache_data()
 def get_projections():
+
     dg_proj = pd.read_csv(f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key={dg_key}")
     return dg_proj
 dg_proj = get_projections()
@@ -48,7 +49,7 @@ week.sort_values('proj_pts',ascending=False,inplace=True)
 
 ####   CURRENT WEEK INPUTS   ####
 current_week = 10
-tournament = "Players<br>Championship"
+tournament = "The Players<br>Championship"
 matchup1 = ['New Team 4','unit_circle']
 matchup2 = ['txmoonshine','Team Gamble']
 matchup3 = ['Putt Pirates','Philly919']
@@ -96,18 +97,34 @@ fig2 = px.bar(top_6_proj.groupby('team',as_index=False)['proj_pts'].sum().sort_v
               ).update_yaxes(tickfont=dict(color='#5A5856'),title_font_color='#5A5856')
 
 # HORIZONTAL BAR - TOP 6 BY TEAM
-fig3 = px.bar(top_6_proj.set_index('player').sort_values(by = ['proj_pts','team'],ascending=False),
+fig3 = px.bar(top_6_proj.sort_values(by = ['proj_pts','team'],ascending=False),
               y = 'proj_pts',
               color='team',
-              hover_name=top_6_proj.player,
+            #   hover_name=top_6_proj.index,
               template='plotly_dark',
-              labels = {'_index':" ",'player': '','proj_pts':''},
+              labels = {'index':" ",'player': '','proj_pts':''},
               height=300,
               color_discrete_map=team_color,
-              log_y=True
+              log_y=True,
               ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
               ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
               ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
+              ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
+
+top20 = week.sort_values(by = 'proj_pts',ascending=False)[:25].reset_index(drop=True)
+line = top20.proj_pts.mean()
+fig4 = px.bar(top20,
+              y = 'proj_pts',
+              color = 'team',
+              color_discrete_map=team_color,
+              labels = {'index':"", 'proj_pts':'Projected Pts'},
+              text=week[:25].index,
+              template = 'plotly_dark',
+              height=300,
+            #   log_y=True,
+              hover_name='proj_pts'
+              ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
+              ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856'#,tickvals=[60,70,80,90]
               ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
 
 
@@ -117,20 +134,22 @@ col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("###")
     st.markdown("###")
-    st.markdown(f"<small>Fantrax Week {current_week}</small>",unsafe_allow_html=True)
+    st.caption("Fantrax Week 10")
+    # st.markdown(f"<small>Fantrax Week {current_week}</small>",unsafe_allow_html=True)
     st.markdown(f"<h4>{tournament}</h4>",unsafe_allow_html=True)
     st.markdown("###")
     st.markdown("###")
-    st.markdown(f"{num_players} Rostered Players",unsafe_allow_html=True)
+    st.markdown(f"{len(week)} Rostered Players",unsafe_allow_html=True)
 with col2:
     st.plotly_chart(fig1,use_container_width=True,config = config)
 with col3:
     st.plotly_chart(fig2, use_container_width=True,config = config)
 
 #### ROW 2 - WIDE BAR CHARTS  ####
-st.markdown("<center><h3>ALL PLAYERS</h3></center>",unsafe_allow_html=True)
-tab1, tab2, tab3 = st.tabs(['by Proj Points', 'Sit / Start', 'Optimal'])
-tab1.plotly_chart(get_all_player_bar(week,'team',team_color),use_container_width=True,config = config)
+# st.markdown("<center><h3>ALL PLAYERS</h3></center>",unsafe_allow_html=True)
+tab1, tab2, tab3 = st.tabs(['Top 25 Plays', 'Sit / Start', 'Optimals'])
+# tab1.plotly_chart(get_all_player_bar(week,'team',team_color),use_container_width=True,config = config)
+tab1.plotly_chart(fig4,use_container_width=True,config = config)
 tab2.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
 tab3.plotly_chart(fig3,use_container_width=True,config = config)
 
