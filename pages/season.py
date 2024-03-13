@@ -3,7 +3,7 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import statsmodels.api as sm
-from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color
+from utils import team_color
 import secrets
 
 st.set_page_config(
