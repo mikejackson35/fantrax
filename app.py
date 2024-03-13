@@ -135,7 +135,6 @@ with col1:
     st.markdown("###")
     st.markdown("###")
     st.caption("Fantrax Week 10")
-    # st.markdown(f"<small>Fantrax Week {current_week}</small>",unsafe_allow_html=True)
     st.markdown(f"<h4>{tournament}</h4>",unsafe_allow_html=True)
     st.markdown("###")
     st.markdown("###")
@@ -146,7 +145,6 @@ with col3:
     st.plotly_chart(fig2, use_container_width=True,config = config)
 
 #### ROW 2 - WIDE BAR CHARTS  ####
-# st.markdown("<center><h3>ALL PLAYERS</h3></center>",unsafe_allow_html=True)
 tab1, tab2, tab3 = st.tabs(['Top 25 Plays', 'Sit / Start', 'Optimals'])
 # tab1.plotly_chart(get_all_player_bar(week,'team',team_color),use_container_width=True,config = config)
 tab1.plotly_chart(fig4,use_container_width=True,config = config)
