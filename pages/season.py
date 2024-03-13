@@ -18,7 +18,7 @@ with open(r"styles/main.css") as f:
 
 config = {'displayModeBar': False}
 
-df = pd.read_excel(r"C:\Users\mikej\Desktop\fantrax\fantrax.csv")
+df = pd.read_csv(r"C:\Users\mikej\Desktop\fantrax\fantrax.csv")
 
 ### SEASON TO DATE SCORE VS WEEKLY MEDIAN  ###
 team_medians = pd.DataFrame(df.groupby('team',as_index=False)['median_delta'].sum()).sort_values(by='median_delta',ascending=False).reset_index(drop=True)
