@@ -111,6 +111,7 @@ fig3 = px.bar(top_6_proj.sort_values(by = ['proj_pts','team'],ascending=False),
               ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
               ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
 
+# HORIZONTAL BAR = TOP 25 PLAYS
 top20 = week.sort_values(by = 'proj_pts',ascending=False)[:25].reset_index(drop=True)
 line = top20.proj_pts.mean()
 fig4 = px.bar(top20,
