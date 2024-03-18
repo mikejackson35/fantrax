@@ -27,6 +27,6 @@ font-size:1rem;
     justify-content: center;
 }
 
-MainMenu {visibility: hidden;}
+#MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
