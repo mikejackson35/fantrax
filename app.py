@@ -49,11 +49,11 @@ week.sort_values('proj_pts',ascending=False,inplace=True)
 
 ####   CURRENT WEEK INPUTS   ####
 current_week = 10
-tournament = "The Players<br>Championship"
-matchup1 = ['New Team 4','unit_circle']
-matchup2 = ['txmoonshine','Team Gamble']
-matchup3 = ['Putt Pirates','Philly919']
-matchup4 = ['AlphaWired','Sneads Foot']   
+tournament = "Valspar<br>Championship"
+matchup1 = ['Putt Pirates','unit_circle']
+matchup2 = ['txmoonshine','AlphaWired']
+matchup3 = ['Team Gamble','Philly919']
+matchup4 = ['New Team 4','Sneads Foot']   
 num_players = len(week)
 
 #### MAKE CHARTS ####
