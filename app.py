@@ -6,7 +6,7 @@ import secrets
 from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color
 
 st.set_page_config(
-    page_title="Fantrax Wk10",
+    page_title="Fantrax Wk11",
     layout="centered",
     initial_sidebar_state="expanded",
 )
@@ -48,7 +48,7 @@ week[['player','team','active_reserve']] = week[['player','team','active_reserve
 week.sort_values('proj_pts',ascending=False,inplace=True)
 
 ####   CURRENT WEEK INPUTS   ####
-current_week = 10
+current_week = 11
 tournament = "Valspar<br>Championship"
 matchup1 = ['Putt Pirates','unit_circle']
 matchup2 = ['txmoonshine','AlphaWired']
@@ -134,7 +134,7 @@ col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("###")
     st.markdown("###")
-    st.caption("Fantrax Week 10")
+    st.caption("Fantrax Week 11")
     st.markdown(f"<h4>{tournament}</h4>",unsafe_allow_html=True)
     st.markdown("###")
     st.markdown("###")
