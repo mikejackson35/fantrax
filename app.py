@@ -134,7 +134,7 @@ col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("###")
     st.markdown("###")
-    st.caption("Fantrax Week 11")
+    st.caption(f"Fantrax Week {current_week}")
     st.markdown(f"<h4>{tournament}</h4>",unsafe_allow_html=True)
     st.markdown("###")
     st.markdown("###")
