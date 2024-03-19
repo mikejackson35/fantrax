@@ -98,7 +98,7 @@ st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
 
 ### FINISHING POSITION COMPARISON
 finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
-finish_medians.columns = 'Team','Top Finisher','2nd','3rd','4th','5th','Worst Finisher'
+finish_medians.columns = 'Team','Best Finisher','2nd','3rd','4th','5th','Worst Finisher'
 melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Best Finisher','2nd','3rd','4th','5th','Worst Finisher'])
 
 fin_place_scatter = px.scatter(melted_finish_medians,
