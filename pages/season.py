@@ -110,6 +110,7 @@ fin_place_scatter = px.scatter(melted_finish_medians,
           color_discrete_map=team_color,
           template='plotly_white',
           labels={'value':'Median Finish','variable':''},
+          log_y=True
           ).update_traces(marker_size=12
           ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3))
 
