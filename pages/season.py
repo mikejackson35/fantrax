@@ -64,7 +64,7 @@ scatter_fig = px.scatter(temp_df,
                         size_max=14,
                         hover_name='win_loss',
                         color_discrete_sequence=px.colors.qualitative.Pastel1,
-                        title='Weekly Wins & Losses by Pts Scored',
+                        title='Weekly Scores',
                         labels={'week':'','total_pts':'Points Scored'}
                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,title_x=.35,
                                         legend=dict(orientation='h',yanchor="bottom",y=1,xanchor="center",x=.5,title='',font_color='#5A5856')
@@ -99,7 +99,7 @@ st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
 ### FINISHING POSITION COMPARISON
 finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
 finish_medians.columns = 'Team','Top Finisher','2nd','3rd','4th','5th','Worst Finisher'
-melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Top Finisher','2nd','3rd','4th','5th','Worst Finisher'])
+melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Best Finisher','2nd','3rd','4th','5th','Worst Finisher'])
 
 fin_place_scatter = px.scatter(melted_finish_medians,
           x='variable',
@@ -107,10 +107,10 @@ fin_place_scatter = px.scatter(melted_finish_medians,
           color='Team',
           color_discrete_map=team_color,
           template='plotly_white',
-          labels={'value':'Median Finish','variable':''},
+          labels={'value':'Median Finish (log scale)','variable':''},
           log_y=True
           ).update_traces(marker_size=12
-          ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3),showlegend=False
+          ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3)
           ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
           ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
