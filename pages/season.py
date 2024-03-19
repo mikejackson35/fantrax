@@ -111,7 +111,7 @@ fin_place_scatter = px.scatter(melted_finish_medians,
           log_y=True
           ).update_traces(marker_size=12
           ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3)
-          ).update_yaxes(showgrid=True,gridcolor='darkslategrey')
+          ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
 
 st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
 
