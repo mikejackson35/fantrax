@@ -18,8 +18,6 @@ with open(r"styles/main.css") as f:
 
 config = {'displayModeBar': False}
 
-# df = pd.read_excel(r"fantrax_season_data.xlsm")
-
 st.cache_data()
 def get_season_data():
     season_data = pd.read_excel(r"fantrax_season_data.xlsm")
@@ -112,7 +110,8 @@ fin_place_scatter = px.scatter(melted_finish_medians,
           labels={'value':'Median Finish','variable':''},
           log_y=True
           ).update_traces(marker_size=12
-          ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3))
+          ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3)
+          ).update_yaxes(showgrid=True,gridcolor='darkslategrey')
 
 st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
 
