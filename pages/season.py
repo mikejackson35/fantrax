@@ -66,7 +66,7 @@ scatter_fig = px.scatter(temp_df,
                         color_discrete_sequence=px.colors.qualitative.Pastel1,
                         title='Weekly Scores',
                         labels={'week':'','total_pts':'Points Scored'}
-                        ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,title_x=.35,
+                        ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,title_x=.45,
                                         legend=dict(orientation='h',yanchor="bottom",y=1,xanchor="center",x=.5,title='',font_color='#5A5856')
                         ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10],
                                        ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS'],
@@ -107,10 +107,11 @@ fin_place_scatter = px.scatter(melted_finish_medians,
           color='Team',
           color_discrete_map=team_color,
           template='plotly_white',
-          labels={'value':'Median Finish (log scale)','variable':''},
-          log_y=True
-          ).update_traces(marker_size=12
-        #   ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3)
+          labels={'value':'Finish Place<br>(log scale)','variable':''},
+          log_y=True,
+          height=600,
+          ).update_traces(marker=dict(size=18,opacity=.75,line=dict(width=1,color='darkslategrey'))
+          ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856')
           ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
           ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
