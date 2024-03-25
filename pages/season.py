@@ -68,8 +68,8 @@ scatter_fig = px.scatter(temp_df,
                         labels={'week':'','total_pts':'Points Scored'}
                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,title_x=.45,
                                         legend=dict(orientation='h',yanchor="bottom",y=1,xanchor="center",x=.5,title='',font_color='#5A5856')
-                        ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10],
-                                       ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS'],
+                        ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11],
+                                       ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar'],
                                        tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                         ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
                         ).update_traces(marker=dict(line_color='black')
