@@ -120,20 +120,62 @@ st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
 
 ### CORRELATION TO WINS BY STAT - SCATTER PLOTS WITH SLIDER / TOGGLE / RADIO BUTTON FOR EACH STAT
 df['bb_ratio'] = df.bird_num / df.bog_num
-stats_to_compare = ['pars_num','bird_num','eag_num','bog_num','dbog_num','plc_pts','cuts_made','median_delta','pp_hole','bb_ratio']
-df['bb_ratio'] = df.bird_num / df.bog_num
+# stats_to_compare = ['pars_num','bird_num','eag_num','bog_num','dbog_num','plc_pts','cuts_made','median_delta','pp_hole','bb_ratio']
+# df['bb_ratio'] = df.bird_num / df.bog_num
 
-for stat in stats_to_compare:
+# for stat in stats_to_compare:
+#     scatter_df = df.groupby(['team'],as_index=False)[[stat,'win_loss']].mean()
+#     fig = px.scatter(scatter_df,
+#               x=stat,
+#               y='win_loss',
+#               color='team',
+#               color_discrete_map=team_color,
+#               trendline='ols',trendline_scope='overall',trendline_color_override='black',
+#           ).update_traces(marker_size=12
+#           ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3))
+#     results = px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
+
+stats_dict = {
+    'bb_ratio':'Birdie Bogey Ratio',
+    'bird_num':'Num of Birdies',
+    'median_delta':'+/- Weekly Median',
+    'total_pts':'Fantasy Points',
+    'plc_pts':'Place Points',
+    'cuts_made':'Avg Cuts Made/Wk',
+    'pp_hole':'Points per Hole Played',
+    'pars_num':'Num of Pars',
+    'eag_num':'Num of Eagles',
+    'dbog_num':'Num of Double Bogeys',
+    'bog_num':'Num of Bogeys'
+}
+
+col1,col2 = st.columns([1,1.75])
+with col1:
+    st.write("##")
+    st.write("##")
+    st.write("##")
+    stat = st.radio(
+        "",
+        ['bb_ratio','bird_num','median_delta','total_pts','plc_pts','cuts_made','pp_hole','pars_num','eag_num','dbog_num','bog_num'],
+        format_func=lambda x: stats_dict.get(x),
+    )
+
+with col2:
     scatter_df = df.groupby(['team'],as_index=False)[[stat,'win_loss']].mean()
     fig = px.scatter(scatter_df,
-              x=stat,
-              y='win_loss',
-              color='team',
-              color_discrete_map=team_color,
-              trendline='ols',trendline_scope='overall',trendline_color_override='black',
-          ).update_traces(marker_size=12
-          ).update_layout(legend=dict(title=None,orientation='h',x=0,y=1.3))
+                x=stat,
+                y='win_loss',
+                color='team',
+                color_discrete_map=team_color,
+                trendline='ols',trendline_scope='overall',trendline_color_override='black',
+                title=stat
+            ).update_traces(marker_size=12
+            ).update_layout(showlegend=False)#legend=dict(title=None,orientation='h',x=0,y=1.3))
     results = px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
+    st.markdown(f"<h3>R-Squared: {results:.2f}</h3>",unsafe_allow_html=True)
+    st.plotly_chart(fig,use_container_width=True, config=config)
+
+
 
 ### CORRELATION TO WINS BY STAT - SCATTER PLOTS WITH SLIDER / TOGGLE / RADIO BUTTON FOR EACH STAT
 
@@ -158,5 +200,5 @@ for stat in stats_to_compare:
     # print(f"R-Squared Value: {results:.2f}")
     # print(fig.show())
 
-st.markdown(f"Comparing {stat} with Wins<br>R-Squared: {results:.2f}",unsafe_allow_html=True)
-st.plotly_chart(fig,use_container_width=True,config=config)
+# st.markdown(f"Comparing {stat} with Wins<br>R-Squared: {results:.2f}",unsafe_allow_html=True)
+# st.plotly_chart(fig,use_container_width=True,config=config)

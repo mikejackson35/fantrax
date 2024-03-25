@@ -6,7 +6,7 @@ import secrets
 from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color
 
 st.set_page_config(
-    page_title="Fantrax Wk11",
+    page_title="Fantrax Wk12",
     layout="centered",
     initial_sidebar_state="expanded",
 )
@@ -49,12 +49,12 @@ week[['player','team','active_reserve']] = week[['player','team','active_reserve
 week.sort_values('proj_pts',ascending=False,inplace=True)
 
 ####   CURRENT WEEK INPUTS   ####
-current_week = 11
-tournament = "Valspar<br>Championship"
-matchup1 = ['Putt Pirates','unit_circle']
-matchup2 = ['txmoonshine','AlphaWired']
-matchup3 = ['Team Gamble','Philly919']
-matchup4 = ['New Team 4','Sneads Foot']   
+current_week = 12
+tournament = "Texas Children's<br>Houston Open"
+matchup1 = ['Philly919','unit_circle']
+matchup2 = ['Team Gamble','AlphaWired']
+matchup3 = ['New Team 4','txmoonshine']
+matchup4 = ['Putt Pirates','Sneads Foot']   
 num_players = len(week)
 
 #### MAKE CHARTS ####
