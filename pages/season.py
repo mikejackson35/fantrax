@@ -85,8 +85,8 @@ cuts_made_hist = px.histogram(df,
                     template='plotly_dark',
                     labels={'cuts_made':'','count':''},
                     color='win_loss',
-                    histfunc='sum',
-                    histnorm='probability density',
+                    # histfunc='sum',
+                    # histnorm='probability density',
                              ).update_layout(legend=dict(title=""))
 
 cuts_made_hist.update_xaxes(tickvals = [2,3,4,5,6],
@@ -110,7 +110,7 @@ fin_place_scatter = px.scatter(melted_finish_medians,
           labels={'value':'Finish Place<br>(log scale)','variable':''},
           log_y=True,
           height=600,
-          ).update_traces(marker=dict(size=18,opacity=.75,line=dict(width=1,color='darkslategrey'))
+          ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
           ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856')
           ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
           ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
