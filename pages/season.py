@@ -78,22 +78,77 @@ scatter_fig = px.scatter(temp_df,
 
 st.plotly_chart(scatter_fig)#,use_container_width=True, config=config)
 
+# ### CUTS MADE DISTRIBUTION  ###
+# cuts_made_hist = px.histogram(df,
+#                     x='cuts_made',
+#                     text_auto='.2f',
+#                     template='plotly_dark',
+#                     labels={'cuts_made':'','count':''},
+#                     color='win_loss',
+#                     # histfunc='sum',
+#                     # histnorm='probability density',
+#                              ).update_layout(legend=dict(title=""))
+
+# cuts_made_hist.update_xaxes(tickvals = [2,3,4,5,6],
+#                             ticktext = ['2/6','3/6','4/6','5/6','6/6'])
+
+# cuts_made_hist.update_yaxes(showticklabels=False, showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856',visible= False)
+# st.markdown("<center><h5>Cuts Made Distribution</h5></center>",unsafe_allow_html=True)
+# st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
+
 ### CUTS MADE DISTRIBUTION  ###
-cuts_made_hist = px.histogram(df,
-                    x='cuts_made',
-                    text_auto='.2f',
-                    template='plotly_dark',
-                    labels={'cuts_made':'','count':''},
-                    color='win_loss',
-                    # histfunc='sum',
-                    # histnorm='probability density',
-                             ).update_layout(legend=dict(title=""))
+df['rounded_percentage'] = (df['cuts_made'] * 100).round().astype(int).astype(str) + '%'
 
-cuts_made_hist.update_xaxes(tickvals = [2,3,4,5,6],
-                            ticktext = ['2/6','3/6','4/6','5/6','6/6'])
+cuts_made_hist = px.histogram(df.sort_values('cuts_made', ascending=False),
+                              x='cuts_made',
+                              template='plotly_dark',
+                              labels={'cuts_made':'', 'count':''},
+                              title="%'s Cuts Made",
+                              histnorm='percent',
+                              color_discrete_sequence=['grey'],
+                              height=350,
+                              text_auto='.2s'
+                             )
 
-cuts_made_hist.update_yaxes(showticklabels=False, showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856',visible= False)
+
+cuts_made_hist.update_layout(title_x=.5, bargap=0.2, legend=dict(title="", x=.45, y=1.2, orientation='h'))
+cuts_made_hist.update_xaxes(tickvals=[1, 2, 3, 4, 5, 6], ticktext=['1/6', '2/6', '3/6', '4/6', '5/6', '6/6'])
+cuts_made_hist.update_yaxes(showticklabels=False, showgrid=False, tickfont=dict(color='#5A5856'),
+                             title_font_color='#5A5856', visible=False)
+
 st.markdown("<center><h5>Cuts Made Distribution</h5></center>",unsafe_allow_html=True)
+st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
+
+### CUTS MADE DISTRIBUTION  ###
+
+newnames={'0':'Loss','1':'Win'}
+
+# ['#B6E880', '#FF97FF']
+
+cuts_made_hist = px.histogram(df.sort_values('cuts_made',ascending=False),
+                    x='cuts_made',
+                    text_auto='.2s',
+                    # title='Win Percentage by Cuts Made',
+                    template='plotly_dark',
+                    labels={'cuts_made':'Players Thru Cut','count':''},
+                    histfunc='count',
+                    barnorm='percent',
+                    barmode='stack',
+                    color='win_loss',
+#                     color_discrete_sequence=['red', 'green'],
+                    color_discrete_sequence=px.colors.qualitative.Safe,
+                    height=350
+                             ).update_layout(legend=dict(title="",x=.45,y=1.2,orientation='h'))
+
+cuts_made_hist.update_layout(bargap=0.2)
+cuts_made_hist.for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+
+cuts_made_hist.update_xaxes(tickvals = [1,2,3,4,5,6],
+                            ticktext = ['1/6','2/6','3/6','4/6','5/6','6/6'])
+
+cuts_made_hist.update_yaxes(showticklabels=False, showgrid=False,visible= False)
+
+st.markdown("<center><h5>Win Perc by Cuts Made</h5></center>",unsafe_allow_html=True)
 st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
 
 ### FINISHING POSITION COMPARISON
@@ -115,6 +170,9 @@ fin_place_scatter = px.scatter(melted_finish_medians,
           ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
           ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
+st.markdown("##")
+st.markdown("##")
+st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
 st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
 
 
