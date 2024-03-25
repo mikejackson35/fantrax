@@ -168,7 +168,7 @@ with col2:
                 color='team',
                 color_discrete_map=team_color,
                 trendline='ols',trendline_scope='overall',trendline_color_override='black',
-                title=stat
+                title=f"Corr between {stat} vs Wins",
             ).update_traces(marker_size=12
             ).update_layout(showlegend=False)#legend=dict(title=None,orientation='h',x=0,y=1.3))
     results = px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
