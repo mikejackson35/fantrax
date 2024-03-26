@@ -25,6 +25,7 @@ def get_season_data():
 df = get_season_data()
 
 # ###  PER TOURNAMENT AVERAGES  ###
+st.write("")
 st.markdown("<center><h5>WEEKLY AVERAGES</h5></center>",unsafe_allow_html=True)
 team_stat_medians = df.groupby('team')[['total_pts','cuts_made','total_holes','pp_hole','bird_num','eag_num','bog_num','dbog_num','plc_pts']].mean()#.reset_index()
 team_stat_medians.columns = 'Total Pts','Cuts Made','Holes Played','Pts/Hole','Birdies','Eagles','Bogeys','Doubles','Plc Pts'
