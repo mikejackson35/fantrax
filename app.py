@@ -171,10 +171,52 @@ tab6.plotly_chart(get_team_bar(week,'Team Gamble'),use_container_width=True,conf
 tab7.plotly_chart(get_team_bar(week,'Sneads Foot'),use_container_width=True,config = config)
 tab8.plotly_chart(get_team_bar(week,'Putt Pirates'),use_container_width=True,config = config)    
 
-
-# tabs = {}
-# for key, value in teams_dict.items():
-#     tabs[key] = st.tabs(value)
+# tab_string = ""
+# for i in len(teams_dict.keys()):
+#     s[i] = f"tab{i},"
+#     tab_string.append(s[i])
 
 # for key, tab in tabs.items():
 #     tab.plotly_chart(get_team_bar(week, teams_dict[key]), use_container_width=True, config=config)
+
+# tab_string = []
+
+# for i in range(len(teams_dict.keys())):
+#     tab_string.append(f"tab{i},")
+
+# ''.join(tab_string) == st.tabs(list(teams_dict.keys()))
+
+# tab_string = []
+
+# for i in range(len(teams_dict.keys())):
+#     tab_string.append(f"tab{i},")
+
+# ''.join(tab_string) == st.tabs(list(teams_dict.keys()))
+
+# for team in range(len(teams_dict.values())):
+#     st.plotly_chart(get_team_bar(week,team),use_container_width=True,config = config)
+
+# tab_string = []
+
+# for i in range(len(teams_dict.keys())):
+#     tab_string.append(f"tab{i},")
+
+# ''.join(tab_string) == st.tabs(list(teams_dict.keys()))
+
+# tabs = {}
+# for key, value in teams_dict.items():
+#     tabs[key] = st.empty()  # Use st.empty() to create an empty placeholder
+
+# for tab_container in list(tabs.items()):
+#     # Inside each tab container, add your plotly chart
+#     with tab_container:
+#         tabs[key].plotly_chart(get_team_bar(week, teams_dict[key]), use_container_width=True, config=config)
+
+# tab1.plotly_chart(get_team_bar(week,'Philly919'),use_container_width=True,config = config)
+# tab2.plotly_chart(get_team_bar(week,'unit_circle'),use_container_width=True,config = config)
+# tab3.plotly_chart(get_team_bar(week,'txmoonshine'),use_container_width=True,config = config)
+# tab4.plotly_chart(get_team_bar(week,'AlphaWired'),use_container_width=True,config = config)
+# tab5.plotly_chart(get_team_bar(week,'New Team 4'),use_container_width=True,config = config)
+# tab6.plotly_chart(get_team_bar(week,'Team Gamble'),use_container_width=True,config = config)
+# tab7.plotly_chart(get_team_bar(week,'Sneads Foot'),use_container_width=True,config = config)
+# tab8.plotly_chart(get_team_bar(week,'Putt Pirates'),use_container_width=True,config = config) 
