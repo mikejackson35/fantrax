@@ -76,14 +76,21 @@ team_color={
      "New Team 4": 'rgb(247,94,56)',
      "Team Gamble": 'rgb(38,147,190)',
      "txmoonshine": 'rgb(219,197,48)',
-     "Putt Pirates": 'rgb(115,112,106)'}
+     "Putt Pirates": 'rgb(115,112,106)'
+     }
 
 active_color={
     "Active":'rgb(146,146,143)',
     "Reserve":'rgb(220,222,202)'
     }
 
-teams_dict = {'919':'Philly919','u_c':'unit_circle',
-              'NT 4':'New Team 4','NT 8':'Sneads Foot',
-              'txms':'txmoonshine','MG':'Team Gamble',
-              'grrr':'Putt Pirates','[AW]':'AlphaWired'}
+teams_dict = {
+        '919':'Philly919',
+        'u_c':'unit_circle',
+        'NT 4':'New Team 4',
+        'NT 8':'Sneads Foot',
+        'txms':'txmoonshine',
+        'MG':'Team Gamble',
+        'grrr':'Putt Pirates',
+        '[AW]':'AlphaWired'
+        }

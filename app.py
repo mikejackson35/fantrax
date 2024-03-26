@@ -3,41 +3,38 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import secrets
-from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color
+from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color, teams_dict
 
-st.set_page_config(
-    page_title="Fantrax Wk12",
-    layout="centered",
-    initial_sidebar_state="expanded",
-)
+#### ST, CSS, and PLOTLY CONFIGS
+st.set_page_config(page_title="Fantrax Wk12", layout="centered", initial_sidebar_state="expanded")
 
-# CSS and PLOTLY CONFIGS
 with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+
 config = {'displayModeBar': False}
 
 
-####  LIVE SCORING DATA FROM DATAGOLF API AND PREP FOR MERGE  ####
+####  LIVE SCORING API ####
 # dg_key = st.secrets.dg_key
 dg_key = "e297e933c3ad47d71ec1626c299e"
+
 st.cache_data()
 def get_projections():
-
     dg_proj = pd.read_csv(f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key={dg_key}")
     return dg_proj
+
 dg_proj = get_projections()
 dg_proj = dg_proj[['player_name','proj_points_total']]
 dg_proj.columns = ['player','proj_pts']
 dg_proj.set_index(fix_long_names(dg_proj).player,inplace=True)  
 
-
-####  FANTRAX TEAMS CSV DOWNLOAD AND PREP FOR MERGE  ####
+####  FANTRAX TEAMS  ####
 usecols=['Player','Status','Roster Status']
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fantrax.csv",
-                        usecols=usecols)
+    teams = pd.read_csv(r"fantrax.csv",usecols=usecols)
     return teams
+
 teams = get_fantrax()
 teams.columns = ['player','team','active_reserve']
 teams['team'] = teams.team.map(teams_dict)
@@ -58,7 +55,6 @@ matchup4 = ['Putt Pirates','Sneads Foot']
 num_players = len(week)
 
 #### MAKE CHARTS ####
-
 # VERTICAL BAR - CURRENT ROSTERS
 top_6_active = pd.DataFrame()
 for team in week.team.unique():
@@ -147,11 +143,11 @@ with col3:
     st.plotly_chart(fig2, use_container_width=True,config = config)
 
 #### ROW 2 - WIDE BAR CHARTS  ####
-tab1, tab2, tab3 = st.tabs(['Top 25 Plays', 'Sit / Start', 'Optimals'])
+tab_a, tab_b, tab_c = st.tabs(['Top 25 Plays', 'Sit / Start', 'Optimals'])
 # tab1.plotly_chart(get_all_player_bar(week,'team',team_color),use_container_width=True,config = config)
-tab1.plotly_chart(fig4,use_container_width=True,config = config)
-tab2.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
-tab3.plotly_chart(fig3,use_container_width=True,config = config)
+tab_a.plotly_chart(fig4,use_container_width=True,config = config)
+tab_b.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
+tab_c.plotly_chart(fig3,use_container_width=True,config = config)
 
 #### ROW 3 - MATCHUP BAR CHARTS  ####
 st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
@@ -174,3 +170,11 @@ tab5.plotly_chart(get_team_bar(week,'New Team 4'),use_container_width=True,confi
 tab6.plotly_chart(get_team_bar(week,'Team Gamble'),use_container_width=True,config = config)
 tab7.plotly_chart(get_team_bar(week,'Sneads Foot'),use_container_width=True,config = config)
 tab8.plotly_chart(get_team_bar(week,'Putt Pirates'),use_container_width=True,config = config)    
+
+
+# tabs = {}
+# for key, value in teams_dict.items():
+#     tabs[key] = st.tabs(value)
+
+# for key, tab in tabs.items():
+#     tab.plotly_chart(get_team_bar(week, teams_dict[key]), use_container_width=True, config=config)
