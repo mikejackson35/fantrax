@@ -228,14 +228,14 @@ stat = st.radio(
     )
 
 df['bb_ratio'] = df.bird_num / df.bog_num
-scatter_df = df.groupby(['team'],as_index=False)[[stat,'win_loss']].mean()
+scatter_df = df.groupby(['team'],as_index=False)[[stat,'total_pts']].mean()
 fig = px.scatter(scatter_df,
             x=stat,
-            y='win_loss',
+            y='total_pts',
             color='team',
             color_discrete_map=team_color,
             trendline='ols',trendline_scope='overall',trendline_color_override='black',
-            labels={'win_loss':'Win Rate',stat:stats_dict[stat]}
+            labels={'total_pts':'Fantasy Pts Scored',stat:stats_dict[stat]}
         ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
         ).update_layout(showlegend=False#legend=dict(title=None,orientation='h',x=0,y=1.3))
         ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
