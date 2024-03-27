@@ -5,8 +5,17 @@ import streamlit as st
 import secrets
 from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color, teams_dict
 
+####   CURRENT WEEK INPUTS   ####
+current_week = 12                                                                                       # input current week variables
+page_title = f"Fantrax WK{current_week}"
+tournament = "Texas Children's<br>Houston Open"
+matchup1 = ['Philly919','unit_circle']
+matchup2 = ['Team Gamble','AlphaWired']
+matchup3 = ['New Team 4','txmoonshine']
+matchup4 = ['Putt Pirates','Sneads Foot']
+
 #### ST, CSS, and PLOTLY CONFIGS
-st.set_page_config(page_title="Fantrax Wk12", layout="centered", initial_sidebar_state="expanded")
+st.set_page_config(page_title=page_title, layout="centered", initial_sidebar_state="expanded")
 
 with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
@@ -42,20 +51,14 @@ teams.set_index('player',inplace=True)
 
 ####   MERGE DATA    ####
 week = pd.merge(teams,dg_proj, left_index=True, right_index=True)
-week[['player','team','active_reserve']] = week[['player','team','active_reserve']].astype('string')
-week.sort_values('proj_pts',ascending=False,inplace=True)
 
-####   CURRENT WEEK INPUTS   ####
-current_week = 12
-tournament = "Texas Children's<br>Houston Open"
-matchup1 = ['Philly919','unit_circle']
-matchup2 = ['Team Gamble','AlphaWired']
-matchup3 = ['New Team 4','txmoonshine']
-matchup4 = ['Putt Pirates','Sneads Foot']   
-num_players = len(week)
+week[['player','team','active_reserve']] = week[
+    ['player','team','active_reserve']
+    ].astype('string')
 
-#### MAKE CHARTS ####
-# VERTICAL BAR - CURRENT ROSTERS
+week.sort_values('proj_pts',ascending=False,inplace=True)                                                   # data loaded and ready
+
+# VERTICAL BAR - CURRENT ROSTERS                                                                            # begin make charts
 top_6_active = pd.DataFrame()
 for team in week.team.unique():
     temp = week[(week.team==team) & (week.active_reserve=='Active')][['team','player','proj_pts','active_reserve']]
@@ -122,12 +125,11 @@ fig4 = px.bar(top20,
             #   log_y=True,
               hover_name='proj_pts'
               ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
-              ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856'#,tickvals=[60,70,80,90]
+              ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856'
               ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
 
 
-
-####  ROW 1 - TITLE AND ROSTERS  ####
+####  ROW 1 - TITLE AND ROSTERS  ####                                                                              # ui row 1
 col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("###")
@@ -142,14 +144,13 @@ with col2:
 with col3:
     st.plotly_chart(fig2, use_container_width=True,config = config)
 
-#### ROW 2 - WIDE BAR CHARTS  ####
-tab_a, tab_b, tab_c = st.tabs(['Top 25 Plays', 'Sit / Start', 'Optimals'])
-# tab1.plotly_chart(get_all_player_bar(week,'team',team_color),use_container_width=True,config = config)
+#### ROW 2 - WIDE BAR CHARTS  ####                                                                                  # ui row 2
+tab_a, tab_b, tab_c = st.tabs(['Top 25 Plays', 'Sit / Start', 'Lineup Comparison'])
 tab_a.plotly_chart(fig4,use_container_width=True,config = config)
 tab_b.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
 tab_c.plotly_chart(fig3,use_container_width=True,config = config)
 
-#### ROW 3 - MATCHUP BAR CHARTS  ####
+#### ROW 3 - MATCHUP BAR CHARTS  ####                                                                               # ui row 3
 st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
 col1,col2 = st.columns(2)
 with col1:
@@ -159,17 +160,47 @@ with col2:
     col2.plotly_chart(get_matchup_bar(week,matchup3),use_container_width=True,config = config)
     col2.plotly_chart(get_matchup_bar(week,matchup4),use_container_width=True,config = config)
 
-####  ROW 4 - ACTIVE RESERVE TABS  ####
+####  ROW 4 - ACTIVE RESERVE TABS  ####                                                                             # ui row 4
 st.markdown("<center><h3>ACTIVE/RESERVE CHOICES</h3></center>",unsafe_allow_html=True)
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
-tab1.plotly_chart(get_team_bar(week,'Philly919'),use_container_width=True,config = config)
-tab2.plotly_chart(get_team_bar(week,'unit_circle'),use_container_width=True,config = config)
-tab3.plotly_chart(get_team_bar(week,'txmoonshine'),use_container_width=True,config = config)
-tab4.plotly_chart(get_team_bar(week,'AlphaWired'),use_container_width=True,config = config)
-tab5.plotly_chart(get_team_bar(week,'New Team 4'),use_container_width=True,config = config)
-tab6.plotly_chart(get_team_bar(week,'Team Gamble'),use_container_width=True,config = config)
-tab7.plotly_chart(get_team_bar(week,'Sneads Foot'),use_container_width=True,config = config)
-tab8.plotly_chart(get_team_bar(week,'Putt Pirates'),use_container_width=True,config = config)    
+tab_objects = st.tabs(list(teams_dict.keys()))
+for tab, team_name in zip(tab_objects, teams_dict.values()):
+    tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config)
+
+# # Create a sidebar selectbox to choose the team
+# selected_team = st.selectbox("Select a team", list(teams_dict.keys()))
+
+# # Plot the bar chart corresponding to the selected team
+# team_name = teams_dict[selected_team]
+# st.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config)
+
+# tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(list(teams_dict.keys()))
+# tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr'])
+# tab1.plotly_chart(get_team_bar(week,'Philly919'),use_container_width=True,config = config)
+# tab2.plotly_chart(get_team_bar(week,'unit_circle'),use_container_width=True,config = config)
+# tab3.plotly_chart(get_team_bar(week,'txmoonshine'),use_container_width=True,config = config)
+# tab4.plotly_chart(get_team_bar(week,'AlphaWired'),use_container_width=True,config = config)
+# tab5.plotly_chart(get_team_bar(week,'New Team 4'),use_container_width=True,config = config)
+# tab6.plotly_chart(get_team_bar(week,'Team Gamble'),use_container_width=True,config = config)
+# tab7.plotly_chart(get_team_bar(week,'Sneads Foot'),use_container_width=True,config = config)
+# tab8.plotly_chart(get_team_bar(week,'Putt Pirates'),use_container_width=True,config = config)    
+
+# Create tabs for each team
+tab_objects = st.tabs(list(teams_dict.keys()))
+
+# Plot bar charts for each tab
+for tab, team_name in zip(tab_objects, teams_dict.values()):
+    tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config)
+# Define your tabs and corresponding team names
+# tabs = ['919', 'u_c', 'txms','[AW]','NT4','MG','foot','grrr']
+# teams = ['Philly919', 'unit_circle', 'txmoonshine', 'AlphaWired', 'New Team 4', 'Team Gamble', 'Sneads Foot', 'Putt Pirates']
+
+# Create a sidebar selectbox to choose the team
+# selected_team = st.selectbox("Select a team", list(teams_dict.keys()))
+
+# # Plot the bar chart corresponding to the selected team
+# team_name = teams_dict[selected_team]
+# st.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config)
+
 
 # tab_string = ""
 # for i in len(teams_dict.keys()):
