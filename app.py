@@ -144,7 +144,8 @@ with col2:
 with col3:
     st.plotly_chart(fig2, use_container_width=True,config = config)
 
-#### ROW 2 - WIDE BAR CHARTS  ####                                                                                  # ui row 2
+#### ROW 2 - WIDE BAR CHARTS  ####  
+st.markdown("<center><h3>OUTLOOK</h3></center>",unsafe_allow_html=True)                                                                                # ui row 2
 tab_a, tab_b, tab_c = st.tabs(['Top 25 Plays', 'Sit / Start', 'Lineup Comparison'])
 tab_a.plotly_chart(fig4,use_container_width=True,config = config)
 tab_b.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
