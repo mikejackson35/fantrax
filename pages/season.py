@@ -222,7 +222,7 @@ st.markdown(f"<h5>Choose a statistic to observe it's correlation with 'Wins'</h5
 
 stat = st.radio(
     "",
-    ['bb_ratio','bird_num','median_delta','total_pts','plc_pts','cuts_made','pp_hole','pars_num','eag_num','dbog_num','bog_num'],
+    ['bb_ratio','bird_num','plc_pts','cuts_made','pp_hole','pars_num','eag_num','dbog_num','bog_num'],
     format_func=lambda x: stats_dict.get(x),
     horizontal=True
     )
