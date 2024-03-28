@@ -5,3 +5,4 @@ numpy
 matplotlib
 statsmodels
 openpyxl
+streamlit_shadcn_ui

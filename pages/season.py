@@ -4,6 +4,8 @@ import plotly.express as px
 import streamlit as st
 import statsmodels.api as sm
 from utils import team_color
+import streamlit_shadcn_ui as ui
+from utils import stats_dict
 import secrets
 
 st.set_page_config(
@@ -138,7 +140,6 @@ st.markdown("<center><h5>Cuts Made Distribution (%)</h5></center>",unsafe_allow_
 st.plotly_chart(cuts_made_hist1,use_container_width=True, config=config)
 
 ### CUTS MADE DISTRIBUTION  ###
-
 newnames={'0':'Loss','1':'Win'}
 
 cuts_made_hist = px.histogram(df.sort_values('cuts_made',ascending=False),
@@ -199,49 +200,42 @@ st.markdown("##")
 st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
 st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
 
+col1,col2 = st.columns([1,2])
+with col1:
+    st.markdown(f"<center><h4>Correlation w/<br>Total Fantasy Points</h4></center>",unsafe_allow_html=True)
+    "#"
+    "#"
+    st.markdown(f"Choose a Statistic<br>",unsafe_allow_html=True)
+    radio_options = [
+        {"label": "Bird/Bog Ratio", "value": "bb_ratio", "id": "bb_ratio"},
+        {"label": "Place Pts", "value": "plc_pts", "id": "plc_pts"},
+        {"label": "Cuts Made Avg", "value": "cuts_made", "id": "cuts_made"},
+        {"label": "Pts/Hole", "value": "pp_hole", "id": "pp_hole"},
+        {"label": "Num of Pars", "value": "pars_num", "id": "pars_num"},
+        {"label": "Num of Birdies", "value": "bird_num", "id": "bird_num"},
+        {"label": "Num of Eagles", "value": "eag_num", "id": "eag_num"},
+        {"label": "Num of Bogeys", "value": "bog_num", "id": "bog_num"},
+        {"label": "Num of Dougle Bogeys", "value": "dbog_num", "id": "dbog_num"}
+    ]
+    radio_value = ui.radio_group(options=radio_options, default_value="bb_ratio", key="radio1")
 
-### CORRELATION TO WINS BY STAT
+with col2:
+    "#"
+    r_squared = st.empty()
+    df['bb_ratio'] = df.bird_num / df.bog_num
+    fig = px.scatter(df.groupby(['team'],as_index=False)[[radio_value,'total_pts']].mean(),
+                x=radio_value,
+                y='total_pts',
+                color='team',
+                color_discrete_map=team_color,
+                trendline='ols',trendline_scope='overall',trendline_color_override='black',
+                labels={'total_pts':'Fantasy Pts Scored',radio_value:stats_dict[radio_value]}
+            ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
+            ).update_layout(showlegend=False#legend=dict(title=None,orientation='h',x=0,y=1.3))
+            ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
+            ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
-stats_dict = {
-    'bb_ratio':'Birdie Bogey Ratio',
-    'bird_num':'Num of Birdies',
-    'median_delta':'+/- Weekly Median',
-    'total_pts':'Fantasy Points',
-    'plc_pts':'Place Points',
-    'cuts_made':'Avg Cuts Made/Wk',
-    'pp_hole':'Points per Hole Played',
-    'pars_num':'Num of Pars',
-    'eag_num':'Num of Eagles',
-    'dbog_num':'Num of Double Bogeys',
-    'bog_num':'Num of Bogeys'
-}
+    results = px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
+    r_squared.markdown(f"<h5><center>R-Squared: {results:.2f}</center></h5>", unsafe_allow_html=True)
 
-st.write("##")
-st.write("##")
-st.markdown(f"<h5>Choose a statistic to observe it's correlation with 'Wins'</h5>",unsafe_allow_html=True)
-
-stat = st.radio(
-    "",
-    ['bb_ratio','bird_num','plc_pts','cuts_made','pp_hole','pars_num','eag_num','dbog_num','bog_num'],
-    format_func=lambda x: stats_dict.get(x),
-    horizontal=True
-    )
-
-df['bb_ratio'] = df.bird_num / df.bog_num
-scatter_df = df.groupby(['team'],as_index=False)[[stat,'total_pts']].mean()
-fig = px.scatter(scatter_df,
-            x=stat,
-            y='total_pts',
-            color='team',
-            color_discrete_map=team_color,
-            trendline='ols',trendline_scope='overall',trendline_color_override='black',
-            labels={'total_pts':'Fantasy Pts Scored',stat:stats_dict[stat]}
-        ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
-        ).update_layout(showlegend=False#legend=dict(title=None,orientation='h',x=0,y=1.3))
-        ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
-        ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
-
-results = px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
-st.markdown("##")
-st.markdown(f"<h5>r-squared: {results:.2f}</h5>",unsafe_allow_html=True)
-st.plotly_chart(fig,use_container_width=True, config=config)
+    st.plotly_chart(fig,use_container_width=True, config=config)

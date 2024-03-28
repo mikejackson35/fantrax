@@ -94,3 +94,17 @@ teams_dict = {
         'grrr':'Putt Pirates',
         '[AW]':'AlphaWired'
         }
+
+stats_dict = {
+    'bb_ratio':'Birdie Bogey Ratio',
+    'bird_num':'Num of Birdies',
+    'median_delta':'+/- Weekly Median',
+    'total_pts':'Fantasy Points',
+    'plc_pts':'Place Points',
+    'cuts_made':'Avg Cuts Made/Wk',
+    'pp_hole':'Points per Hole Played',
+    'pars_num':'Num of Pars',
+    'eag_num':'Num of Eagles',
+    'dbog_num':'Num of Double Bogeys',
+    'bog_num':'Num of Bogeys'
+}
