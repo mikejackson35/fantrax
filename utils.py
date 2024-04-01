@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import streamlit as st
+import secrets
 
 def get_team_bar(week,team):
         fig = px.bar(week[week.team == team].sort_values(by='proj_pts',ascending=False), 
