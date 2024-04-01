@@ -40,7 +40,7 @@ dg_proj.set_index(fix_long_names(dg_proj).player,inplace=True)
 usecols=['Player','Status','Roster Status']
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"C:\Users\mikej\Desktop\fantrax\data\fantrax.csv",usecols=usecols)
+    teams = pd.read_csv(r"data\fantrax.csv",usecols=usecols)
     return teams
 
 teams = get_fantrax()
