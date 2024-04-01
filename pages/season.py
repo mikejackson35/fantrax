@@ -68,7 +68,7 @@ median_delta_by_team_bar = px.bar(
     template='plotly_dark',
     text_auto='.3s'
     ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
-    ).update_xaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = [1,2,3,4,5,6,7,8,9,10,11],ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar'],ticklabelposition='outside'
+    ).update_xaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = [1,2,3,4,5,6,7,8,9,10,11,12],ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open'],ticklabelposition='outside'
     ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=False
     ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", "")))
 
