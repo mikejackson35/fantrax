@@ -6,13 +6,13 @@ import secrets
 from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color, teams_dict
 
 ####   CURRENT WEEK INPUTS   ####
-current_week = 12                                                                                       # input current week variables
+current_week = 13                                                                                      # input current week variables
 page_title = f"Fantrax WK{current_week}"
-tournament = "Texas Children's<br>Houston Open"
-matchup1 = ['Philly919','unit_circle']
-matchup2 = ['Team Gamble','AlphaWired']
-matchup3 = ['New Team 4','txmoonshine']
-matchup4 = ['Putt Pirates','Sneads Foot']
+tournament = "The Valero"
+matchup1 = ['Sneads Foot','unit_circle']
+matchup2 = ['Philly919','AlphaWired']
+matchup3 = ['New Team 4','Team Gamble']
+matchup4 = ['Putt Pirates','txmoonshine']
 
 #### ST, CSS, and PLOTLY CONFIGS
 st.set_page_config(page_title=page_title, layout="centered", initial_sidebar_state="expanded")
