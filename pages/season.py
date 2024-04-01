@@ -52,12 +52,20 @@ median_delta_bar = px.bar(team_medians,
 
 ### WEEKLY SCORE VS WEEKLY MEDIAN FOR EACH TEAM ###
 team_weekly_deltas = pd.DataFrame(df[['team','week','median','median_delta']].groupby(['team','week'],as_index=False)[['median_delta','median']].sum())
+wins_losses = df[['team','week','win_loss']]
+wins_losses['win_loss'] = wins_losses['win_loss'].astype('bool')
+team_weekly_deltas = team_weekly_deltas.merge(wins_losses, how='left', on=['team','week'])
+
+newnames={'False':'Loss','True':'Win'}
+
 median_delta_by_team_bar = px.bar(
     team_weekly_deltas.sort_values('median_delta',ascending=False),
     x='week',
     y='median_delta',
-    color='team',
-    color_discrete_map=team_color,        
+    color='win_loss',
+    color_discrete_sequence=px.colors.qualitative.Safe,
+    # color='team',
+    # color_discrete_map=team_color,        
     facet_col='team',
     facet_col_wrap=2,
     facet_col_spacing=.1,
@@ -66,11 +74,13 @@ median_delta_by_team_bar = px.bar(
     width=800,
     labels={'median_delta':'','week':''},
     template='plotly_dark',
-    text_auto='.3s'
+    hover_name='week'
+    # text_auto='.3s'
     ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
-    ).update_xaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = [1,2,3,4,5,6,7,8,9,10,11,12],ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open'],ticklabelposition='outside'
-    ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=False
-    ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", "")))
+    ).update_xaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = [1,2,3,4,5,6,7,8,9,10,11,12],ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open']
+    ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
+    ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", ""))
+    ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
 
 st.markdown("##")
 st.markdown("##")
