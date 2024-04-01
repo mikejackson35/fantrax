@@ -24,8 +24,7 @@ config = {'displayModeBar': False}
 
 
 ####  LIVE SCORING API ####
-# dg_key = st.secrets.dg_key
-dg_key = "e297e933c3ad47d71ec1626c299e"
+dg_key = st.secrets.dg_key
 
 st.cache_data()
 def get_projections():
@@ -41,7 +40,7 @@ dg_proj.set_index(fix_long_names(dg_proj).player,inplace=True)
 usecols=['Player','Status','Roster Status']
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fantrax.csv",usecols=usecols)
+    teams = pd.read_csv(r"C:\Users\mikej\Desktop\fantrax\data\fantrax.csv",usecols=usecols)
     return teams
 
 teams = get_fantrax()
