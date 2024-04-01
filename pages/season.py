@@ -118,7 +118,7 @@ cuts_made_hist1 = px.histogram(df.sort_values('cuts_made', ascending=False),
                               title="",
                               color_discrete_sequence=['grey'],
                               height=250,
-                              text_auto='.2s'
+                              text_auto='.0f'
                              )
 
 cuts_made_hist1.update_layout(bargap=0.2, legend=dict(title="", x=.45, y=1.4, orientation='h'))
