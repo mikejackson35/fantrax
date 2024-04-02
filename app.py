@@ -3,7 +3,7 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import secrets
-from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, teams_dict, team_color, active_color, teams_dict
+from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, fix_long_names_2, teams_dict, team_color, active_color, teams_dict
 
 ####   CURRENT WEEK INPUTS   ####
 current_week = 13                                                                                      # input current week variables
@@ -15,7 +15,7 @@ matchup3 = ['New Team 4','Team Gamble']
 matchup4 = ['Putt Pirates','txmoonshine']
 
 #### ST, CSS, and PLOTLY CONFIGS
-st.set_page_config(page_title=page_title, layout="centered", initial_sidebar_state="expanded")
+st.set_page_config(page_title=page_title, layout="wide", initial_sidebar_state="expanded")
 
 with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
@@ -69,13 +69,14 @@ fig1 = px.bar(top_6_active.groupby('team',as_index=False)['proj_pts'].sum().sort
               color='team', 
               template='plotly_dark',
               text_auto='.3s',
-              labels = {'team': 'Current Rosters', 'proj_pts':''},
+              labels = {'team': '', 'proj_pts':''},
               color_discrete_map=team_color,
               log_x=True,
-              height=325
-              ).update_layout(showlegend=False
+              height=400,
+              title='Current Team<br>Projected Pts'
+              ).update_layout(showlegend=False,title_x=.33
               ).update_xaxes(showticklabels=False
-              ).update_yaxes(tickfont=dict(color='#5A5856'),title_font_color='#5A5856')
+              ).update_yaxes(tickfont=dict(color='#5A5856'),title_font_color='#5A5856',title_font_size=22)
 
 # VERTICAL BAR - OPTIMAL ROSTERS
 top_6_proj = pd.DataFrame()
@@ -129,40 +130,77 @@ fig4 = px.bar(top20,
               ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
 
 
+# fantrax available player list
+available = r"C:\Users\mikej\Desktop\fantrax\available.csv"
+avail_players = pd.read_csv(available,usecols=['Player']).Player.values
+
+dg_ = get_projections()
+dg = dg_[['player_name','proj_points_total']]
+dg.columns = ['player','proj_pts']
+
+# set index to new names
+dg.set_index(fix_long_names_2(dg),inplace=True)
+dg = dg[['proj_pts']]
+
+# filter dg based on fantrax list of players
+df = dg[dg.index.isin(avail_players)].sort_values('proj_pts',ascending=False)[:10]
+
+avail_fig = px.bar(
+    df,
+    y='proj_pts',
+    title= "by Projected Pts",
+    template='plotly_dark',
+    # color_discrete_sequence=px.colors.qualitative.Safe,
+    color_continuous_scale=px.colors.sequential.Greys,
+    color = 'proj_pts',
+    text_auto='.1f',
+    labels={'player':'','proj_pts':''},
+    # width=750,
+    height=325,
+    log_y=True,
+    )
+
+avail_fig.update_xaxes(tickfont=dict(color='#5A5856'), tickangle=45)
+avail_fig.update_yaxes(showticklabels=False,showgrid=False, tickfont=dict(color='#5A5856'))
+avail_fig.update_layout(showlegend=False, coloraxis_showscale=False, title_x=.33, legend=dict(orientation='h',title='',y=1.3,x=.33))
+avail_fig.update_traces(width=.7)
+
+st.markdown("<center><h1>The Valero</h1></center>",unsafe_allow_html=True)
+st.markdown(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
+# st.markdown("#")
+"---"
 ####  ROW 1 - TITLE AND ROSTERS  ####                                                                              # ui row 1
-col1,col2,col3 = st.columns(3)
-with col1:
-    st.markdown("###")
-    st.markdown("###")
-    st.caption(f"Fantrax Week {current_week}")
-    st.markdown(f"<h4>{tournament}</h4>",unsafe_allow_html=True)
-    st.markdown("###")
-    st.markdown("###")
-    st.markdown(f"{len(week)} Rostered Players",unsafe_allow_html=True)
-with col2:
-    st.plotly_chart(fig1,use_container_width=True,config = config)
-with col3:
-    st.plotly_chart(fig2, use_container_width=True,config = config)
 
 #### ROW 2 - WIDE BAR CHARTS  ####  
-st.markdown("<center><h3>OUTLOOK</h3></center>",unsafe_allow_html=True)                                                                                # ui row 2
-tab_a, tab_b, tab_c = st.tabs(['Top 25 Plays', 'Sit / Start', 'Lineup Comparison'])
-tab_a.plotly_chart(fig4,use_container_width=True,config = config)
-tab_b.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
-tab_c.plotly_chart(fig3,use_container_width=True,config = config)
-
+blank,col1,blank,col3 = st.columns([.5,1,.5,3])
+with col1:
+    st.plotly_chart(fig1,use_container_width=True,config = config)
+with col3:
+    st.markdown("#")                                                                               # ui row 2
+    tab_a, tab_b, tab_c = st.tabs(['Top 25 Plays', 'Sit / Start', 'Lineup Comparison'])
+    tab_a.plotly_chart(fig4,use_container_width=True,config = config)
+    tab_b.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
+    tab_c.plotly_chart(fig3,use_container_width=True,config = config)
 #### ROW 3 - MATCHUP BAR CHARTS  ####                                                                               # ui row 3
 st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
-col1,col2 = st.columns(2)
+blank,col1,col2,col3,col4 = st.columns([.5,1,1,1,1])
 with col1:
-    col1.plotly_chart(get_matchup_bar(week,matchup1),use_container_width=True,config = config)
-    col1.plotly_chart(get_matchup_bar(week,matchup2),use_container_width=True,config = config)
+    st.plotly_chart(get_matchup_bar(week,matchup1),use_container_width=True,config = config)
 with col2:
-    col2.plotly_chart(get_matchup_bar(week,matchup3),use_container_width=True,config = config)
-    col2.plotly_chart(get_matchup_bar(week,matchup4),use_container_width=True,config = config)
+    st.plotly_chart(get_matchup_bar(week,matchup2),use_container_width=True,config = config)
+with col3:
+    st.plotly_chart(get_matchup_bar(week,matchup3),use_container_width=True,config = config)
+with col4:
+    st.plotly_chart(get_matchup_bar(week,matchup4),use_container_width=True,config = config)
 
-####  ROW 4 - ACTIVE RESERVE TABS  ####                                                                             # ui row 4
-st.markdown("<center><h3>ACTIVE/RESERVE CHOICES</h3></center>",unsafe_allow_html=True)
-tab_objects = st.tabs(list(teams_dict.keys()))
-for tab, team_name in zip(tab_objects, teams_dict.values()):
-    tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 
+####  ROW 4 - ACTIVE RESERVE TABS  #### 
+blank,col1,blank,col2 = st.columns([.5,1.5,.5,2])
+with col1:
+    st.markdown("<center><h3>BEST AVAILABLE</h3></center>",unsafe_allow_html=True)
+    st.plotly_chart(avail_fig, use_container_width=True,config = config)
+
+with col2:                                                                            # ui row 4
+    st.markdown("<center><h3>ACTIVE/RESERVE CHOICES</h3></center>",unsafe_allow_html=True)
+    tab_objects = st.tabs(list(teams_dict.keys()))
+    for tab, team_name in zip(tab_objects, teams_dict.values()):
+        tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 

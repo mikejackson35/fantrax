@@ -5,7 +5,7 @@ import streamlit as st
 import secrets
 
 def get_team_bar(week,team):
-        fig = px.bar(week[week.team == team].sort_values(by='proj_pts',ascending=False), 
+        fig = px.bar(week[week.team == team].sort_values(by=['active_reserve','proj_pts'],ascending=[True,False]), 
                                 x = 'player', 
                                 y = 'proj_pts', 
                                 height=250,
@@ -48,10 +48,10 @@ def get_matchup_bar(week,matchup):
                              hover_name='proj_pts',
                              height=250,
                              log_y=True
-                             ).update_xaxes(showticklabels=False
-                             ).update_yaxes(tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
+                             ).update_xaxes(showticklabels=False,
+                             ).update_yaxes(showticklabels=False,tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
                              ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
-                             ).update_layout(legend=dict(orientation='h',title='',y=1.25,x=.2,font_color='#5A5856'))
+                             ).update_layout(legend=dict(orientation='h',title='',y=1.25,x=.1,font_color='#5A5856'))
         return matchup_bar
 
 def fix_long_names(dg_proj):
@@ -68,6 +68,21 @@ def fix_long_names(dg_proj):
         names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
         names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
         return names
+
+def fix_long_names_2(dg):
+        names = dg['player'].str.split(expand=True)                  
+        names[0] = names[0].str.rstrip(",")
+        names[1] = names[1].str.rstrip(",")
+        names['player'] = names[1] + " " + names[0]
+
+        names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
+        names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
+        names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
+        names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
+        names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
+        names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
+        names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
+        return names.player
 
 team_color={
      "Philly919": 'rgb(14,195,210)',
