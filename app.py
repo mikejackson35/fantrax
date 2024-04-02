@@ -131,7 +131,7 @@ fig4 = px.bar(top20,
 
 
 # fantrax available player list
-available = r"C:\Users\mikej\Desktop\fantrax\available.csv"
+available = r"available.csv"
 avail_players = pd.read_csv(available,usecols=['Player']).Player.values
 
 dg_ = get_projections()
@@ -156,7 +156,7 @@ avail_fig = px.bar(
     text_auto='.1f',
     labels={'player':'','proj_pts':''},
     # width=750,
-    height=325,
+    height=310,
     log_y=True,
     )
 
