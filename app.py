@@ -160,7 +160,7 @@ avail_fig = px.bar(
     log_y=True,
     )
 
-avail_fig.update_xaxes(tickfont=dict(color='#5A5856'), tickangle=45)
+avail_fig.update_xaxes(tickfont=dict(color='#5A5856'), tickangle=30)
 avail_fig.update_yaxes(showticklabels=False,showgrid=False, tickfont=dict(color='#5A5856'))
 avail_fig.update_layout(showlegend=False, coloraxis_showscale=False, title_x=.33, legend=dict(orientation='h',title='',y=1.3,x=.33))
 avail_fig.update_traces(width=.7)
@@ -181,8 +181,21 @@ with col3:
     tab_a.plotly_chart(fig4,use_container_width=True,config = config)
     tab_b.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
     tab_c.plotly_chart(fig3,use_container_width=True,config = config)
+
+####  ROW 4 - ACTIVE RESERVE TABS  #### 
+blank,col1,blank,col2 = st.columns([.5,1.5,.5,2])
+with col1:
+    st.markdown("<center><h4>BEST AVAILABLE</h4></center>",unsafe_allow_html=True)
+    st.plotly_chart(avail_fig, use_container_width=True,config = config)
+
+with col2:                                                                            # ui row 4
+    st.markdown("<center><h4>ACTIVE/RESERVE CHOICES</h4></center>",unsafe_allow_html=True)
+    tab_objects = st.tabs(list(teams_dict.keys()))
+    for tab, team_name in zip(tab_objects, teams_dict.values()):
+        tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 
+
 #### ROW 3 - MATCHUP BAR CHARTS  ####                                                                               # ui row 3
-st.markdown("<center><h3>MATCHUPS</h3></center>",unsafe_allow_html=True)
+st.markdown("<center><h4>MATCHUPS</h4></center>",unsafe_allow_html=True)
 blank,col1,col2,col3,col4 = st.columns([.5,1,1,1,1])
 with col1:
     st.plotly_chart(get_matchup_bar(week,matchup1),use_container_width=True,config = config)
@@ -194,13 +207,13 @@ with col4:
     st.plotly_chart(get_matchup_bar(week,matchup4),use_container_width=True,config = config)
 
 ####  ROW 4 - ACTIVE RESERVE TABS  #### 
-blank,col1,blank,col2 = st.columns([.5,1.5,.5,2])
-with col1:
-    st.markdown("<center><h3>BEST AVAILABLE</h3></center>",unsafe_allow_html=True)
-    st.plotly_chart(avail_fig, use_container_width=True,config = config)
+# blank,col1,blank,col2 = st.columns([.5,1.5,.5,2])
+# with col1:
+#     st.markdown("<center><h4>BEST AVAILABLE</h4></center>",unsafe_allow_html=True)
+#     st.plotly_chart(avail_fig, use_container_width=True,config = config)
 
-with col2:                                                                            # ui row 4
-    st.markdown("<center><h3>ACTIVE/RESERVE CHOICES</h3></center>",unsafe_allow_html=True)
-    tab_objects = st.tabs(list(teams_dict.keys()))
-    for tab, team_name in zip(tab_objects, teams_dict.values()):
-        tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 
+# with col2:                                                                            # ui row 4
+#     st.markdown("<center><h4>ACTIVE/RESERVE CHOICES</h4></center>",unsafe_allow_html=True)
+#     tab_objects = st.tabs(list(teams_dict.keys()))
+#     for tab, team_name in zip(tab_objects, teams_dict.values()):
+#         tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 

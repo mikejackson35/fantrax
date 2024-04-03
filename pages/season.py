@@ -99,11 +99,12 @@ scatter_fig = px.scatter(temp_df,
                         y='total_pts',
                         color='win_loss',
                         template='plotly_dark',
-                        size='cuts_made',
+                        size='total_pts',
                         size_max=12,
-                        hover_name='win_loss',
+                        hover_name=['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open']*8,
                         color_discrete_sequence=px.colors.qualitative.Pastel1,
-                        labels={'week':'','total_pts':'Points Scored'}
+                        labels={'week':'','total_pts':'Points Scored'},
+                        custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent']
                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
                                         legend=dict(orientation='h',yanchor="bottom",y=1,xanchor="center",x=.5,title='',font_color='#5A5856')
                         ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -112,6 +113,17 @@ scatter_fig = px.scatter(temp_df,
                         ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
                         ).update_traces(marker=dict(line_color='black')
                         ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+
+
+scatter_fig.update_traces(hovertemplate=
+                    "<b>%{customdata[0]}</b> \
+                    <br>%{customdata[3]}</b> \
+                    <br>vs. %{customdata[6]}</b> \
+                    <br> \
+                    <br>Scored %{customdata[5]} Points</b> \
+                    <br>%{customdata[4]} vs Median Score</b> \
+                    <br> \
+                    <br>%{customdata[1]}/%{customdata[2]} thru cut</b>")
 
 st.markdown("##")
 st.markdown("##")
