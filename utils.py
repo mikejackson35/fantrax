@@ -67,6 +67,7 @@ def fix_long_names(dg_proj):
         names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
         names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
         names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
+        names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
         return names
 
 def fix_long_names_2(dg):
@@ -82,6 +83,7 @@ def fix_long_names_2(dg):
         names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
         names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
         names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
+        names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
         return names.player
 
 team_color={

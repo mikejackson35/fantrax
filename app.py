@@ -166,8 +166,8 @@ avail_fig.update_layout(showlegend=False, coloraxis_showscale=False, title_x=.33
 avail_fig.update_traces(width=.7)
 
 ####  ROW 1 - TITLE AND ROSTERS  #### 
-st.write("<center><h1>The Valero</h1></center>",unsafe_allow_html=True)
-st.write(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
+st.markdown("<center><h1>The Valero</h1></center>",unsafe_allow_html=True)
+st.markdown(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
 
 #### ROW 2 - WIDE BAR CHARTS  ####  
 blank,col1,blank,col3 = st.columns([.5,1,.5,3])
