@@ -22,7 +22,7 @@ config = {'displayModeBar': False}
 
 st.cache_data()
 def get_season_data():
-    season_data = pd.read_excel(r"C:\Users\mikej\Desktop\fantrax\fantrax_season_data.xlsm")
+    season_data = pd.read_excel("fantrax_season_data.xlsm")
     return season_data
 df = get_season_data()
 
