@@ -165,11 +165,9 @@ avail_fig.update_yaxes(showticklabels=False,showgrid=False, tickfont=dict(color=
 avail_fig.update_layout(showlegend=False, coloraxis_showscale=False, title_x=.33, legend=dict(orientation='h',title='',y=1.3,x=.33))
 avail_fig.update_traces(width=.7)
 
-st.markdown("<center><h1>The Valero</h1></center>",unsafe_allow_html=True)
-st.markdown(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
-# st.markdown("#")
-"---"
-####  ROW 1 - TITLE AND ROSTERS  ####                                                                              # ui row 1
+####  ROW 1 - TITLE AND ROSTERS  #### 
+st.write("<center><h1>The Valero</h1></center>",unsafe_allow_html=True)
+st.write(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
 
 #### ROW 2 - WIDE BAR CHARTS  ####  
 blank,col1,blank,col3 = st.columns([.5,1,.5,3])
@@ -205,15 +203,3 @@ with col3:
     st.plotly_chart(get_matchup_bar(week,matchup3),use_container_width=True,config = config)
 with col4:
     st.plotly_chart(get_matchup_bar(week,matchup4),use_container_width=True,config = config)
-
-####  ROW 4 - ACTIVE RESERVE TABS  #### 
-# blank,col1,blank,col2 = st.columns([.5,1.5,.5,2])
-# with col1:
-#     st.markdown("<center><h4>BEST AVAILABLE</h4></center>",unsafe_allow_html=True)
-#     st.plotly_chart(avail_fig, use_container_width=True,config = config)
-
-# with col2:                                                                            # ui row 4
-#     st.markdown("<center><h4>ACTIVE/RESERVE CHOICES</h4></center>",unsafe_allow_html=True)
-#     tab_objects = st.tabs(list(teams_dict.keys()))
-#     for tab, team_name in zip(tab_objects, teams_dict.values()):
-#         tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 
