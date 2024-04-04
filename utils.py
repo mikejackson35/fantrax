@@ -25,10 +25,10 @@ def get_all_player_bar(week,color_by,color_map):
         all_player_bar = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
                                 y = 'proj_pts',
                                 template='plotly_dark',
-                                color = color_by,
-                                color_discrete_map=color_map,
+                                # color = color_by,
+                                # color_discrete_map=color_map,
                                 labels = {'index':"", 'proj_pts':''},
-                                height=300,
+                                height=275,
                                 log_y=True,
                                 hover_name='player'
                                 ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'

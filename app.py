@@ -105,7 +105,7 @@ fig3 = px.bar(top_6_proj.sort_values(by = ['proj_pts','team'],ascending=False),
             #   hover_name=top_6_proj.index,
               template='plotly_dark',
               labels = {'index':" ",'player': '','proj_pts':''},
-              height=300,
+              height=275,
               color_discrete_map=team_color,
               log_y=True,
               ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
@@ -123,7 +123,7 @@ fig4 = px.bar(top20,
               labels = {'index':"", 'proj_pts':'Projected Pts'},
               text=week[:25].index,
               template = 'plotly_dark',
-              height=300,
+              height=275,
             #   log_y=True,
               hover_name='proj_pts'
               ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
@@ -144,57 +144,57 @@ dg.set_index(fix_names(dg),inplace=True)
 dg = dg[['proj_pts']]
 
 # filter dg based on fantrax list of players
-df = dg[dg.index.isin(avail_players)].sort_values('proj_pts',ascending=False)[:10]
+df = dg[dg.index.isin(avail_players)].sort_values('proj_pts',ascending=True)[-8:]
 
 avail_fig = px.bar(
     df,
-    y='proj_pts',
-    title= "by Projected Pts",
+    x=df.proj_pts,
+    title= "Best Available<br>by Projected Pts",
     template='plotly_dark',
-    # color_discrete_sequence=px.colors.qualitative.Safe,
     color_continuous_scale=px.colors.sequential.Greys,
     color = 'proj_pts',
     text_auto='.1f',
     labels={'player':'','proj_pts':''},
-    # width=750,
-    height=310,
-    log_y=True,
+    log_x=True,
+    height=400
     )
 
-avail_fig.update_xaxes(tickfont=dict(color='#5A5856'), tickangle=30)
-avail_fig.update_yaxes(showticklabels=False,showgrid=False, tickfont=dict(color='#5A5856'))
+avail_fig.update_yaxes(tickfont=dict(color='#5A5856'))
+avail_fig.update_xaxes(showticklabels=False,showgrid=False, tickfont=dict(color='#5A5856'))
 avail_fig.update_layout(showlegend=False, coloraxis_showscale=False, title_x=.33, legend=dict(orientation='h',title='',y=1.3,x=.33))
 avail_fig.update_traces(width=.7)
 
 ####  ROW 1 - TITLE AND ROSTERS  #### 
 st.markdown("<center><h1>The Valero</h1></center>",unsafe_allow_html=True)
-st.markdown(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
+st.markdown(f"<center>week 13</center>",unsafe_allow_html=True)
+# st.markdown(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
+st.markdown("#")
 
 #### ROW 2 - WIDE BAR CHARTS  ####  
-blank,col1,blank,col3 = st.columns([.5,1,.5,3])
+blank,col1,blank,col3,blank = st.columns([.5,1,.5,2.5,.5])
 with col1:
     st.plotly_chart(fig1,use_container_width=True,config = config)
 with col3:
-    st.markdown("#")                                                                               # ui row 2
+    # st.markdown("<center><h4>OVERVIEW</h4></center>",unsafe_allow_html=True)
+    st.markdown(f"<center><h5>{len(week)} Rostered Players</center>",unsafe_allow_html=True)                                                                              # ui row 2
     tab_a, tab_b, tab_c = st.tabs(['Top 25 Plays', 'Sit / Start', 'Lineup Comparison'])
     tab_a.plotly_chart(fig4,use_container_width=True,config = config)
     tab_b.plotly_chart(get_all_player_bar(week,'active_reserve',active_color),use_container_width=True,config = config)
     tab_c.plotly_chart(fig3,use_container_width=True,config = config)
 
 ####  ROW 4 - ACTIVE RESERVE TABS  #### 
-blank,col1,blank,col2 = st.columns([.5,1.5,.5,2])
+blank,col1,blank,col2,blank = st.columns([.5,1,.5,2.5,.5])
 with col1:
-    st.markdown("<center><h4>BEST AVAILABLE</h4></center>",unsafe_allow_html=True)
     st.plotly_chart(avail_fig, use_container_width=True,config = config)
 
 with col2:                                                                            # ui row 4
-    st.markdown("<center><h4>ACTIVE/RESERVE CHOICES</h4></center>",unsafe_allow_html=True)
+    st.markdown(f"<center><h5>Active / Reserve Choices</center>",unsafe_allow_html=True) 
     tab_objects = st.tabs(list(teams_dict.keys()))
     for tab, team_name in zip(tab_objects, teams_dict.values()):
         tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 
 
 #### ROW 3 - MATCHUP BAR CHARTS  ####                                                                               # ui row 3
-st.markdown("<center><h4>MATCHUPS</h4></center>",unsafe_allow_html=True)
+st.markdown("<center><h5>MATCHUPS</h4></center>",unsafe_allow_html=True)
 blank,col1,col2,col3,col4 = st.columns([.5,1,1,1,1])
 with col1:
     st.plotly_chart(get_matchup_bar(week,matchup1),use_container_width=True,config = config)
