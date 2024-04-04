@@ -3,7 +3,7 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import secrets
-from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, fix_long_names_2, teams_dict, team_color, active_color, teams_dict
+from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, fix_names, teams_dict, team_color, active_color, teams_dict
 
 ####   CURRENT WEEK INPUTS   ####
 current_week = 13                                                                                      # input current week variables
@@ -21,7 +21,6 @@ with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
 config = {'displayModeBar': False}
-
 
 ####  LIVE SCORING API ####
 # dg_key = st.secrets.dg_key
@@ -57,6 +56,8 @@ week[['player','team','active_reserve']] = week[
     ].astype('string')
 
 week.sort_values('proj_pts',ascending=False,inplace=True)                                                   # data loaded and ready
+
+st.write("#")
 
 # VERTICAL BAR - CURRENT ROSTERS                                                                            # begin make charts
 top_6_active = pd.DataFrame()
@@ -139,7 +140,7 @@ dg = dg_[['player_name','proj_points_total']]
 dg.columns = ['player','proj_pts']
 
 # set index to new names
-dg.set_index(fix_long_names_2(dg),inplace=True)
+dg.set_index(fix_names(dg),inplace=True)
 dg = dg[['proj_pts']]
 
 # filter dg based on fantrax list of players

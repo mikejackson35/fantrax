@@ -70,7 +70,7 @@ def fix_long_names(dg_proj):
         names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
         return names
 
-def fix_long_names_2(dg):
+def fix_names(dg):
         names = dg['player'].str.split(expand=True)                  
         names[0] = names[0].str.rstrip(",")
         names[1] = names[1].str.rstrip(",")
