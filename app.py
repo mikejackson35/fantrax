@@ -23,8 +23,7 @@ with open(r"styles/main.css") as f:
 config = {'displayModeBar': False}
 
 ####  LIVE SCORING API ####
-# dg_key = st.secrets.dg_key
-dg_key = "e297e933c3ad47d71ec1626c299e"
+dg_key = st.secrets.dg_key
 
 st.cache_data()
 def get_projections():
