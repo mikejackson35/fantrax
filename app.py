@@ -8,7 +8,7 @@ from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_na
 ####   CURRENT WEEK INPUTS   ####
 current_week = 14                                                                                      # input current week variables
 # page_title = f"Fantrax WK{current_week}"
-page_title = 'week'
+page_title = 'app'
 tournament = "The<br>Masters"
 matchup1 = ['txmoonshine','unit_circle']
 matchup2 = ['Philly919','Sneads Foot']
