@@ -171,6 +171,7 @@ scatter_fig = px.scatter(temp_df,
                         size_max=12,
                         hover_name=['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero']*8,
                         color_discrete_sequence=px.colors.qualitative.Pastel1,
+                        # color_discrete_map=team_color,
                         labels={'week':'','total_pts':'Points Scored'},
                         custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent']
                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
@@ -180,7 +181,7 @@ scatter_fig = px.scatter(temp_df,
                                        tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                         ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
                         ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
-                        ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+                        )#.for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
 
 
 scatter_fig.update_traces(hovertemplate=
