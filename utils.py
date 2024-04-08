@@ -115,14 +115,14 @@ teams_dict = {
 
 stats_dict = {
     'bb_ratio':'Birdie Bogey Ratio',
-    'bird_num':'Num of Birdies',
+    'bird_num':'Birdies/wk',
     'median_delta':'+/- Weekly Median',
     'total_pts':'Fantasy Points',
-    'plc_pts':'Place Points',
-    'cuts_made':'Avg Cuts Made/Wk',
-    'pp_hole':'Points per Hole Played',
-    'pars_num':'Num of Pars',
-    'eag_num':'Num of Eagles',
-    'dbog_num':'Num of Double Bogeys',
-    'bog_num':'Num of Bogeys'
+    'plc_pts':'Place Points/wk',
+    'cuts_made':'Cuts Made/Wk',
+    'pp_hole':'Points/Hole Played',
+    'pars_num':'Pars/wk',
+    'eag_num':'Eagles/wk',
+    'dbog_num':'Double Bogeys/wk',
+    'bog_num':'Bogeys/wk'
 }

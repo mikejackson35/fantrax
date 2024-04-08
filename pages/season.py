@@ -229,19 +229,19 @@ with corr_container:
     col1,col2 = st.columns([1,2])
     with col1:
         "#"
-        st.markdown(f"<center><h5>Which Stats<br>Correlate Most<br>with WINS?</h5></center>",unsafe_allow_html=True)
+        st.markdown(f"<center><h5>Correlation<br>to WINS</h5></center>",unsafe_allow_html=True)
         "#"
         st.markdown(f"Choose a Statistic<br>",unsafe_allow_html=True)
         radio_options = [
-            {"label": "Birdie to Bogey Ratio", "value": "bb_ratio", "id": "bb_ratio"},
-            {"label": "Place Pts", "value": "plc_pts", "id": "plc_pts"},
-            {"label": "Cuts Made", "value": "cuts_made", "id": "cuts_made"},
-            {"label": "Points/Hole", "value": "pp_hole", "id": "pp_hole"},
-            {"label": "Num of Pars", "value": "pars_num", "id": "pars_num"},
-            {"label": "Num of Birdies", "value": "bird_num", "id": "bird_num"},
-            {"label": "Num of Eagles", "value": "eag_num", "id": "eag_num"},
-            {"label": "Num of Bogeys", "value": "bog_num", "id": "bog_num"},
-            {"label": "Num of Dougle Bogeys", "value": "dbog_num", "id": "dbog_num"}
+            {"label": "Bird : Bogey Ratio", "value": "bb_ratio", "id": "bb_ratio"},
+            {"label": "Points/hole", "value": "pp_hole", "id": "pp_hole"},
+            {"label": "Cuts Made/wk", "value": "cuts_made", "id": "cuts_made"},
+            {"label": "Place Pts/wk", "value": "plc_pts", "id": "plc_pts"},
+            {"label": "Pars/wk", "value": "pars_num", "id": "pars_num"},
+            {"label": "Birdies/wk", "value": "bird_num", "id": "bird_num"},
+            {"label": "Eagles/wk", "value": "eag_num", "id": "eag_num"},
+            {"label": "Bogeys/wk", "value": "bog_num", "id": "bog_num"},
+            {"label": "Pts vs. Weekly Median", "value": "median_delta", "id": "median_delta"}
         ]
         radio_value = ui.radio_group(options=radio_options, default_value="bb_ratio", key="radio1")
 
@@ -249,7 +249,8 @@ with corr_container:
         "#"
         r_squared = st.empty()
         df['bb_ratio'] = round(df.bird_num / df.bog_num,1)
-        fig = px.scatter(df.groupby(['team'],as_index=False)[[radio_value,'win_loss']].mean(),
+        # df['avg_place_pts'] = round(df.plc_pts / df.TP)
+        fig = px.scatter(df.groupby(['team'],as_index=False)[[radio_value,'win_loss']].agg({radio_value:'mean','win_loss':'sum'}),
                     x=radio_value,
                     y='win_loss',
                     color='team',
@@ -259,7 +260,7 @@ with corr_container:
                 ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
                 ).update_layout(showlegend=False#legend=dict(title=None,orientation='h',x=0,y=1.3))
                 ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14), tickvals=[1,2,3,4,5,6,7,8,9,10,11,12,13]
-                ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
+                ).update_xaxes(showgrid=True,gridcolor="#B1A999",tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
         results = px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
         r_squared.markdown(f"<h5><center>R-Squared: {results:.2f}</center></h5>", unsafe_allow_html=True)
