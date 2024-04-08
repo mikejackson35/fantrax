@@ -25,8 +25,8 @@ def get_all_player_bar(week,color_by,color_map):
         all_player_bar = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
                                 y = 'proj_pts',
                                 template='plotly_dark',
-                                # color = color_by,
-                                # color_discrete_map=color_map,
+                                color = 'active_reserve',
+                                color_discrete_map=active_color,
                                 labels = {'index':"", 'proj_pts':''},
                                 height=275,
                                 log_y=True,
@@ -36,6 +36,7 @@ def get_all_player_bar(week,color_by,color_map):
                                 ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
                                 ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
         return all_player_bar
+
 
 def get_matchup_bar(week,matchup):
         matchup_bar = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
