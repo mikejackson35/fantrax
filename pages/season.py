@@ -233,14 +233,14 @@ with corr_container:
         "#"
         st.markdown(f"Choose a Statistic<br>",unsafe_allow_html=True)
         radio_options = [
-            {"label": "Bird : Bogey Ratio", "value": "bb_ratio", "id": "bb_ratio"},
-            {"label": "Points/hole", "value": "pp_hole", "id": "pp_hole"},
-            {"label": "Cuts Made/wk", "value": "cuts_made", "id": "cuts_made"},
-            {"label": "Place Pts/wk", "value": "plc_pts", "id": "plc_pts"},
-            {"label": "Pars/wk", "value": "pars_num", "id": "pars_num"},
-            {"label": "Birdies/wk", "value": "bird_num", "id": "bird_num"},
-            {"label": "Eagles/wk", "value": "eag_num", "id": "eag_num"},
-            {"label": "Bogeys/wk", "value": "bog_num", "id": "bog_num"},
+            {"label": "Birdie : Bogey Ratio", "value": "bb_ratio", "id": "bb_ratio"},
+            {"label": "Points / hole", "value": "pp_hole", "id": "pp_hole"},
+            {"label": "Cuts Made / wk", "value": "cuts_made", "id": "cuts_made"},
+            {"label": "Place Pts / wk", "value": "plc_pts", "id": "plc_pts"},
+            {"label": "Pars / wk", "value": "pars_num", "id": "pars_num"},
+            {"label": "Birdies / wk", "value": "bird_num", "id": "bird_num"},
+            {"label": "Eagles / wk", "value": "eag_num", "id": "eag_num"},
+            {"label": "Bogeys / wk", "value": "bog_num", "id": "bog_num"},
             {"label": "Pts vs. Weekly Median", "value": "median_delta", "id": "median_delta"}
         ]
         radio_value = ui.radio_group(options=radio_options, default_value="bb_ratio", key="radio1")
