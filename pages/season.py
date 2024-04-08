@@ -248,7 +248,7 @@ with corr_container:
         "#"
         r_squared = st.empty()
         df['bb_ratio'] = round(df.bird_num / df.bog_num,1)
-        fig = px.scatter(df.groupby(['team'],as_index=False)[[radio_value,'win_loss']].sum(),
+        fig = px.scatter(df.groupby(['team'],as_index=False)[[radio_value,'win_loss']].mean(),
                     x=radio_value,
                     y='win_loss',
                     color='team',
@@ -257,7 +257,7 @@ with corr_container:
                     labels={'win_loss':'Wins',radio_value:stats_dict[radio_value]}
                 ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
                 ).update_layout(showlegend=False#legend=dict(title=None,orientation='h',x=0,y=1.3))
-                ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14), tickvals=[1,2,3,4,5,6,7,8,9,10,11,12]
+                ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14), tickvals=[1,2,3,4,5,6,7,8,9,10,11,12,13]
                 ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
         results = px.get_trendline_results(fig).px_fit_results.iloc[0].rsquared
