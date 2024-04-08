@@ -26,16 +26,26 @@ def get_season_data():
     return season_data
 df = get_season_data()
 
-df['team'] = np.where(df['team'] == "Snead's Foot","Sneads Foot", df['team'])
-
 # ###  PER TOURNAMENT AVERAGES  ###
 st.write("#")
-st.markdown("<center><h5>WEEKLY MEDIANS</h5></center>",unsafe_allow_html=True)
-team_stat_medians = df.groupby('team')[['total_pts','cuts_made','total_holes','pp_hole','bird_num','eag_num','bog_num','dbog_num','plc_pts']].median()#.reset_index()
+st.markdown("<center><h5>WEEKLY</h5></center>",unsafe_allow_html=True)
+team_stat_avgs = df.groupby('team')[['total_pts','cuts_made','total_holes','pp_hole','bird_num','eag_num','bog_num','dbog_num','plc_pts']].mean()
+team_stat_avgs.columns = 'Total Pts','Cuts Made','Holes Played','Pts/Hole','Birdies','Eagles','Bogeys','Doubles','Plc Pts'
+team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']] = team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']].astype('int')
+team_stat_avgs.index.name = 'Team'
+team_stat_avgs = team_stat_avgs.sort_values('Total Pts',ascending=False).round({'Cuts Made':1,'Pts/Hole':2,'Eagles':1,'Doubles':1})
+
+team_stat_medians = df.groupby('team')[['total_pts','cuts_made','total_holes','pp_hole','bird_num','eag_num','bog_num','dbog_num','plc_pts']].median()
 team_stat_medians.columns = 'Total Pts','Cuts Made','Holes Played','Pts/Hole','Birdies','Eagles','Bogeys','Doubles','Plc Pts'
 team_stat_medians[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']] = team_stat_medians[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']].astype('int')
+team_stat_medians.index.name = 'Team'
 team_stat_medians = team_stat_medians.sort_values('Total Pts',ascending=False).round({'Cuts Made':1,'Pts/Hole':2,'Eagles':1,'Doubles':1})
-st.dataframe(team_stat_medians,use_container_width=True)
+
+tab1,tab2 = st.tabs(['Averages','Medians'])
+with tab1:
+    st.dataframe(team_stat_avgs,use_container_width=True)
+with tab2:
+    st.dataframe(team_stat_medians,use_container_width=True)
 ##################
 
 ### SEASON TO DATE SCORE VS WEEKLY MEDIAN  ###
@@ -50,7 +60,7 @@ median_delta_bar = px.bar(team_medians,
                           title='season-to-date'
                          ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
                          ).update_yaxes(showticklabels=False,showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856'
-                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),title_y=.75,title_x=.4,legend=dict(y=1.85, orientation='h',title='',font_color='#5A5856'))
+                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),title_y=.75,title_x=.4, legend=dict(title='',font_color='#5A5856'))#,legend=dict(y=1.85, orientation='h',title='',font_color='#5A5856'))
 
 ### WEEKLY SCORE VS WEEKLY MEDIAN FOR EACH TEAM ###
 team_weekly_deltas = pd.DataFrame(df[['team','week','median','median_delta']].groupby(['team','week'],as_index=False)[['median_delta','median']].sum())
@@ -83,8 +93,6 @@ median_delta_by_team_bar = px.bar(
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
 
 ### CUTS MADE DISTRIBUTION  ###
-# df['rounded_percentage'] = (df['cuts_made'] * 100).round().astype(int).astype(str) + '%'
-
 cuts_made_hist1 = px.histogram(df.sort_values('cuts_made', ascending=False),
                               x='cuts_made',
                               template='plotly_dark',
@@ -152,76 +160,120 @@ with col2:
 container = st.container(border=True)
 with container:
     st.markdown('<center><h5>vs. WEEKLY MEDIAN SCORE</h5></center>',unsafe_allow_html=True)
-    st.write("#")
     st.plotly_chart(median_delta_bar,config=config,use_container_width=True)
-    with st.expander("CLICK HERE for team-by-team weekly"):
+    with st.expander("CLICK for WEEKLY by TEAM"):
         st.plotly_chart(median_delta_by_team_bar,config=config, use_container_width=True)
 ##################
 
 ### WEEKLY BUBBLES WIN / LOSS  ###
-newnames={'False':'Loss','True':'Win'}
+st.write("#")
+weekly_bubble_container = st.container(border=True)
+
 temp_df = df.copy()
 temp_df['win_loss'] = temp_df['win_loss'].astype('bool')
-scatter_fig = px.scatter(temp_df,
-                        x='week',
-                        y='total_pts',
-                        color='win_loss',
-                        template='plotly_dark',
-                        size='total_pts',
-                        size_max=12,
-                        hover_name=['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero']*8,
-                        color_discrete_sequence=px.colors.qualitative.Pastel1,
-                        # color_discrete_map=team_color,
-                        labels={'week':'','total_pts':'Points Scored'},
-                        custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent']
-                        ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
-                                        legend=dict(orientation='h',yanchor="bottom",y=1,xanchor="center",x=.5,title='',font_color='#5A5856')
-                        ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13],
-                                       ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero'],
-                                       tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
-                        ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
-                        ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
-                        )#.for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+
+with weekly_bubble_container:
+    tab1,tab2 = st.tabs(['by Win/Loss','by Team'])
+    with tab1:
+        newnames={'False':'Loss','True':'Win'}
+
+        scatter_fig = px.scatter(temp_df,
+                                x='week',
+                                y='total_pts',
+                                color='win_loss',
+                                template='plotly_dark',
+                                size='total_pts',
+                                size_max=12,
+                                hover_name=['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero']*8,
+                                color_discrete_sequence=px.colors.qualitative.Pastel1,
+                                labels={'week':'','total_pts':'Points Scored'},
+                                custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent'],
+                                height=400
+                                ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
+                                                legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
+                                ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13],
+                                            ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero'],
+                                            tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
+                                ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
+                                ).update_traces(marker=dict(size=15,opacity=.9,line=dict(width=1,color='darkslategrey'))
+                                ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+    
+        scatter_fig.update_traces(hovertemplate=
+                            "<b>%{customdata[0]}</b> \
+                            <br>%{customdata[3]}</b> \
+                            <br>vs. %{customdata[6]}</b> \
+                            <br> \
+                            <br>Scored %{customdata[5]} Points</b> \
+                            <br>%{customdata[4]} vs Median Score</b> \
+                            <br> \
+                            <br>%{customdata[1]}/%{customdata[2]} thru cut</b>")
+
+        st.markdown("##")
+        st.markdown("##")
+        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
+        st.plotly_chart(scatter_fig,use_container_width=True, config=config)
+
+    with tab2:
+        scatter_fig = px.scatter(temp_df,
+                                x='week',
+                                y='total_pts',
+                                color='team',
+                                template='plotly_dark',
+                                hover_name=['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero']*8,
+                                color_discrete_map=team_color,
+                                labels={'week':'','total_pts':'Points Scored'},
+                                custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent'],
+                                height=400
+                                ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
+                                                legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
+                                ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13],
+                                            ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero'],
+                                            tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
+                                ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
+                                ).update_traces(marker=dict(size=12,opacity=.75,line=dict(width=1,color='darkslategrey'))
+                                )
 
 
-scatter_fig.update_traces(hovertemplate=
-                    "<b>%{customdata[0]}</b> \
-                    <br>%{customdata[3]}</b> \
-                    <br>vs. %{customdata[6]}</b> \
-                    <br> \
-                    <br>Scored %{customdata[5]} Points</b> \
-                    <br>%{customdata[4]} vs Median Score</b> \
-                    <br> \
-                    <br>%{customdata[1]}/%{customdata[2]} thru cut</b>")
+        scatter_fig.update_traces(hovertemplate=
+                            "<b>%{customdata[0]}</b> \
+                            <br>%{customdata[3]}</b> \
+                            <br>vs. %{customdata[6]}</b> \
+                            <br> \
+                            <br>Scored %{customdata[5]} Points</b> \
+                            <br>%{customdata[4]} vs Median Score</b> \
+                            <br> \
+                            <br>%{customdata[1]}/%{customdata[2]} thru cut</b>")
 
-st.markdown("##")
-st.markdown("##")
-st.markdown("<center><h5>WEEKLY SCORES</h5></center>",unsafe_allow_html=True)
-st.plotly_chart(scatter_fig,use_container_width=True, config=config)
+        st.markdown("##")
+        st.markdown("##")
+        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
+        st.plotly_chart(scatter_fig,use_container_width=True, config=config)
 
 ### FINISHING POSITION COMPARISON
-finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
-finish_medians.columns = 'Team','Best Finisher','2nd','3rd','4th','5th','Worst Finisher'
-melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Best Finisher','2nd','3rd','4th','5th','Worst Finisher'])
+finish_place_container = st.container(border=True)
+with finish_place_container:
+    finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
+    finish_medians.columns = 'Team','Best Finisher','2nd','3rd','4th','5th','Worst Finisher'
+    melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Best Finisher','2nd','3rd','4th','5th','Worst Finisher'])
 
-fin_place_scatter = px.scatter(melted_finish_medians,
-          x='variable',
-          y='value',
-          color='Team',
-          color_discrete_map=team_color,
-          template='plotly_white',
-          labels={'value':'Finish Place<br>(log scale)','variable':''},
-          log_y=True,
-          height=600,
-          ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
-          ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856',title="")
-          ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
-          ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
+    fin_place_scatter = px.scatter(melted_finish_medians,
+            x='variable',
+            y='value',
+            color='Team',
+            color_discrete_map=team_color,
+            template='plotly_white',
+            labels={'value':'Finish Place<br>(log scale)','variable':''},
+            log_y=True,
+            height=550,
+            ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
+            ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856',title="",orientation='h',y=1.15)
+            ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
+            ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
-st.markdown("##")
-st.markdown("##")
-st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
-st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
+    st.markdown("##")
+    st.markdown("##")
+    st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
+    st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
 
 corr_container = st.container(border=True)
 with corr_container:
