@@ -6,13 +6,13 @@ import secrets
 from utils import get_team_bar, get_all_player_bar, get_matchup_bar, fix_long_names, fix_names, teams_dict, team_color, active_color, teams_dict
 
 ####   CURRENT WEEK INPUTS   ####
-current_week = 13                                                                                      # input current week variables
+current_week = 14                                                                                      # input current week variables
 page_title = f"Fantrax WK{current_week}"
-tournament = "The<br>Valero"
-matchup1 = ['Sneads Foot','unit_circle']
-matchup2 = ['Philly919','AlphaWired']
-matchup3 = ['New Team 4','Team Gamble']
-matchup4 = ['Putt Pirates','txmoonshine']
+tournament = "The<br>Masters"
+matchup1 = ['txmoonshine','unit_circle']
+matchup2 = ['Philly919','Sneads Foot']
+matchup3 = ['New Team 4','AlphaWired']
+matchup4 = ['Putt Pirates','Team Gamble']
 
 #### ST, CSS, and PLOTLY CONFIGS
 st.set_page_config(page_title=page_title, layout="wide", initial_sidebar_state="expanded")
@@ -40,7 +40,7 @@ dg_proj.set_index(fix_long_names(dg_proj).player,inplace=True)
 usecols=['Player','Status','Roster Status']
 st.cache_data()
 def get_fantrax():
-    teams = pd.read_csv(r"fantrax.csv",usecols=usecols)
+    teams = pd.read_csv(r"week.csv",usecols=usecols)
     return teams
 
 teams = get_fantrax()
