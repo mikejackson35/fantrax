@@ -7,9 +7,9 @@ from utils import get_team_bar, get_all_player_bar, get_matchup_bar,fix_names, t
 
 ####   CURRENT WEEK INPUTS   ####
 current_week = 14                                                                                      # input current week variables
-# page_title = f"Fantrax WK{current_week}"
-page_title = 'app'
-tournament = "The<br>Masters"
+page_title = f"Fantrax WK{current_week}"
+page_title = page_title
+tournament = "The Masters"
 matchup1 = ['txmoonshine','unit_circle']
 matchup2 = ['Philly919','Sneads Foot']
 matchup3 = ['New Team 4','AlphaWired']
@@ -166,8 +166,8 @@ avail_fig.update_layout(showlegend=False, coloraxis_showscale=False, title_x=.33
 avail_fig.update_traces(width=.7)
 
 ####  ROW 1 - TITLE AND ROSTERS  #### 
-st.markdown("<center><h1>The Valero</h1></center>",unsafe_allow_html=True)
-st.markdown(f"<center>week 13</center>",unsafe_allow_html=True)
+st.markdown("<center><h1>The Masters</h1></center>",unsafe_allow_html=True)
+st.markdown(f"<center>Week{current_week}</center>",unsafe_allow_html=True)
 # st.markdown(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True)
 st.markdown("#")
 
