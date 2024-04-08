@@ -54,21 +54,21 @@ def get_matchup_bar(week,matchup):
                              ).update_layout(legend=dict(orientation='h',title='',y=1.25,x=.1,font_color='#5A5856'))
         return matchup_bar
 
-# def fix_long_names(dg_proj):
-#         names = dg_proj['player'].str.split(expand=True)                  
-#         names[0] = names[0].str.rstrip(",")
-#         names[1] = names[1].str.rstrip(",")
-#         names['player'] = names[1] + " " + names[0]
+def fix_long_names(dg_proj):
+        names = dg_proj['player'].str.split(expand=True)                  
+        names[0] = names[0].str.rstrip(",")
+        names[1] = names[1].str.rstrip(",")
+        names['player'] = names[1] + " " + names[0]
 
-#         names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
-#         names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
-#         names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
-#         names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
-#         names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
-#         names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
-#         names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
-#         names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
-#         return names
+        names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
+        names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
+        names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
+        names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
+        names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
+        names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
+        names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
+        names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
+        return names
 
 def fix_names(dg):
         names = dg['player'].str.split(expand=True)                  
