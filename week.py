@@ -34,7 +34,7 @@ def get_projections():
 dg_proj = get_projections()
 dg_proj = dg_proj[['player_name','proj_points_total']]
 dg_proj.columns = ['player','proj_pts']
-dg_proj.set_index(fix_long_names(dg_proj).player,inplace=True)  
+dg_proj.set_index(fix_names(dg_proj),inplace=True)  
 
 ####  FANTRAX TEAMS  ####
 usecols=['Player','Status','Roster Status']
