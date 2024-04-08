@@ -77,13 +77,13 @@ median_delta_by_team_bar = px.bar(
     hover_name='week'
     # text_auto='.3s'
     ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
-    ).update_xaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = [1,2,3,4,5,6,7,8,9,10,11,12],ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open']
+    ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13],ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero']
     ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
     ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", ""))
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
 
 ### CUTS MADE DISTRIBUTION  ###
-df['rounded_percentage'] = (df['cuts_made'] * 100).round().astype(int).astype(str) + '%'
+# df['rounded_percentage'] = (df['cuts_made'] * 100).round().astype(int).astype(str) + '%'
 
 cuts_made_hist1 = px.histogram(df.sort_values('cuts_made', ascending=False),
                               x='cuts_made',
@@ -169,14 +169,14 @@ scatter_fig = px.scatter(temp_df,
                         template='plotly_dark',
                         size='total_pts',
                         size_max=12,
-                        hover_name=['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open']*8,
+                        hover_name=['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero']*8,
                         color_discrete_sequence=px.colors.qualitative.Pastel1,
                         labels={'week':'','total_pts':'Points Scored'},
                         custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent']
                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
                                         legend=dict(orientation='h',yanchor="bottom",y=1,xanchor="center",x=.5,title='',font_color='#5A5856')
-                        ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11,12],
-                                       ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open'],
+                        ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13],
+                                       ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero'],
                                        tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                         ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
                         ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
