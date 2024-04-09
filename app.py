@@ -161,7 +161,7 @@ with col3:
 
 
 #### ROW 2 - WIDE BAR CHARTS / TABS  ####  
-st.markdown(f"<center><h5>{len(week)} Rostered Players</center>",unsafe_allow_html=True) 
+st.markdown(f"<center>{len(week)} Rostered Players</center>",unsafe_allow_html=True) 
 
 tab1, tab2, tab3 = st.tabs(['Top 25', 'Sit / Start', "Compare LU's"])
 with tab1:
