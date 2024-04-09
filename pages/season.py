@@ -151,10 +151,10 @@ st.markdown("##")
 st.markdown("##")
 col1,blank,col2 = st.columns([2,1,2])
 with col1:
-    st.markdown("<center><h5>Cuts Made Distribution</h5></center>",unsafe_allow_html=True)
+    # st.markdown("<center><h5>Cuts Made Distribution</h5></center>",unsafe_allow_html=True)
     st.plotly_chart(cuts_made_hist1,use_container_width=True, config=config)
 with col2:
-    st.markdown("<center><h5>Win % by Cuts Made</h5></center>",unsafe_allow_html=True)
+    # st.markdown("<center><h5>Win % by Cuts Made</h5></center>",unsafe_allow_html=True)
     st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
 
 container = st.container(border=True)
