@@ -6,10 +6,9 @@ import secrets
 from utils import get_team_bar, get_all_player_bar, get_matchup_bar,fix_names, teams_dict, team_color, active_color, teams_dict, fix_long_names
 
 ####   CURRENT WEEK INPUTS   ####
-current_week = 14                                                                                      # input current week variables
-page_title = f"Fantrax WK{current_week}"
-page_title = page_title
 tournament = "The Masters"
+current_week = 14                                                                                      # input current week variables
+page_title = f"FX wk{current_week}"
 matchup1 = ['txmoonshine','unit_circle']
 matchup2 = ['Philly919','Sneads Foot']
 matchup3 = ['New Team 4','AlphaWired']
@@ -175,7 +174,7 @@ with tab3:
 
 ####  ROW 3 - ACTIVE RESERVE TABS  #### 
 st.markdown(f"<center><h5>Active / Reserve Choices</center>",unsafe_allow_html=True) 
-
+st.write("#")
 team_tabs = st.tabs(list(teams_dict.keys()))
 for tab, team_name in zip(team_tabs, teams_dict.values()):
         tab.plotly_chart(get_team_bar(week, team_name), use_container_width=True, config=config) 
