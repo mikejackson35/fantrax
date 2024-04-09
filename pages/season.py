@@ -97,18 +97,18 @@ cuts_made_hist1 = px.histogram(df.sort_values('cuts_made', ascending=False),
                               x='cuts_made',
                               template='plotly_dark',
                               labels={'cuts_made':'Players Thru Cut', 'count':''},
-                              title="",
-                              color_discrete_sequence=['grey'],
-                              height=250,
+                              title="Distribution Cuts Made",
+                              color_discrete_sequence=['#5A5856'],
+                              height=275,
                               text_auto='.0f'
                              )
 
-cuts_made_hist1.update_layout(bargap=0.2, legend=dict(title="", x=.45, y=1.4, orientation='h'))
+cuts_made_hist1.update_layout(bargap=0.2, legend=dict(title="", x=.45, y=1.3, orientation='h'),title_x=.25)
 cuts_made_hist1.update_xaxes(tickvals = [1,2,3,4,5,6],
                             ticktext = ['1/6','2/6','3/6','4/6','5/6','6/6'],
                             showgrid=False,
                             tickfont=dict(
-                                color='#5A5856'),
+                                color='#000000'),
                                 title_font=dict(
                                     color='#5A5856',
                                     size=14))
@@ -121,26 +121,24 @@ newnames={'0':'Loss','1':'Win'}
 cuts_made_hist = px.histogram(df.sort_values('cuts_made',ascending=False),
                     x='cuts_made',
                     text_auto='.2s',
-                    # title='Win Percentage by Cuts Made',
+                    title='Win % by Cuts Made',
                     template='plotly_dark',
                     labels={'cuts_made':'Players Thru Cut','count':''},
                     histfunc='count',
                     barnorm='percent',
                     barmode='stack',
                     color='win_loss',
-#                     color_discrete_sequence=['red', 'green'],
                     color_discrete_sequence=px.colors.qualitative.Safe,
-                    height=250
-                             ).update_layout(legend=dict(title="",x=.25,y=1.4,orientation='h',font_color='#5A5856'))
+                    height=275)
 
-cuts_made_hist.update_layout(bargap=0.2)
+cuts_made_hist.update_layout(legend=dict(title="",x=.25,y=1.4,orientation='h',font_color='#5A5856'),title_x=.25,bargap=0.2)
 cuts_made_hist.for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
 
 cuts_made_hist.update_xaxes(tickvals = [1,2,3,4,5,6],
                             ticktext = ['1/6','2/6','3/6','4/6','5/6','6/6'],
                             showgrid=False,
                             tickfont=dict(
-                                color='#5A5856'),
+                                color='#000000'),
                                 title_font=dict(
                                     color='#5A5856',
                                     size=14))
@@ -190,7 +188,7 @@ with weekly_bubble_container:
                                 custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent'],
                                 height=400
                                 ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
-                                                legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
+                                                legend=dict(orientation='h',yanchor="bottom",y=1.1,x=.33,title='',font_color='#5A5856')
                                 ).update_xaxes(tickangle= -45,tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13],
                                             ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero'],
                                             tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)

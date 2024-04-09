@@ -2,7 +2,7 @@
 primaryColor="#5a5856"
 backgroundColor="#bbb7b1"
 secondaryBackgroundColor="#e8e6e3"
-textColor="#5a5856"
+textColor="#492400"
 
 [server]
 runOnSave = true
