@@ -10,7 +10,7 @@ import secrets
 
 st.set_page_config(page_title="fantrax-golf", layout="centered", initial_sidebar_state="expanded")    # streamlit
 alt.themes.enable("dark")                                                                             # altair
-with open(r"C:\Users\mikej\Desktop\fantrax\styles\main.css") as f:                                                                   # css
+with open(r"styles\main.css") as f:                                                                   # css
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)    
 config = {'displayModeBar': False}                                                                    # plotly
 
