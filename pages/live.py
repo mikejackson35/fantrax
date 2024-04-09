@@ -8,10 +8,9 @@ import secrets
 
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
 
-st.set_page_config(page_title="fantrax-golf", layout="centered", initial_sidebar_state="expanded")    # streamlit
+st.set_page_config(page_title="Live", layout="centered", initial_sidebar_state="expanded")              # streamlit
 alt.themes.enable("dark")                                                                             # altair
-with open(r"styles\main.css") as f:                                                                   # css
-    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)    
+
 config = {'displayModeBar': False}                                                                    # plotly
 
 # dg_key = st.secrets.dg_key
