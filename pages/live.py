@@ -13,8 +13,7 @@ alt.themes.enable("dark")                                                       
 
 config = {'displayModeBar': False}                                                                    # plotly
 
-# dg_key = st.secrets.dg_key
-dg_key = "e297e933c3ad47d71ec1626c299e"                  
+dg_key = st.secrets.dg_key               
 
 matchups = {                                    # enter weekly matchups here
     'unit_circle':1,
