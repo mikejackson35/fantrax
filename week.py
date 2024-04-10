@@ -24,7 +24,6 @@ config = {'displayModeBar': False}
 
 ####  DG PROJECTIONS ####
 dg_key = st.secrets.dg_key
-# dg_key = "e297e933c3ad47d71ec1626c299e"
 
 path = f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key={dg_key}"
 
