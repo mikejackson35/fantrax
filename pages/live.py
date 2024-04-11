@@ -11,15 +11,54 @@ import secrets
 st.set_page_config(page_title="Live", layout="centered", initial_sidebar_state="expanded")              # streamlit
 alt.themes.enable("dark")        
 
-st.markdown("""
-<style>
-    span[data-baseweb="tag"][role="button"]{
-        background-color: grey;
-    }
-</style>
+# st.markdown("""
+#             <style>
+#             span[data-baseweb="tag"][role="button"]{
+#                 background-color: blue;
+#             }
+#             </style>
+#             """, unsafe_allow_html=True) 
 
-""", unsafe_allow_html=True)  
-                                                             # altair
+st.markdown("""
+            <style>
+            /* The input itself */
+            div[data-baseweb="select"] > div {
+            
+            [data-baseweb="tag"][role='button'][aria-label*="2"]{
+                background-color: lightblue;}
+            [data-baseweb="tag"][role='button'][aria-label*="1"]{
+                background-color: lightgrey;}
+            [data-baseweb="tag"][role='button'][aria-label*="3"]{
+                background-color: lightgreen;}
+            [data-baseweb="tag"][role='button'][aria-label*="4"]{
+                background-color: #ff8080;}
+            }
+
+            </style>
+            """, unsafe_allow_html=True)
+
+
+# st.markdown("""
+#         <style>
+#             /* Style for the first button */
+#             span[data-baseweb="tag"][role='button']{
+#                 background-color: blue;
+#             }
+#             /* Style for the second button */
+#             span[data-baseweb="tag"][role='button'][title="2"]{
+#                 background-color: green;
+#             }
+#             /* Style for the third button */
+#             span[data-baseweb="tag"][role='button'][title="3"]{
+#                 background-color: teal;
+#             }
+#             /* Style for the fourth button */
+#             span[data-baseweb="tag"][role='button'][title="4"]{
+#                 background-color: wheat;
+#             }
+#         </style>
+#         """, unsafe_allow_html=True)
+                                                                  # altair
 
 config = {'displayModeBar': False}                                                                    # plotly
 
