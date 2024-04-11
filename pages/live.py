@@ -3,7 +3,7 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import altair as alt
-from utils_live import highlight_rows, teams_dict, get_inside_cut, remove_T_from_positions, team_color,fix_names, highlight_rows_team_short,plus_prefix, get_inside_cut_weekend
+from utils_live import teams_dict, get_inside_cut, fix_names, highlight_rows_team_short,plus_prefix, matchups, highlight_rows
 import secrets
 
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
@@ -15,16 +15,6 @@ config = {'displayModeBar': False}                                              
 
 # dg_key = st.secrets.dg_key               
 dg_key = 'e297e933c3ad47d71ec1626c299e'
-matchups = {                                    # enter weekly matchups here
-    'unit_circle':1,
-    'Putt Pirates':2,
-    'AlphaWired':3,
-    'txmoonshine':2,
-    'Sneads Foot':1,
-    'New Team 4':4,
-    'Team Gamble':4,
-    'Philly919':3
-}
 
 ## LIVE SCORING API ##
 path = f"https://feeds.datagolf.com/preds/live-tournament-stats?stats=sg_putt,sg_arg,sg_app,sg_ott,sg_t2g,sg_bs,sg_total,distance,accuracy,gir,prox_fw,prox_rgh,scrambling&round=event_avg&display=value&file_format=csv&key={dg_key}"
@@ -49,16 +39,16 @@ teams['team_short'] = teams['team']
 teams['team'] = teams.team.map(teams_dict)
 teams = teams.loc[teams.active_reserve=='Active'].set_index('player')
 
+
 ## MERGE & PROCESS ##
+
 # merge current fantasy teams and live scoring
 live_merged = pd.merge(teams, live, how='left', left_index=True, right_index=True)[['team','team_short','position','total','round','thru','sg_putt','sg_arg','sg_app','sg_ott','sg_t2g']].fillna(0).sort_values('total')
-live_merged = live_merged[live_merged.index != 0].reset_index()
-live_merged[['total','round', 'thru']] = live_merged[['total','round', 'thru']].astype(int)
+live_merged = live_merged.convert_dtypes().reset_index()
 # add columns matchup_num & holes_remaining
 live_merged['matchup_num'] = live_merged.team.map(matchups)
 live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD']), 'holes_remaining'] = 0
-live_merged['holes_remaining'] = live_merged['holes_remaining'].astype(int)
 
 "#" # ensures refreshed page starts at top
 st.markdown("<h3 style='text-align: center;;'>The Masters</h3>", unsafe_allow_html=True)   
@@ -81,25 +71,22 @@ with col2:
 # data filtered by multiselect
 live_merged = live_merged[live_merged.matchup_num.isin(matchup_num)]
 
-# Make team leaderboard
+# get team leaderboard
 team_leaderboard = (live_merged[['team', 'team_short', 'total', 'holes_remaining', 'matchup_num']]
                     .groupby(['team', 'team_short'])
                     .agg({'total': 'sum', 'holes_remaining': 'sum'})
-                    .convert_dtypes()
                     .sort_values('total')
                     .reset_index()
-                    .astype({'team': str, 'team_short': str})
                    )
 
-team_leaderboard['inside_cut'] = team_leaderboard['team_short'].map(get_inside_cut(live_merged))
+team_leaderboard['inside_cut'] = team_leaderboard['team'].map(get_inside_cut(live_merged)).fillna(0).astype(int)# team_leaderboard['total'] = team_leaderboard['total'].apply(plus_prefix)
 team_leaderboard['total'] = team_leaderboard['total'].apply(plus_prefix)
-team_leaderboard['total'] = team_leaderboard['total'].replace('0', 'E').astype(str)
 team_leaderboard_bar_df = team_leaderboard.copy()
 
 team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
 team_leaderboard.columns = ['Team','Total','PHR','Inside Cut']
-team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)#, column_config={'Team':None})
+team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
 
 # make player leaderboard
 player_leaderboard = live_merged[['player', 'total', 'position', 'round', 'thru','team','matchup_num']].fillna(0)
