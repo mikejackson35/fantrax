@@ -9,7 +9,17 @@ import secrets
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
 
 st.set_page_config(page_title="Live", layout="centered", initial_sidebar_state="expanded")              # streamlit
-alt.themes.enable("dark")                                                                             # altair
+alt.themes.enable("dark")        
+
+st.markdown("""
+<style>
+    span[data-baseweb="tag"][role="button"]{
+        background-color: grey;
+    }
+</style>
+
+""", unsafe_allow_html=True)  
+                                                             # altair
 
 config = {'displayModeBar': False}                                                                    # plotly
 

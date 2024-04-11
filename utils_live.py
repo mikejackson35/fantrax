@@ -21,25 +21,85 @@ def fix_names(live):
     names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
     return names.player
 
+# def highlight_rows(row):
+#     value = row.loc['Team']
+#     if value == 'unit_circle':
+#         color = '#c28bdd' # Purple
+#     elif value == 'Philly919':
+#         color = '#0ec3d2' # Aqua
+#     elif value == 'AlphaWired':
+#         color = '#f7a05d' # Orange
+#     elif value == 'Sneads Foot':
+#         color = '#46d671' # Green
+#     elif value == 'New Team 4':
+#         color = '#f75e38' # Red
+#     elif value == 'Team Gamble':
+#         color = '#2693be' # Navy
+#     elif value == 'txmoonshine':
+#         color = '#dbc530' # Yellow
+#     else:
+#         color = '#73706a' # Grey
+#     return ['background-color: {}'.format(color) for r in row]
+
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#c28bdd' # Purple
+        color = '#2ca3d4' # Purple
     elif value == 'Philly919':
-        color = '#0ec3d2' # Aqua
+        color = '#26bf53' # Aqua
     elif value == 'AlphaWired':
-        color = '#f7a05d' # Orange
+        color = '#7e8d9b' # Orange
     elif value == 'Sneads Foot':
-        color = '#46d671' # Green
+        color = '#2ad45c' # Green
     elif value == 'New Team 4':
-        color = '#f75e38' # Red
+        color = '#9ba6b1' # Red
     elif value == 'Team Gamble':
-        color = '#2693be' # Navy
+        color = '#ff4101' # Navy
     elif value == 'txmoonshine':
-        color = '#dbc530' # Yellow
+        color = '#55b5dd' # Yellow
     else:
-        color = '#73706a' # Grey
+        color = '#ff541b' # Grey
     return ['background-color: {}'.format(color) for r in row]
+
+def highlight_rows_team_short(row):
+    value = row.loc['Team']
+    if value == 'u_c':
+        color = '#2ca3d4' # Purple
+    elif value == '919':
+        color = '#26bf53' # Aqua
+    elif value == '[AW]':
+        color = '#7e8d9b' # Orange
+    elif value == 'NT 8':
+        color = '#2ad45c' # Green
+    elif value == 'NT 4':
+        color = '#9ba6b1' # Red
+    elif value == 'MG':
+        color = '#ff4101' # Navy
+    elif value == 'txms':
+        color = '#55b5dd' # Yellow
+    else:
+        color = '#ff541b' # Grey
+    return ['background-color: {}'.format(color) for r in row]
+
+# def highlight_rows_team_short(row):
+#     value = row.loc['Team']
+#     if value == 'u_c':
+#         color = '#c28bdd' # Purple
+#     elif value == '919':
+#         color = '#0ec3d2' # Aqua
+#     elif value == '[AW]':
+#         color = '#f7a05d' # Orange
+#     elif value == 'NT 8':
+#         color = '#46d671' # Green
+#     elif value == 'NT 4':
+#         color = '#f75e38' # Red
+#     elif value == 'MG':
+#         color = '#2693be' # Navy
+#     elif value == 'txms':
+#         color = '#dbc530' # Yellow
+#     else:
+#         color = '#73706a' # Grey
+#     return ['background-color: {}'.format(color) for r in row]
 
 teams_dict = {
         '919':'Philly919',
@@ -104,23 +164,3 @@ def get_inside_cut(live_merged):
     
     inside_cut_dict = dict(inside_cut_df.values)
     return inside_cut_dict
-
-def highlight_rows_team_short(row):
-    value = row.loc['Team']
-    if value == 'u_c':
-        color = '#c28bdd' # Purple
-    elif value == '919':
-        color = '#0ec3d2' # Aqua
-    elif value == '[AW]':
-        color = '#f7a05d' # Orange
-    elif value == 'NT 8':
-        color = '#46d671' # Green
-    elif value == 'NT 4':
-        color = '#f75e38' # Red
-    elif value == 'MG':
-        color = '#2693be' # Navy
-    elif value == 'txms':
-        color = '#dbc530' # Yellow
-    else:
-        color = '#73706a' # Grey
-    return ['background-color: {}'.format(color) for r in row]
