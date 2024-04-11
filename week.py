@@ -8,7 +8,7 @@ from utils import get_team_bar, get_all_player_bar, get_matchup_bar,fix_names, t
 ####   CURRENT WEEK INPUTS   ####
 tournament = "The Masters"
 current_week = 14                                                                                      # input current week variables
-page_title = f"FX wk{current_week}"
+page_title = f"fx wk{current_week}"
 matchup1 = ['txmoonshine','unit_circle']
 matchup2 = ['Philly919','Sneads Foot']
 matchup3 = ['New Team 4','AlphaWired']

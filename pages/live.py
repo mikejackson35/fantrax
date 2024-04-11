@@ -9,56 +9,29 @@ import secrets
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
 
 st.set_page_config(page_title="Live", layout="centered", initial_sidebar_state="expanded")              # streamlit
-alt.themes.enable("dark")        
+alt.themes.enable("dark")   
+
+with open(r"styles/main.css") as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
 # st.markdown("""
 #             <style>
-#             span[data-baseweb="tag"][role="button"]{
-#                 background-color: blue;
-#             }
-#             </style>
-#             """, unsafe_allow_html=True) 
-
-st.markdown("""
-            <style>
-            /* The input itself */
-            div[data-baseweb="select"] > div {
+#             div[data-baseweb="select"] > div {
+#                 background-color: #BBB7B1;
+#                 border-color: #BBB7B1;
             
-            [data-baseweb="tag"][role='button'][aria-label*="2"]{
-                background-color: lightblue;}
-            [data-baseweb="tag"][role='button'][aria-label*="1"]{
-                background-color: lightgrey;}
-            [data-baseweb="tag"][role='button'][aria-label*="3"]{
-                background-color: lightgreen;}
-            [data-baseweb="tag"][role='button'][aria-label*="4"]{
-                background-color: #ff8080;}
-            }
+#             [data-baseweb="tag"][role='button'][aria-label*="1"]{
+#                 background-color: lightblue;}
+#             [data-baseweb="tag"][role='button'][aria-label*="2"]{
+#                 background-color: #9ba6b1;}
+#             [data-baseweb="tag"][role='button'][aria-label*="3"]{
+#                 background-color: lightgreen;}
+#             [data-baseweb="tag"][role='button'][aria-label*="4"]{
+#                 background-color: #ff8080;}
+#             }
 
-            </style>
-            """, unsafe_allow_html=True)
-
-
-# st.markdown("""
-#         <style>
-#             /* Style for the first button */
-#             span[data-baseweb="tag"][role='button']{
-#                 background-color: blue;
-#             }
-#             /* Style for the second button */
-#             span[data-baseweb="tag"][role='button'][title="2"]{
-#                 background-color: green;
-#             }
-#             /* Style for the third button */
-#             span[data-baseweb="tag"][role='button'][title="3"]{
-#                 background-color: teal;
-#             }
-#             /* Style for the fourth button */
-#             span[data-baseweb="tag"][role='button'][title="4"]{
-#                 background-color: wheat;
-#             }
-#         </style>
-#         """, unsafe_allow_html=True)
-                                                                  # altair
+#             </style>
+#             """, unsafe_allow_html=True)
 
 config = {'displayModeBar': False}                                                                    # plotly
 
@@ -104,18 +77,26 @@ st.markdown("<h3 style='text-align: center;;'>The Masters</h3>", unsafe_allow_ht
 st.markdown("<center>Week 14</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
 
-# team leaderboard and matchup filter
-col1,blank,col2 = st.columns([3.5,.5,.8])
-with col1:
-    st.write("")
-    placeholder = st.empty()
+placeholder = st.empty()
 
-with col2:
-    matchup_num = st.multiselect(        
-        label='Matchup Filter',
-        options=sorted(np.array(live_merged['matchup_num'].unique())),
-        default=sorted(np.array(live_merged['matchup_num'].unique())),
-    )
+matchup_num = st.multiselect(        
+    label='Matchup',
+    options=sorted(np.array(live_merged['matchup_num'].unique())),
+    default=sorted(np.array(live_merged['matchup_num'].unique())),
+)
+
+# team leaderboard and matchup filter
+# col1,blank,col2 = st.columns([3.5,.5,.8])
+# with col1:
+#     st.write("")
+# placeholder = st.empty()
+
+# with col2:
+#     matchup_num = st.multiselect(        
+#         label='Matchup',
+#         options=sorted(np.array(live_merged['matchup_num'].unique())),
+#         default=sorted(np.array(live_merged['matchup_num'].unique())),
+#     )
 
 # data filtered by multiselect
 live_merged = live_merged[live_merged.matchup_num.isin(matchup_num)]
@@ -171,7 +152,7 @@ st.markdown("<h5 style='text-align: center;;'>Live Leaderboard</h5>", unsafe_all
 with placeholder:
     st.dataframe(team_leaderboard,                                                                   
                                 hide_index=False,height=180, use_container_width=True,
-                                column_config={0:'',1:'1',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8'})
+                                column_config={0:'',1:'1st',2:'2nd',3:'3rd',4:'4th',5:'5th',6:'6th',7:'7th',8:'8th'})
 
 # strokes gained expander
 with st.expander('EXPAND for Strokes Gained by Team'):                                                                   

@@ -27,6 +27,20 @@ font-size:1rem;
     justify-content: center;
 }
 
+div[data-baseweb="select"] > div {
+    background-color: #BBB7B1;
+    border-color: #BBB7B1;
+
+[data-baseweb="tag"][role='button'][aria-label*="1"]{
+    background-color: lightblue;}
+[data-baseweb="tag"][role='button'][aria-label*="2"]{
+    background-color: #9ba6b1;}
+[data-baseweb="tag"][role='button'][aria-label*="3"]{
+    background-color: lightgreen;}
+[data-baseweb="tag"][role='button'][aria-label*="4"]{
+    background-color: #ff8080;}
+}
+
 MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 #header {visibility: hidden;}
