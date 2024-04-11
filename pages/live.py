@@ -79,9 +79,9 @@ team_leaderboard = (live_merged[['team', 'team_short', 'total', 'holes_remaining
                     .reset_index()
                    )
 
-team_leaderboard['inside_cut'] = team_leaderboard['team'].map(get_inside_cut(live_merged)).fillna(0).astype(int)# team_leaderboard['total'] = team_leaderboard['total'].apply(plus_prefix)
+team_leaderboard['inside_cut'] = team_leaderboard['team'].map(get_inside_cut(live_merged)).fillna(0).astype(int)
 team_leaderboard['total'] = team_leaderboard['total'].apply(plus_prefix)
-team_leaderboard['total'] = np.where(team_leaderboard['total'] == 0, "E", team_leaderboard['total']).astype(str)
+team_leaderboard['total'] = np.where(team_leaderboard['total'] == 0, "E", team_leaderboard['total'])#.astype(str)
 team_leaderboard_bar_df = team_leaderboard.copy()
 
 team_leaderboard.drop(columns='team',inplace=True)
