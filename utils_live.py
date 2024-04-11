@@ -124,14 +124,3 @@ def highlight_rows_team_short(row):
     else:
         color = '#73706a' # Grey
     return ['background-color: {}'.format(color) for r in row]
-
-matchups = {                                    # enter weekly matchups here
-    'unit_circle':1,
-    'Putt Pirates':2,
-    'AlphaWired':3,
-    'txmoonshine':2,
-    'Sneads Foot':1,
-    'New Team 4':4,
-    'Team Gamble':4,
-    'Philly919':3
-}
