@@ -52,13 +52,13 @@ def highlight_rows(row):
     elif value == 'Sneads Foot':
         color = '#2ad45c' # Green
     elif value == 'New Team 4':
-        color = '#9ba6b1' # Red
+        color = '#8d99a6' # Red
     elif value == 'Team Gamble':
         color = '#ff4101' # Navy
     elif value == 'txmoonshine':
         color = '#55b5dd' # Yellow
     else:
-        color = '#ff541b' # Grey
+        color = '#ff8080' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 def highlight_rows_team_short(row):
@@ -72,13 +72,13 @@ def highlight_rows_team_short(row):
     elif value == 'NT 8':
         color = '#2ad45c' # Green
     elif value == 'NT 4':
-        color = '#9ba6b1' # Red
+        color = '#8d99a6' # Red
     elif value == 'MG':
         color = '#ff4101' # Navy
     elif value == 'txms':
         color = '#55b5dd' # Yellow
     else:
-        color = '#ff541b' # Grey
+        color = '#ff8080' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 # def highlight_rows_team_short(row):
