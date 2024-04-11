@@ -56,7 +56,7 @@ live_merged = live_merged[live_merged.index != 0].reset_index()
 live_merged[['total','round', 'thru']] = live_merged[['total','round', 'thru']].astype(int)
 # add columns matchup_num & holes_remaining
 live_merged['matchup_num'] = live_merged.team.map(matchups)
-live_merged['holes_remaining'] = (18 - (live_merged['thru']).fillna(0)).astype(int)
+live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD']), 'holes_remaining'] = 0
 live_merged['holes_remaining'] = live_merged['holes_remaining'].astype(int)
 
@@ -91,7 +91,7 @@ team_leaderboard = (live_merged[['team', 'team_short', 'total', 'holes_remaining
                     .astype({'team': str, 'team_short': str})
                    )
 
-team_leaderboard['inside_cut'] = team_leaderboard['team_short'].map(get_inside_cut_weekend(live_merged))
+team_leaderboard['inside_cut'] = team_leaderboard['team_short'].map(get_inside_cut(live_merged))
 team_leaderboard['total'] = team_leaderboard['total'].apply(plus_prefix)
 team_leaderboard['total'] = team_leaderboard['total'].replace('0', 'E').astype(str)
 team_leaderboard_bar_df = team_leaderboard.copy()
