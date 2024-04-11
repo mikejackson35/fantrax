@@ -54,11 +54,11 @@ teams_dict = {
 
 matchups = {                                    # enter weekly matchups here
     'unit_circle':1,
-    'Putt Pirates':2,
-    'AlphaWired':3,
-    'txmoonshine':2,
-    'Sneads Foot':1,
-    'New Team 4':4,
+    'Putt Pirates':4,
+    'AlphaWired':2,
+    'txmoonshine':1,
+    'Sneads Foot':3,
+    'New Team 4':2,
     'Team Gamble':4,
     'Philly919':3
 }
