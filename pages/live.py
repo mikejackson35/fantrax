@@ -113,7 +113,7 @@ team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis
 
 # Define a function to apply bold font to a single row
 def style_bold(s):
-    return ['font-weight: bold' if col == 'A' else '' for col in s.index]
+    return ['font-weight: bold' if col == 'Total' else '' for col in s.index]
 
 # Apply the bold styling row-wise to the transposed DataFrame
 team_leaderboard = team_leaderboard.apply(style_bold, axis=1)
