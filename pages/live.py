@@ -111,12 +111,12 @@ team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 
 team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
 
-# Define a function to apply bold font to a single column
+# Define a function to apply bold font to a single row
 def style_bold(s):
-    return ['font-weight: bold' if idx == 'A' else '' for idx in s.index]
+    return ['font-weight: bold' if col == 'A' else '' for col in s.index]
 
-# Apply the bold styling to the DataFrame
-team_leaderboard = team_leaderboard.apply(style_bold, subset=pd.IndexSlice['A', :])
+# Apply the bold styling row-wise to the transposed DataFrame
+team_leaderboard = team_leaderboard.apply(style_bold, axis=1)
 
 # 2 - player leaderboard
 player_leaderboard = live_merged[['player', 'total', 'position', 'round', 'thru','team','matchup_num']].fillna(0)
