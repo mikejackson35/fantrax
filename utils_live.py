@@ -44,7 +44,7 @@ def fix_names(live):
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#2ca3d4' # Purple
+        color = '#2793bf' # Purple
     elif value == 'Philly919':
         color = '#26bf53' # Aqua
     elif value == 'AlphaWired':
@@ -64,7 +64,7 @@ def highlight_rows(row):
 def highlight_rows_team_short(row):
     value = row.loc['Team']
     if value == 'u_c':
-        color = '#2ca3d4' # Purple
+        color = '#2793bf' # Purple
     elif value == '919':
         color = '#26bf53' # Aqua
     elif value == '[AW]':
