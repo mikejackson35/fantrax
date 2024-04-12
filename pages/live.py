@@ -109,6 +109,13 @@ team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
 team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 
+# Define a function to apply bold font to a single column
+def style_bold(s):
+    return ['font-weight: bold' if idx == 'A' else '' for idx in s.index]
+
+# Apply the bold styling to the DataFrame
+team_leaderboard = team_leaderboard.apply(style_bold, subset=pd.IndexSlice['A', :])
+
 team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
 
 # 2 - player leaderboard
