@@ -165,10 +165,8 @@ def get_inside_cut(live_merged):
     inside_cut_dict = dict(inside_cut_df.values)
     return inside_cut_dict
 
-def make_bold(val):
-
-
-    bold = 'bold'
-
-
-    return 'font-weight: %s' % bold
+# Define a function to apply the transformations
+def clean_leaderboard_column(x):
+    x = x.apply(plus_prefix)
+    x = np.where(x == 0, "E", x)
+    return x.astype(str)
