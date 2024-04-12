@@ -116,7 +116,7 @@ def style_bold(s):
     return ['font-weight: bold' if col == 'Total' else '' for col in s.index]
 
 # Apply the bold styling row-wise to the transposed DataFrame
-team_leaderboard = team_leaderboard.apply(style_bold, axis=1)
+team_leaderboard['Total'] = team_leaderboard['Total'].apply(style_bold, axis=1)
 
 # 2 - player leaderboard
 player_leaderboard = live_merged[['player', 'total', 'position', 'round', 'thru','team','matchup_num']].fillna(0)
