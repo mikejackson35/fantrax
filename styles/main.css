@@ -29,7 +29,7 @@ font-size:1rem;
 
 div[data-baseweb="select"] > div {
     background-color: #BBB7B1;
-    border-color: #BBB7B1;
+    border-color: #afaaa3;
 
 [data-baseweb="tag"][role='button'][aria-label*="1"]{
     background-color: lightblue;}

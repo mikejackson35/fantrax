@@ -58,21 +58,6 @@ st.markdown("<h3 style='text-align: center;;'>The Masters</h3>", unsafe_allow_ht
 st.markdown("<center>Week 14</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
 
-# placeholder = st.empty()
-
-# col1,blank,col2 = st.columns([2.75,.2,2])
-# with col1:
-#     st.write("#")
-#     placeholder1 = st.empty()
-# with blank:
-#     st.write("")
-# with col2:
-#     matchup_num = st.multiselect(        
-#         label='',
-#         options=sorted(np.array(live_merged['matchup_num'].unique())),
-#         default=sorted(np.array(live_merged['matchup_num'].unique())),
-    # )
-
 # team leaderboard and matchup filter
 col1,blank,col2 = st.columns([3.5,.5,.8])
 with col1:
@@ -106,16 +91,28 @@ team_leaderboard_bar_df = team_leaderboard.copy()
 team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
 team_leaderboard.columns = ['Team','Total','PHR','Cut+']
+
 team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
 
 # make player leaderboard
 player_leaderboard = live_merged[['player', 'total', 'position', 'round', 'thru','team','matchup_num']].fillna(0)
 
-player_leaderboard['total'] = player_leaderboard['total'].apply(plus_prefix)
-player_leaderboard['total'] = np.where(player_leaderboard['total'] == 0, "E", player_leaderboard['total']).astype(str)
+# Define a function to apply the transformations
+def transform_column(x):
+    x = x.apply(plus_prefix)
+    x[x == 0] = "E"
+    return x.astype(str)
 
-player_leaderboard['round'] = player_leaderboard['round'].apply(plus_prefix)
-player_leaderboard['round'] = np.where(player_leaderboard['round'] == 0, "E", player_leaderboard['round']).astype(str)
+# Apply the transformations to 'total' and 'round' columns
+player_leaderboard[['total', 'round']] = player_leaderboard[['total', 'round']].apply(transform_column)
+
+
+
+# player_leaderboard['total'] = player_leaderboard['total'].apply(plus_prefix)
+# player_leaderboard['total'] = np.where(player_leaderboard['total'] == 0, "E", player_leaderboard['total']).astype(str)
+
+# player_leaderboard['round'] = player_leaderboard['round'].apply(plus_prefix)
+# player_leaderboard['round'] = np.where(player_leaderboard['round'] == 0, "E", player_leaderboard['round']).astype(str)
 
 player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAITING", "-", player_leaderboard['position'])
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
