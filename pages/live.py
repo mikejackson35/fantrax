@@ -105,7 +105,7 @@ team_leaderboard_bar_df = team_leaderboard.copy()
 
 team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
-team_leaderboard.columns = ['Team','Total','PHR','Inside Cut']
+team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
 
 # make player leaderboard
