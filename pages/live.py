@@ -103,7 +103,7 @@ team_leaderboard = (
     .assign(inside_cut = team_leaderboard['team'].map(get_inside_cut(live_merged)).fillna(0).astype(int))
     .assign(total = team_leaderboard['total'].apply(plus_prefix))
 )
-team_leaderboard['total'] = np.where(team_leaderboard['total'] == 0, "E", team_leaderboard['total']).astype(str)
+team_leaderboard['total'] = np.where(team_leaderboard['total'] == 0, "E", team_leaderboard['total'])#.astype(str)
 
 team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
