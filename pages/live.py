@@ -14,25 +14,6 @@ alt.themes.enable("dark")
 with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
-# st.markdown("""
-#             <style>
-#             div[data-baseweb="select"] > div {
-#                 background-color: #BBB7B1;
-#                 border-color: #BBB7B1;
-            
-#             [data-baseweb="tag"][role='button'][aria-label*="1"]{
-#                 background-color: lightblue;}
-#             [data-baseweb="tag"][role='button'][aria-label*="2"]{
-#                 background-color: #9ba6b1;}
-#             [data-baseweb="tag"][role='button'][aria-label*="3"]{
-#                 background-color: lightgreen;}
-#             [data-baseweb="tag"][role='button'][aria-label*="4"]{
-#                 background-color: #ff8080;}
-#             }
-
-#             </style>
-#             """, unsafe_allow_html=True)
-
 config = {'displayModeBar': False}                                                                    # plotly
 
 # dg_key = st.secrets.dg_key               
@@ -79,17 +60,24 @@ st.markdown("<center></center>",unsafe_allow_html=True)
 
 placeholder = st.empty()
 
-matchup_num = st.multiselect(        
-    label='Matchup',
-    options=sorted(np.array(live_merged['matchup_num'].unique())),
-    default=sorted(np.array(live_merged['matchup_num'].unique())),
-)
+col1,blank,col2 = st.columns([2.75,.2,2])
+with col1:
+    st.write("#")
+    placeholder1 = st.empty()
+with blank:
+    st.write("")
+with col2:
+    matchup_num = st.multiselect(        
+        label='',
+        options=sorted(np.array(live_merged['matchup_num'].unique())),
+        default=sorted(np.array(live_merged['matchup_num'].unique())),
+    )
 
 # team leaderboard and matchup filter
 # col1,blank,col2 = st.columns([3.5,.5,.8])
 # with col1:
 #     st.write("")
-# placeholder = st.empty()
+    # placeholder = st.empty()
 
 # with col2:
 #     matchup_num = st.multiselect(        
@@ -155,7 +143,7 @@ with placeholder:
                                 column_config={0:'',1:'1st',2:'2nd',3:'3rd',4:'4th',5:'5th',6:'6th',7:'7th',8:'8th'})
 
 # strokes gained expander
-with st.expander('EXPAND for Strokes Gained by Team'):                                                                   
+with placeholder1.expander('EXPAND for Strokes Gained by Team'):                                                                   
     st.dataframe(strokes_gained_table,
                  height=330,hide_index=True,use_container_width=True)
     
