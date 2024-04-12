@@ -38,7 +38,7 @@ def highlight_rows(row):
     elif value == 'txmoonshine':
         color = '#55b5dd' # Yellow
     else:
-        color = '#8c009a' # Grey
+        color = '#a400b4' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 def highlight_rows_team_short(row):
@@ -58,7 +58,7 @@ def highlight_rows_team_short(row):
     elif value == 'txms':
         color = '#55b5dd' # Yellow
     else:
-        color = '#8c009a' # Grey
+        color = '#a400b4' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 teams_dict = {
