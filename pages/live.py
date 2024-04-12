@@ -3,7 +3,7 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import altair as alt
-from utils_live import teams_dict, get_inside_cut, fix_names, highlight_rows_team_short,plus_prefix, matchups, highlight_rows
+from utils_live import teams_dict, get_inside_cut, fix_names, highlight_rows_team_short,plus_prefix, matchups, highlight_rows, make_bold
 import secrets
 
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
@@ -58,33 +58,33 @@ st.markdown("<h3 style='text-align: center;;'>The Masters</h3>", unsafe_allow_ht
 st.markdown("<center>Week 14</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
 
-placeholder = st.empty()
+# placeholder = st.empty()
 
-col1,blank,col2 = st.columns([2.75,.2,2])
+# col1,blank,col2 = st.columns([2.75,.2,2])
+# with col1:
+#     st.write("#")
+#     placeholder1 = st.empty()
+# with blank:
+#     st.write("")
+# with col2:
+#     matchup_num = st.multiselect(        
+#         label='',
+#         options=sorted(np.array(live_merged['matchup_num'].unique())),
+#         default=sorted(np.array(live_merged['matchup_num'].unique())),
+    # )
+
+# team leaderboard and matchup filter
+col1,blank,col2 = st.columns([3.5,.5,.8])
 with col1:
-    st.write("#")
-    placeholder1 = st.empty()
-with blank:
     st.write("")
+    placeholder = st.empty()
+
 with col2:
     matchup_num = st.multiselect(        
-        label='',
+        label='Matchup',
         options=sorted(np.array(live_merged['matchup_num'].unique())),
         default=sorted(np.array(live_merged['matchup_num'].unique())),
     )
-
-# team leaderboard and matchup filter
-# col1,blank,col2 = st.columns([3.5,.5,.8])
-# with col1:
-#     st.write("")
-    # placeholder = st.empty()
-
-# with col2:
-#     matchup_num = st.multiselect(        
-#         label='Matchup',
-#         options=sorted(np.array(live_merged['matchup_num'].unique())),
-#         default=sorted(np.array(live_merged['matchup_num'].unique())),
-#     )
 
 # data filtered by multiselect
 live_merged = live_merged[live_merged.matchup_num.isin(matchup_num)]
@@ -143,7 +143,7 @@ with placeholder:
                                 column_config={0:'',1:'1st',2:'2nd',3:'3rd',4:'4th',5:'5th',6:'6th',7:'7th',8:'8th'})
 
 # strokes gained expander
-with placeholder1.expander('EXPAND for Strokes Gained by Team'):                                                                   
+with st.expander('EXPAND for Strokes Gained by Team'):                                                                   
     st.dataframe(strokes_gained_table,
                  height=330,hide_index=True,use_container_width=True)
     

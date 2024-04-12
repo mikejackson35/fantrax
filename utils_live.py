@@ -164,3 +164,11 @@ def get_inside_cut(live_merged):
     
     inside_cut_dict = dict(inside_cut_df.values)
     return inside_cut_dict
+
+def make_bold(val):
+
+
+    bold = 'bold'
+
+
+    return 'font-weight: %s' % bold
