@@ -88,13 +88,14 @@ median_delta_by_team_bar = px.bar(
     width=800,
     labels={'median_delta':'','week':''},
     template='plotly_dark',
-    hover_name='week'
-    # text_auto='.3s'
+    hover_name='week',
     ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
     ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = tickvals,ticktext = ticktext
     ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
     ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", ""))
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+
+
 
 ### CUTS MADE DISTRIBUTION  ###
 cuts_made_hist1 = px.histogram(df[df.week != 4].sort_values('cuts_made', ascending=False),
@@ -151,10 +152,13 @@ cuts_made_hist.update_yaxes(showticklabels=False, showgrid=False,visible= False)
 
 st.markdown("##")
 st.markdown("##")
-col1,blank,col2 = st.columns([2,1,2])
+col1,blank,col2 = st.columns([1.9,1.2,1.9])
 with col1:
-    # st.markdown("<center><h5>Cuts Made Distribution</h5></center>",unsafe_allow_html=True)
     st.plotly_chart(cuts_made_hist1,use_container_width=True, config=config)
+with blank:
+    st.markdown("#")
+    st.markdown("#")
+    st.markdown("<center><small>*no cut events<br> exluded",unsafe_allow_html=True)
 with col2:
     # st.markdown("<center><h5>Win % by Cuts Made</h5></center>",unsafe_allow_html=True)
     st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
