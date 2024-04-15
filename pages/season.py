@@ -27,7 +27,7 @@ def get_season_data():
 df = get_season_data()
 
 # constants
-tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
 ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters']
 
 # ###  PER TOURNAMENT AVERAGES  ###
@@ -97,7 +97,7 @@ median_delta_by_team_bar = px.bar(
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
 
 ### CUTS MADE DISTRIBUTION  ###
-cuts_made_hist1 = px.histogram(df.sort_values('cuts_made', ascending=False),
+cuts_made_hist1 = px.histogram(df[df.week != 4].sort_values('cuts_made', ascending=False),
                               x='cuts_made',
                               template='plotly_dark',
                               labels={'cuts_made':'Players Thru Cut', 'count':''},
@@ -122,7 +122,7 @@ cuts_made_hist1.update_yaxes(showticklabels=False, showgrid=False, tickfont=dict
 ### CUTS MADE DISTRIBUTION  ###
 newnames={'0':'Loss','1':'Win'}
 
-cuts_made_hist = px.histogram(df.sort_values('cuts_made',ascending=False),
+cuts_made_hist = px.histogram(df[df.week != 4].sort_values('cuts_made',ascending=False),
                     x='cuts_made',
                     text_auto='.2s',
                     title='Win % by Cuts Made',
@@ -190,14 +190,14 @@ with weekly_bubble_container:
                                 color_discrete_sequence=px.colors.qualitative.Pastel1,
                                 labels={'week':'','total_pts':'Points Scored'},
                                 custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent'],
-                                height=400
+                                height=400,
                                 ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
                                                 legend=dict(orientation='h',yanchor="bottom",y=1.1,x=.33,title='',font_color='#5A5856')
                                 ).update_xaxes(tickangle= -45,tickvals = tickvals,ticktext = ticktext,
                                                tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                                 ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),
                                                tickcolor='darkgrey', gridcolor='darkgrey'
-                                ).update_traces(marker=dict(size=15,opacity=.9,line=dict(width=1,color='darkslategrey'))
+                                ).update_traces(marker=dict(size=14,opacity=.8,line=dict(width=1.25,color='darkslategrey'))
                                 ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
     
         scatter_fig.update_traces(hovertemplate=
