@@ -181,7 +181,7 @@ temp_df['win_loss'] = temp_df['win_loss'].astype('bool')
 with weekly_bubble_container:
     tab1,tab2 = st.tabs(['by Win/Loss','by Team'])
     with tab1:
-        newnames={'False':'Loss','True':'Win'}
+        newnames={'True':'Win','False':'Loss'}
 
         scatter_fig = px.scatter(temp_df,
                                 x='week',
@@ -195,6 +195,7 @@ with weekly_bubble_container:
                                 labels={'week':'','total_pts':'Points Scored'},
                                 custom_data=['team','cuts_made','players_started','win_loss','median_delta','total_pts','opponent'],
                                 height=400,
+                                render_mode='svg'
                                 ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
                                                 legend=dict(orientation='h',yanchor="bottom",y=1.1,x=.33,title='',font_color='#5A5856')
                                 ).update_xaxes(tickangle= -45,tickvals = tickvals,ticktext = ticktext,
