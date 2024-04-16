@@ -70,8 +70,8 @@ live_merged.loc[live_merged['position'].isin(['CUT', 'WD']), 'holes_remaining'] 
 
 
 "#" # ensures refreshed page starts at top
-st.markdown("<h3 style='text-align: center;;'>The Masters</h3>", unsafe_allow_html=True)   
-st.markdown("<center>Week 14</center>",unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;;'>RBC Heritage</h3>", unsafe_allow_html=True)   
+st.markdown("<center>Week 15</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
 
 # leaderboard and filter row
@@ -140,7 +140,7 @@ with placeholder:
                  column_config={0:'',1:'1st',2:'2nd',3:'3rd',4:'4th',5:'5th',6:'6th',7:'7th',8:'8th'})
 
 # strokes gained expander
-with st.expander('EXPAND for Strokes Gained by Team'):                                                                   
+with st.expander('click for Strokes Gained'):                                                                   
     st.dataframe(strokes_gained_table,
                  height=330,
                  hide_index=True,
