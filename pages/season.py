@@ -60,7 +60,7 @@ median_delta_bar = px.bar(team_medians,
                           color_discrete_map=team_color,
                           template='plotly_dark',
                           labels={'index':'', 'value':''},
-                          height=300,
+                          height=350,
                           title='season-to-date'
                          ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
                          ).update_yaxes(showticklabels=False,showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856'
