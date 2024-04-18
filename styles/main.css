@@ -38,7 +38,7 @@ div[data-baseweb="select"] > div {
 [data-baseweb="tag"][role='button'][aria-label*="3"]{
     background-color: lightgreen;}
 [data-baseweb="tag"][role='button'][aria-label*="4"]{
-    background-color: #d200e7;}
+    background-color: #e60000;}
 }
 
 MainMenu {visibility: hidden;}
