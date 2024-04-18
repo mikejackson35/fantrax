@@ -81,11 +81,11 @@ matchups = {                                    # enter weekly matchups here
     'unit_circle':1,
     'Putt Pirates':4,
     'AlphaWired':4,
-    'txmoonshine':2,
-    'Sneads Foot':2,
-    'New Team 4':3,
+    'txmoonshine':3,
+    'Sneads Foot':3,
+    'New Team 4':2,
     'Team Gamble':1,
-    'Philly919':3
+    'Philly919':2
 }
 
 def plus_prefix(a):
