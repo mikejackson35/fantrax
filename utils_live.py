@@ -31,13 +31,13 @@ def highlight_rows(row):
     if value == 'unit_circle':
         color = '#2793bf' # Purple
     elif value == 'Philly919':
-        color = '#26bf53' # Aqua
+        color = '#9ba6b1' # Aqua
     elif value == 'AlphaWired':
         color = '#26bf53' # Orange
     elif value == 'Sneads Foot':
         color = '#2ad45c' # Green
     elif value == 'New Team 4':
-        color = '#26bf53' # Red
+        color = '#8d99a6' # Red
     elif value == 'Team Gamble':
         color = '#55b5dd'  # Navy
     elif value == 'txmoonshine':
@@ -51,13 +51,13 @@ def highlight_rows_team_short(row):
     if value == 'u_c':
         color = '#2793bf' # Purple
     elif value == '919':
-        color = '#26bf53' # Aqua
+        color = '#9ba6b1' # Aqua
     elif value == '[AW]':
         color = '#26bf53' # Orange
     elif value == 'NT 8':
         color = '#2ad45c' # Green
     elif value == 'NT 4':
-        color = '#26bf53' # Red
+        color = '#8d99a6' # Red
     elif value == 'MG':
         color = '#55b5dd' # Navy
     elif value == 'txms':
