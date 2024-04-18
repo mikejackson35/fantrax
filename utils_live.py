@@ -61,7 +61,7 @@ def highlight_rows_team_short(row):
     elif value == 'MG':
         color = '#55b5dd' # Navy
     elif value == 'txms':
-        color = '#55b5dd' # Yellow
+        color = '#26bf53' # Yellow
     else:
         color = '#9ba6b1'  # Grey
     return ['background-color: {}'.format(color) for r in row]
