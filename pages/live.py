@@ -75,7 +75,7 @@ st.markdown("<center>Week 15</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
 
 # leaderboard and filter row
-col1,blank,col2 = st.columns([3.6,.4,.8])
+col1,blank,col2 = st.columns([3.6,.3,.9])
 with col1:                                  # team leaderboard
     st.write("")
     placeholder = st.empty()
