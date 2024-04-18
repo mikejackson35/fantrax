@@ -33,7 +33,7 @@ def highlight_rows(row):
     elif value == 'Philly919':
         color = '#9ba6b1' # Aqua
     elif value == 'AlphaWired':
-        color = '#26bf53' # Orange
+        color = '#ed35ff' # Orange
     elif value == 'Sneads Foot':
         color = '#2ad45c' # Green
     elif value == 'New Team 4':
@@ -43,7 +43,7 @@ def highlight_rows(row):
     elif value == 'txmoonshine':
         color = '#26bf53' # Yellow 
     else:
-        color = '#9ba6b1' # Grey
+        color = '#d200e7' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 def highlight_rows_team_short(row):
@@ -53,7 +53,7 @@ def highlight_rows_team_short(row):
     elif value == '919':
         color = '#9ba6b1' # Aqua
     elif value == '[AW]':
-        color = '#26bf53' # Orange
+        color = '#ed35ff' # Orange
     elif value == 'NT 8':
         color = '#2ad45c' # Green
     elif value == 'NT 4':
@@ -63,7 +63,7 @@ def highlight_rows_team_short(row):
     elif value == 'txms':
         color = '#26bf53' # Yellow
     else:
-        color = '#9ba6b1'  # Grey
+        color = '#d200e7'  # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 teams_dict = {
