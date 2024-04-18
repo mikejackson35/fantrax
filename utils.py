@@ -4,6 +4,8 @@ import plotly.express as px
 import streamlit as st
 import secrets
 
+dg_key = st.secrets.dg_key
+
 def get_team_bar(week,team):
         fig = px.bar(week[week.team == team].sort_values(by=['active_reserve','proj_pts'],ascending=[True,False]), 
                                 x = 'player', 

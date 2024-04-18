@@ -1,6 +1,11 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import streamlit as st
+import secrets
+
+
+dg_key = st.secrets.dg_key    
 
 def fix_names(live):
     """
