@@ -63,7 +63,7 @@ live_merged = pd.merge(teams, live,
 # live_merged = live_merged.convert_dtypes().reset_index()
 # add columns matchup_num & holes_remaining
 live_merged['matchup_num'] = live_merged.team.map(matchups)
-live_merged['holes_remaining'] = (56 - (live_merged['thru']).fillna(0)).astype(int)
+live_merged['holes_remaining'] = (36 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD', 0]), 'holes_remaining'] = 0
 
 live_merged = live_merged[live_merged['position'] !=0]
