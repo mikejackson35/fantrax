@@ -27,8 +27,8 @@ def get_season_data():
 df = get_season_data()
 
 # constants
-tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters']
+tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage']
 
 # ###  PER TOURNAMENT AVERAGES  ###
 st.write("#")
@@ -98,7 +98,8 @@ median_delta_by_team_bar = px.bar(
 
 
 ### CUTS MADE DISTRIBUTION  ###
-cuts_made_hist1 = px.histogram(df[df.week != 4].sort_values('cuts_made', ascending=False),
+df = df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False)
+cuts_made_hist1 = px.histogram(df,
                               x='cuts_made',
                               template='plotly_dark',
                               labels={'cuts_made':'Players Thru Cut', 'count':''},
