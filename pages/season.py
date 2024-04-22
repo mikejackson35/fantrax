@@ -99,7 +99,7 @@ median_delta_by_team_bar = px.bar(
 
 ### CUTS MADE DISTRIBUTION  ###
 # df = df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False)
-cuts_made_hist1 = px.histogram(df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False),
+cuts_made_hist1 = px.histogram(df[(df.week !=4) | (df.week !=15)].sort_values('cuts_made', ascending=False),
                               x='cuts_made',
                               template='plotly_dark',
                               labels={'cuts_made':'Players Thru Cut', 'count':''},
