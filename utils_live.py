@@ -79,13 +79,13 @@ teams_dict = {
 
 matchups = {                                    # enter weekly matchups here
     'unit_circle':1,
-    'Putt Pirates':4,
-    'AlphaWired':4,
+    'Putt Pirates':2,
+    'AlphaWired':1,
     'txmoonshine':3,
-    'Sneads Foot':3,
+    'Sneads Foot':4,
     'New Team 4':2,
-    'Team Gamble':1,
-    'Philly919':2
+    'Team Gamble':4,
+    'Philly919':3
 }
 
 def plus_prefix(a):
