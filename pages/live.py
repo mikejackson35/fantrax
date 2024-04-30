@@ -72,7 +72,7 @@ live_merged = live_merged[live_merged['position'] !=0]
 
 
 "#" # ensures refreshed page starts at top
-st.markdown("* data updates when tournament starts", unsafe_allow_html=True)
+st.markdown("***updates when tournament starts***", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center;;'>AT&T Byron Nelson</h3>", unsafe_allow_html=True)   
 st.markdown("<center>Week 16</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
