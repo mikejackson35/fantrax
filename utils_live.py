@@ -22,7 +22,7 @@ def fix_names(live):
     names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
     names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
     names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
-    names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
+    names['player'] = np.where(names['player']=='kevin Yu', 'Kevin Yu', names['player'])
     names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
     return names.player
 
