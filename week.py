@@ -6,13 +6,13 @@ import secrets
 from utils import get_team_bar, get_all_player_bar, get_matchup_bar,fix_names, teams_dict, team_color, active_color, teams_dict, fix_long_names
 
 ####   CURRENT WEEK INPUTS   ####
-tournament = "RBC Heritage"
-current_week = 15                                                                                      # input current week variables
+tournament = "AT&T Byron Nelson"
+current_week = 16                                                                                     # input current week variables
 page_title = f"fx wk{current_week}"
-matchup1 = ['Team Gamble','unit_circle']
-matchup2 = ['Sneads Foot','txmoonshine']
-matchup3 = ['New Team 4','Philly919']
-matchup4 = ['Putt Pirates','AlphaWired']
+matchup1 = ['AlphaWired','unit_circle']
+matchup2 = ['Sneads Foot','Team Gamble']
+matchup3 = ['txmoonshine','Philly919']
+matchup4 = ['Putt Pirates','New Team 4']
 
 #### ST, CSS, and PLOTLY CONFIGS
 st.set_page_config(page_title=page_title, layout="centered", initial_sidebar_state="expanded")
@@ -150,7 +150,7 @@ col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("#")
     st.markdown("")
-    st.markdown("<center><h1>RBC<br>Heritage</h1></center>",unsafe_allow_html=True)
+    st.markdown("<center><h1>AT&T<br>Byron Nelson</h1></center>",unsafe_allow_html=True)
     st.markdown(f"<center>Week{current_week}</center>",unsafe_allow_html=True)
 with col2:
     st.plotly_chart(roster_projections_bar,use_container_width=True,config = config)
