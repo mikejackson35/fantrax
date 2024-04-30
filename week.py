@@ -150,7 +150,7 @@ col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("#")
     st.markdown("")
-    st.markdown("<center><h1>AT&T<br>Byron Nelson</h1></center>",unsafe_allow_html=True)
+    st.markdown("<center><h3>AT&T<br>Byron Nelson</h3></center>",unsafe_allow_html=True)
     st.markdown(f"<center>Week{current_week}</center>",unsafe_allow_html=True)
 with col2:
     st.plotly_chart(roster_projections_bar,use_container_width=True,config = config)
