@@ -119,7 +119,7 @@ def get_rosters():
     rosters = pd.concat(rosters).set_index('id')
 
     # map in player names using their fantrax ids
-    id_map = pd.read_csv(r"C:\Users\mikej\Desktop\fantrax\player_ids.csv",usecols=['player_name','player_id']).set_index('player_id')
+    id_map = pd.read_csv(r"player_ids.csv",usecols=['player_name','player_id']).set_index('player_id')
     rosters = pd.merge(rosters, id_map, how='left', left_index=True, right_index=True).reset_index()[['player_name','team','status']]
 
     return rosters
