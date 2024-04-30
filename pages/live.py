@@ -131,6 +131,7 @@ strokes_gained_table = strokes_gained_table.style.background_gradient(cmap='Gree
 
 ### UI ###
 # header
+st.markdown("* data updates when tournament starts", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center;;'>Live Leaderboard</h5>", unsafe_allow_html=True)
 
 # team leaderboard
