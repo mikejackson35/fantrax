@@ -1,0 +1,7 @@
+*ipynb
+
+.secrets
+
+.streamlit
+
+fantraxAPI.py

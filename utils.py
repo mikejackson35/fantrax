@@ -1,115 +1,190 @@
+import os
+
+import json
+import requests
+
 import pandas as pd
 import numpy as np
 import plotly.express as px
+
 import streamlit as st
 import secrets
 
+_dir_pkg_root = os.path.dirname(__file__)
+
 dg_key = st.secrets.dg_key
 
-def get_team_bar(week,team):
-        fig = px.bar(week[week.team == team].sort_values(by=['active_reserve','proj_pts'],ascending=[True,False]), 
-                                x = 'player', 
-                                y = 'proj_pts', 
-                                height=250,
-                                color='active_reserve', 
-                                text_auto='.2s',
-                                template = 'plotly_dark',
-                                color_discrete_map=active_color,
-                                log_y=True,
-                                labels = {'proj_pts':'','player':""}
-                                ).update_yaxes(showticklabels=False,showgrid=False, tickfont=dict(color='#5A5856')
-                                ).update_xaxes(tickfont=dict(color='#5A5856')
-                                ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)
-                                ).update_traces(width=.7)
-        return fig
 
-def get_all_player_bar(week,color_by,color_map):
-        all_player_bar = px.bar(week.sort_values(by='proj_pts',ascending=False).reset_index(drop=True),
-                                y = 'proj_pts',
-                                template='plotly_dark',
-                                color = 'active_reserve',
-                                color_discrete_map=active_color,
-                                labels = {'index':"", 'proj_pts':''},
-                                height=275,
-                                log_y=True,
-                                hover_name='player'
-                                ).add_hline(y=week.proj_pts.mean(),line_color='darkslategrey'
-                                ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
-                                ).update_yaxes(showgrid=False,tickfont=dict(color='#5A5856')
-                                ).update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
-        return all_player_bar
+def load_secrets():
+    fn_secrets = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "fantrax.secrets",
+    )
+    with open(fn_secrets, "r") as fsecrets:
+        secrets = json.load(fsecrets)
+    return secrets
 
 
-def get_matchup_bar(week,matchup):
-        matchup_bar = px.bar(week[(week.active_reserve=='Active') & (week.team.isin(matchup))].drop(columns='player').sort_values(by = 'proj_pts',ascending=False).reset_index(),
-                             y = 'proj_pts',
-                             color = 'team',
-                             color_discrete_map=team_color,
-                             labels = {'index':"", 'proj_pts':''},
-                             text='player',
-                             template = 'plotly_dark',
-                             hover_name='proj_pts',
-                             height=250,
-                             log_y=True
-                             ).update_xaxes(showticklabels=False,
-                             ).update_yaxes(showticklabels=False,tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
-                             ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
-                             ).update_layout(legend=dict(orientation='h',title='',y=1.25,x=.1,font_color='#5A5856'))
-        return matchup_bar
+def dump_to_json(fn_json, data):
+    with open(fn_json, "w") as f_json:
+        json.dump(data, f_json, indent=4)
 
-def fix_long_names(dg_proj):
-        names = dg_proj['player'].str.split(expand=True)                  
-        names[0] = names[0].str.rstrip(",")
-        names[1] = names[1].str.rstrip(",")
-        names['player'] = names[1] + " " + names[0]
 
-        names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
-        names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
-        names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
-        names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
-        names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
-        names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
-        names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
-        names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
-        return names
+def rest_request(
+    url,
+    body,
+    note="",
+    resp_format="json",
+):
+    if resp_format == "json":
+        headers = {"Content-Type": "application/json"}
+    elif resp_format == "csv":
+        headers = {"Content-Type": "application/csv"}
+
+    response = requests.post(
+        url,
+        data=json.dumps(body),
+        headers=headers,
+    )
+    print(f"{note}status code:", response.status_code)
+
+    if resp_format == "json":
+        return response.json()
+    elif resp_format == "csv":
+        return response.text
+    else:
+        return response
+
+def fetch_leagueInfo(
+    leagueId=None,
+    secrets=load_secrets(),
+):
+    if leagueId is None:
+        leagueId = secrets["league_id"]
+
+    url_leagueInfo = (
+        f"https://www.fantrax.com/fxea/general/getLeagueInfo?leagueId={leagueId}"
+    )
+    body_leagueInfo = {
+        # "leagueId":secrets["league_id"],
+    }
+    leagueInfo = rest_request(
+        url_leagueInfo,
+        body_leagueInfo,
+        note="requesting league info. ",
+    )
+    return leagueInfo
+
+def fetch_teamRosters(
+    leagueId=None,
+    secrets=load_secrets(),
+):
+    if leagueId is None:
+        leagueId = secrets["league_id"]
+
+    url_teamRosters = (
+        f"https://www.fantrax.com/fxea/general/getTeamRosters?leagueId={leagueId}"
+    )
+    body_teamRosters = {
+        # "leagueId":secrets["league_id"],
+    }
+    teamRosters = rest_request(
+        url_teamRosters,
+        body_teamRosters,
+        note="requesting team rosters. ",
+    )
+    return teamRosters
+
+
+
+# get active/inactive rosters
+def get_rosters():
+
+    # get team names and team id's
+    leagueInfo=fetch_leagueInfo()
+    temp = leagueInfo['teamInfo'].values()
+    team_ids = pd.DataFrame(temp).id.to_list()
+
+    # get current active/inactive rosters
+    teamRosters=fetch_teamRosters()
+
+    # combine to create 'week' 
+    rosters = []
+    for id in team_ids:
+        team_players = pd.DataFrame(teamRosters['rosters'][id]['rosterItems'])
+        team_name = teamRosters['rosters'][id]['teamName']
+        team_players['team'] = team_name
+        rosters.append(team_players)
+
+    rosters = pd.concat(rosters).set_index('id')
+
+    # map in player names using their fantrax ids
+    id_map = pd.read_csv(r"C:\Users\mikej\Desktop\fantrax\player_ids.csv",usecols=['player_name','player_id']).set_index('player_id')
+    rosters = pd.merge(rosters, id_map, how='left', left_index=True, right_index=True).reset_index()[['player_name','team','status']]
+
+    return rosters
+
+# get weekly matchups
+def get_matchups(week_num):
+    leagueInfo=fetch_leagueInfo()
+
+    matches = []
+    for matchup in range(0,4):
+        match = leagueInfo['matchups'][week_num]['matchupList'][matchup]
+        matches.append([match['away']['name'], match['home']['name']])
+
+    matchups = pd.DataFrame(matches, index=[1,2,3,4]).reset_index()
+    matchups.columns = ['matchup','away','home']
+    matchups['week'] = week_num
+
+    matchups = matchups.melt(id_vars=['matchup','week'], value_name='team')[['team','matchup']]
+
+    return matchups.convert_dtypes()
 
 def fix_names(dg):
-        names = dg['player'].str.split(expand=True)                  
+        names = dg['player_name'].str.split(expand=True)                  
         names[0] = names[0].str.rstrip(",")
         names[1] = names[1].str.rstrip(",")
-        names['player'] = names[1] + " " + names[0]
+        names['player_name'] = names[1] + " " + names[0]
 
-        names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
-        names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
-        names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
-        names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
-        names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
-        names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
-        names['player'] = np.where(names['player']=='Kevin Yu', 'kevin Yu', names['player'])
-        names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
-        return names.player
+        names['player_name'] = np.where(names['player_name']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Si Kim', 'Si Woo Kim', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Min Lee', 'Min Woo Lee', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Byeong An', 'Byeong Hun An', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Rooyen Van', 'Erik Van Rooyen', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Vince Whaley', 'Vincent Whaley', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Kevin Yu', 'kevin Yu', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player_name'])
+        return names.player_name
+
+def get_projections():
+    path = f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key={dg_key}"
+    projections = pd.read_csv(path, usecols=['player_name','proj_points_total'])
+    projections['player_name'] = fix_names(projections)
+    return projections
 
 team_color={
      "Philly919": 'rgb(14,195,210)',
      "unit_circle": 'rgb(194,139,221)',
      "AlphaWired": 'rgb(247,160,93)',
-     "Sneads Foot": 'rgb(70,214,113)',
+     "Snead's Foot": 'rgb(70,214,113)',
      "New Team 4": 'rgb(247,94,56)',
      "Team Gamble": 'rgb(38,147,190)',
      "txmoonshine": 'rgb(219,197,48)',
      "Putt Pirates": 'rgb(115,112,106)'
      }
 
+# color dictionary
 active_color={
-    "Active":'rgb(146,146,143)',
-    "Reserve":'rgb(220,222,202)'
+    "ACTIVE":'rgb(146,146,143)',
+    "RESERVE":'rgb(220,222,202)'
     }
 
-teams_dict = {
+team_abbrev_dict = {
         '919':'Philly919',
         'u_c':'unit_circle',
         'NT 4':'New Team 4',
-        'NT 8':'Sneads Foot',
+        'NT 8':"Snead's Foot",
         'txms':'txmoonshine',
         'MG':'Team Gamble',
         'grrr':'Putt Pirates',
@@ -129,3 +204,42 @@ stats_dict = {
     'dbog_num':'Double Bogeys/wk',
     'bog_num':'Bogeys/wk'
 }
+
+def get_matchup_bar(rostered, week_num,matchup_num):
+
+    all_matchups = get_matchups(week_num)
+    one_matchup = all_matchups[all_matchups.matchup==matchup_num].team.to_list()
+
+    matchup_bar = px.bar(rostered[(rostered.status=='ACTIVE') & (rostered.team.isin(one_matchup))].sort_values(by = 'proj_pts',ascending=False).reset_index(),
+                            y = 'proj_pts',
+                            color = 'team',
+                            color_discrete_map=team_color,
+                            labels = {'_index':"", 'proj_pts':''},
+                            text='player_name',
+                            template = 'plotly_dark',
+                            hover_name='proj_pts',
+                            height=250,
+                            log_y=True
+                            ).update_xaxes(showticklabels=False,
+                            ).update_yaxes(showticklabels=False,tickvals=[50,60,70,80,90,100], tickfont=dict(color='#5A5856')
+                            ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856')
+                            ).update_layout(legend=dict(orientation='h',title='',y=1.25,x=.1,font_color='#5A5856'))
+
+    return matchup_bar
+
+def get_team_bar(rostered, team):
+    fig = px.bar(rostered[rostered.team == team].sort_values(by=['status','proj_pts'],ascending=[True,False]), 
+                        x = 'player_name', 
+                        y = 'proj_pts', 
+                        height=250,
+                        color='status', 
+                        text_auto='.2s',
+                        template = 'plotly_dark',
+                        color_discrete_map=active_color,
+                        log_y=True,
+                        labels = {'proj_pts':'','player_name':""}
+                        ).update_yaxes(showticklabels=False,showgrid=False, tickfont=dict(color='#5A5856')
+                        ).update_xaxes(tickfont=dict(color='#5A5856')
+                        ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)
+                        ).update_traces(width=.7)
+    return fig
