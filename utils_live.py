@@ -70,21 +70,21 @@ def highlight_rows(row):
 def highlight_rows_team_short(row):
     value = row.loc['Team']
     if value == 'u_c':
-        color = '#2793bf' # Purple
+        color = '#b22222' # Purple
     elif value == '919':
-        color = '#9ba6b1' # Aqua
+        color = '#1e90ff' # Aqua
     elif value == '[AW]':
-        color = '#e60000' # Orange
+        color = '#ff0000' # Orange
     elif value == 'NT 8':
-        color = '#2ad45c' # Green
+        color = '#32cd32' # Green
     elif value == 'NT 4':
         color = '#7f8c9b' # Red
     elif value == 'MG':
-        color = '#55b5dd' # Navy
+        color = '#008000' # Navy
     elif value == 'txms':
-        color = '#26bf53' # Yellow
+        color = '#0000ff' # Yellow
     else:
-        color = '#ff4e4e'  # Grey
+        color = '#9ba6b1'  # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 teams_dict = {
