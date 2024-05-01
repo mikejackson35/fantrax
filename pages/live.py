@@ -114,7 +114,7 @@ team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
 
 # 2 - player leaderboard
-player_leaderboard = live_merged[['player', 'total', 'position', 'round', 'thru','team','matchup_num']].fillna(0)
+player_leaderboard = live_merged[['player_name', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
 
 player_leaderboard[['total', 'round']] = player_leaderboard[['total', 'round']].apply(clean_leaderboard_column)
 player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAITING", "-", player_leaderboard['position'])
