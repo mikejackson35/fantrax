@@ -34,7 +34,7 @@ def highlight_rows(row):
     elif value == 'Philly919':
         color = '#1e90ff' # Aqua
     elif value == 'AlphaWired':
-        color = '#dc143c' # Orange
+        color = '#ff0000' # Orange
     elif value == "Snead's Foot":
         color = '#32cd32' # Green
     elif value == 'New Team 4':
