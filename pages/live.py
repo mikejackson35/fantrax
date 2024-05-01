@@ -42,7 +42,7 @@ live = live.set_index(fix_names(live))
 # teams['team'] = teams.team.map(teams_dict)
 # teams = teams.loc[teams.active_reserve=='Active'].set_index('player')
 rosters = get_rosters()
-matchups = get_matchups(15)
+matchups = get_matchups(16)
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
 
