@@ -101,7 +101,7 @@ team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
 team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 
-team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0).set_properties(subset=['Total'], **{'font-weight': 'bold'})
+team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
 
 # 2 - player leaderboard
 player_leaderboard = live_merged[['player_name', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
@@ -111,7 +111,7 @@ player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAI
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
 
 player_leaderboard.columns = ['Player', 'Total', 'Pos', 'Rd', 'Thru', 'Team', 'Matchup']
-player_leaderboard = player_leaderboard.style.apply(highlight_rows,axis=1)
+player_leaderboard = player_leaderboard.style.apply(highlight_rows,axis=1).set_properties(subset=['Total'], **{'font-weight': 'bold'})
 
 # 3 - strokes gained table
 strokes_gained_table = live_merged.groupby('team',as_index=False)[['sg_putt','sg_arg','sg_app','sg_t2g']].sum().reset_index(drop=True)
