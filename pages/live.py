@@ -48,7 +48,7 @@ fantrax = pd.merge(rosters,matchups,how='left',on='team')
 
 inv_map = {v: k for k, v in team_abbrev_dict.items()}
 
-fx = fantrax[['player_name','team','status']]
+fx = fantrax[['player_name','team','status','matchup']]
 fx['team_short'] = fx['team'].map(inv_map)
 
 teams = fx.loc[fx.status=='ACTIVE'].set_index('player_name')
