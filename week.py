@@ -39,7 +39,7 @@ st.write("#")                                                                   
 
 ####  VERTICAL BAR - AVAILABLE PLAYERS  ####
 filt = rostered.player_name.to_list()
-available = projections[~projections.player_name.isin(filt)].sort_values('proj_points_total',ascending=True)[-5:]
+available = projections[~projections.player_name.isin(filt)].sort_values('proj_points_total',ascending=True)[-8:]
 available.columns = ['player_name','proj_pts']
 
 available_bar = px.bar(
