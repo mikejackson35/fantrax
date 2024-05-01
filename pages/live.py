@@ -101,7 +101,7 @@ team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
 team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 
-team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
+team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0).set_properties(subset=['Total'], **{'font-weight': 'bold'})
 
 # 2 - player leaderboard
 player_leaderboard = live_merged[['player_name', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
