@@ -31,16 +31,6 @@ live = live.set_index(fix_names(live))
 
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
-# st.cache_data()
-# def get_fantrax():
-#     teams = pd.read_csv(r"week.csv",usecols=['Player','Status','Roster Status'])
-#     return teams
-# teams = get_fantrax()
-
-# teams.columns = ['player','team','active_reserve']
-# teams['team_short'] = teams['team']
-# teams['team'] = teams.team.map(teams_dict)
-# teams = teams.loc[teams.active_reserve=='Active'].set_index('player')
 rosters = get_rosters()
 matchups = get_matchups(16)
 

@@ -30,21 +30,21 @@ def fix_names(live):
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#2793bf' # Purple
+        color = '#ff0000' # Purple
     elif value == 'Philly919':
-        color = '#9ba6b1' # Aqua
+        color = '#1e90ff' # Aqua
     elif value == 'AlphaWired':
-        color = '#55b5dd' # Orange
+        color = '#dc143c' # Orange
     elif value == "Snead's Foot":
-        color = '#2ad45c' # Green
+        color = '#228b22' # Green
     elif value == 'New Team 4':
-        color = '#e60000' # Red
+        color = '#d3d3d3' # Red
     elif value == 'Team Gamble':
-        color = '#55b5dd'  # Navy
+        color = '#008000'  # Navy
     elif value == 'txmoonshine':
-        color = '#7f8c9b' # Yellow 
+        color = '#0000ff' # Yellow 
     else:
-        color = '#ff4e4e' # Grey
+        color = '#a9a9a9' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 # def highlight_rows(row):
@@ -91,7 +91,7 @@ teams_dict = {
         '919':'Philly919',
         'u_c':'unit_circle',
         'NT 4':'New Team 4',
-        'NT 8':'Sneads Foot',
+        'NT 8':"Snead's Foot",
         'txms':'txmoonshine',
         'MG':'Team Gamble',
         'grrr':'Putt Pirates',
@@ -145,7 +145,7 @@ def get_inside_cut(live_merged):
     live_merged = live_merged[live_merged['position'] != "CUT"]
     live_merged = remove_T_from_positions(live_merged)
     live_merged['position'] = live_merged['position'].dropna().astype('int')
-    inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 100].team.value_counts()).reset_index()
+    inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 66].team.value_counts()).reset_index()
     inside_cut_df.columns = ['team','inside_cut']
     
     inside_cut_dict = dict(inside_cut_df.values)
