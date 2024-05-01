@@ -42,7 +42,7 @@ def highlight_rows(row):
     elif value == 'Team Gamble':
         color = '#008000'  # Navy
     elif value == 'txmoonshine':
-        color = '#0000ff' # Yellow 
+        color = '#00bfff' # Yellow 
     else:
         color = '#9ba6b1' # Grey
     return ['background-color: {}'.format(color) for r in row]
@@ -82,7 +82,7 @@ def highlight_rows_team_short(row):
     elif value == 'MG':
         color = '#008000' # Navy
     elif value == 'txms':
-        color = '#0000ff' # Yellow
+        color = '#00bfff' # Yellow
     else:
         color = '#9ba6b1'  # Grey
     return ['background-color: {}'.format(color) for r in row]
