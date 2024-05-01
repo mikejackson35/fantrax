@@ -26,6 +26,7 @@ def fix_names(live):
     names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
     return names.player
 
+
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
@@ -33,18 +34,38 @@ def highlight_rows(row):
     elif value == 'Philly919':
         color = '#9ba6b1' # Aqua
     elif value == 'AlphaWired':
-        color = '#e60000' # Orange
-    elif value == 'Sneads Foot':
+        color = '#55b5dd' # Orange
+    elif value == "Snead's Foot":
         color = '#2ad45c' # Green
     elif value == 'New Team 4':
-        color = '#7f8c9b' # Red
+        color = '#e60000' # Red
     elif value == 'Team Gamble':
         color = '#55b5dd'  # Navy
     elif value == 'txmoonshine':
-        color = '#26bf53' # Yellow 
+        color = '#7f8c9b' # Yellow 
     else:
         color = '#ff4e4e' # Grey
     return ['background-color: {}'.format(color) for r in row]
+
+# def highlight_rows(row):
+#     value = row.loc['Team']
+#     if value == 'unit_circle':
+#         color = '#2793bf' # Purple
+#     elif value == 'Philly919':
+#         color = '#9ba6b1' # Aqua
+#     elif value == 'AlphaWired':
+#         color = '#e60000' # Orange
+#     elif value == "Snead's Foot":
+#         color = '#2ad45c' # Green
+#     elif value == 'New Team 4':
+#         color = '#7f8c9b' # Red
+#     elif value == 'Team Gamble':
+#         color = '#55b5dd'  # Navy
+#     elif value == 'txmoonshine':
+#         color = '#26bf53' # Yellow 
+#     else:
+#         color = '#ff4e4e' # Grey
+#     return ['background-color: {}'.format(color) for r in row]
 
 def highlight_rows_team_short(row):
     value = row.loc['Team']
