@@ -173,7 +173,7 @@ with col3:
 
 #### ROW 2 - WIDE BAR CHARTS / TABS  ####  
 st.markdown(f"<center>{len(rostered)} Rostered Players</center>",unsafe_allow_html=True) 
-
+st.write("")
 tab1, tab2, tab3 = st.tabs(['Top 25', 'Sit / Start', "Compare LU's"])
 with tab1:
     st.plotly_chart(top_25_bar,use_container_width=True,config = config)

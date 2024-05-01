@@ -4,6 +4,7 @@ import plotly.express as px
 import streamlit as st
 import altair as alt
 from utils_live import teams_dict, get_inside_cut, fix_names, highlight_rows_team_short,plus_prefix, matchups, highlight_rows, clean_leaderboard_column
+from utils import *
 import secrets
 
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
@@ -30,25 +31,35 @@ live = live.set_index(fix_names(live))
 
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
-st.cache_data()
-def get_fantrax():
-    teams = pd.read_csv(r"week.csv",usecols=['Player','Status','Roster Status'])
-    return teams
-teams = get_fantrax()
+# st.cache_data()
+# def get_fantrax():
+#     teams = pd.read_csv(r"week.csv",usecols=['Player','Status','Roster Status'])
+#     return teams
+# teams = get_fantrax()
 
-teams.columns = ['player','team','active_reserve']
-teams['team_short'] = teams['team']
-teams['team'] = teams.team.map(teams_dict)
-teams = teams.loc[teams.active_reserve=='Active'].set_index('player')
+# teams.columns = ['player','team','active_reserve']
+# teams['team_short'] = teams['team']
+# teams['team'] = teams.team.map(teams_dict)
+# teams = teams.loc[teams.active_reserve=='Active'].set_index('player')
+rosters = get_rosters()
+matchups = get_matchups(15)
+
+fantrax = pd.merge(rosters,matchups,how='left',on='team')
+
+inv_map = {v: k for k, v in team_abbrev_dict.items()}
+
+fx = fantrax[['player_name','team','status']]
+fx['team_short'] = fx['team'].map(inv_map)
+
+teams = fx.loc[fx.status=='ACTIVE'].set_index('player_name')
 
 
 ## MERGE & PROCESS ##
 
 # merge current fantasy teams and live scoring
-live_merged = pd.merge(teams, live,
-                       how='left', left_index=True, right_index=True)[
-                           ['team',
+live_merged = pd.merge(teams, live,how='left', left_index=True, right_index=True)[['team',
                             'team_short',
+                            'matchup',
                             'position',
                             'total',
                             'round',
@@ -57,13 +68,12 @@ live_merged = pd.merge(teams, live,
                             'sg_arg',
                             'sg_app',
                             'sg_ott',
-                            'sg_t2g']
-                            ].fillna(0).sort_values('total').convert_dtypes().reset_index()
+                            'sg_t2g']].fillna(0).sort_values('total').convert_dtypes().reset_index()
 
 # live_merged = live_merged.convert_dtypes().reset_index()
 # add columns matchup_num & holes_remaining
-live_merged['matchup_num'] = live_merged.team.map(matchups)
-live_merged['holes_remaining'] = (18 - (live_merged['thru']).fillna(0)).astype(int)
+# live_merged['matchup_num'] = live_merged.team.map(matchups)
+live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD', 0]), 'holes_remaining'] = 0
 
 live_merged = live_merged[live_merged['position'] !=0]
