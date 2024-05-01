@@ -40,7 +40,7 @@ def highlight_rows(row):
     elif value == 'New Team 4':
         color = '#7f8c9b' # Red
     elif value == 'Team Gamble':
-        color = '#228b22' # Navy
+        color = '#2ECC71' # Navy
     elif value == 'txmoonshine':
         color = '#00bfff' # Yellow 
     else:
@@ -80,7 +80,7 @@ def highlight_rows_team_short(row):
     elif value == 'NT 4':
         color = '#7f8c9b' # Red
     elif value == 'MG':
-        color = '#228b22' # Navy
+        color = '#2ECC71' # Navy
     elif value == 'txms':
         color = '#00bfff' # Yellow
     else:
