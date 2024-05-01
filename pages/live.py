@@ -24,7 +24,7 @@ path = f"https://feeds.datagolf.com/preds/live-tournament-stats?stats=sg_putt,sg
 
 st.cache_data()
 def get_live():
-    live = round(pd.read_csv(path),2).rename(columns={'player_name':'player'})
+    live = round(pd.read_csv(path),2)#.rename(columns={'player_name':'player'})
     return live
 live = get_live()
 live = live.set_index(fix_names(live))
