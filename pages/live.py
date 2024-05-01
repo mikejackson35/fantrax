@@ -111,7 +111,7 @@ player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAI
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
 
 player_leaderboard.columns = ['Player', 'Total', 'Pos', 'Rd', 'Thru', 'Team', 'Matchup']
-player_leaderboard = player_leaderboard.style.apply(highlight_rows,axis=1).set_properties(subset=['Total'], **{'font-weight': 'bold'})
+player_leaderboard = player_leaderboard.style.set_properties(subset=['Total'], **{'font-weight': 'bold'}).apply(highlight_rows,axis=1)
 
 # 3 - strokes gained table
 strokes_gained_table = live_merged.groupby('team',as_index=False)[['sg_putt','sg_arg','sg_app','sg_t2g']].sum().reset_index(drop=True)
