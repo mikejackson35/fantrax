@@ -36,7 +36,7 @@ def highlight_rows(row):
     elif value == 'AlphaWired':
         color = '#dc143c' # Orange
     elif value == "Snead's Foot":
-        color = '#228b22' # Green
+        color = '#32cd32' # Green
     elif value == 'New Team 4':
         color = '#d3d3d3' # Red
     elif value == 'Team Gamble':
@@ -44,7 +44,7 @@ def highlight_rows(row):
     elif value == 'txmoonshine':
         color = '#0000ff' # Yellow 
     else:
-        color = '#a9a9a9' # Grey
+        color = '#9ba6b1' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 # def highlight_rows(row):
