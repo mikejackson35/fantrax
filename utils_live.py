@@ -38,7 +38,7 @@ def highlight_rows(row):
     elif value == "Snead's Foot":
         color = '#32cd32' # Green
     elif value == 'New Team 4':
-        color = '#d3d3d3' # Red
+        color = '#7f8c9b' # Red
     elif value == 'Team Gamble':
         color = '#008000'  # Navy
     elif value == 'txmoonshine':
