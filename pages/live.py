@@ -85,15 +85,15 @@ with col1:                                  # team leaderboard
 with col2:                                 # matchup filter
     matchup_num = st.multiselect(        
         label='Matchup',
-        options=sorted(np.array(live_merged['matchup_num'].unique())),
-        default=sorted(np.array(live_merged['matchup_num'].unique())),
+        options=sorted(np.array(live_merged['matchup'].unique())),
+        default=sorted(np.array(live_merged['matchup'].unique())),
     )
-live_merged = live_merged[live_merged.matchup_num.isin(matchup_num)]
+live_merged = live_merged[live_merged.matchup.isin(matchup_num)]
 
 
 # 1 - team leaderboard
 team_leaderboard = (
-    live_merged[['team', 'team_short', 'total', 'holes_remaining', 'matchup_num']]
+    live_merged[['team', 'team_short', 'total', 'holes_remaining', 'matchup']]
     .groupby(['team', 'team_short'])
     .agg({'total': 'sum', 'holes_remaining': 'sum'})
     .sort_values('total')
