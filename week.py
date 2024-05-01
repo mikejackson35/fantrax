@@ -45,7 +45,7 @@ available.columns = ['player_name','proj_pts']
 available_bar = px.bar(
                 available.set_index('player_name'),
                 x='proj_pts',
-                title= "Top 5 Available",
+                title= "Top 8 Available",
                 template='plotly_dark',
                 color_continuous_scale=px.colors.sequential.Greys,
                 color = 'proj_pts',
