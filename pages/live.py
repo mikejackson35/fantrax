@@ -4,7 +4,7 @@ import plotly.express as px
 import streamlit as st
 import altair as alt
 from utils_live import teams_dict, get_inside_cut, fix_names, highlight_rows_team_short,plus_prefix, matchups, highlight_rows, clean_leaderboard_column
-from utils import *
+# from utils import *
 import secrets
 
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
