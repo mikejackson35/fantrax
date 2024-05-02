@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.express as px
 
 import streamlit as st
-from utils import get_rosters, get_matchups, get_projections, get_matchup_bar, get_team_bar
+from utils import *
 from dict_utils import *
 
 ####   CURRENT WEEK INPUTS   ####
