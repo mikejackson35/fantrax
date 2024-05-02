@@ -3,7 +3,6 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import statsmodels.api as sm
-from utils import team_color
 import streamlit_shadcn_ui as ui
 from utils import stats_dict, team_color
 import secrets

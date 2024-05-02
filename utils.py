@@ -245,3 +245,75 @@ def get_team_bar(rostered, team):
                         ).update_layout(legend=dict(orientation='h',title='',y=1.3,x=.33)
                         ).update_traces(width=.7)
     return fig
+
+def highlight_rows(row):
+    value = row.loc['Team']
+    if value == 'unit_circle':
+        color = '#b22222' # Purple
+    elif value == 'Philly919':
+        color = '#1e90ff' # Aqua
+    elif value == 'AlphaWired':
+        color = '#ff0000' # Orange
+    elif value == "Snead's Foot":
+        color = '#82E0AA' # Green
+    elif value == 'New Team 4':
+        color = '#7f8c9b' # Red
+    elif value == 'Team Gamble':
+        color = '#2ECC71' # Navy
+    elif value == 'txmoonshine':
+        color = '#00bfff' # Yellow 
+    else:
+        color = '#9ba6b1' # Grey
+    return ['background-color: {}'.format(color) for r in row]
+
+def highlight_rows_team_short(row):
+    value = row.loc['Team']
+    if value == 'u_c':
+        color = '#b22222' # Purple
+    elif value == '919':
+        color = '#1e90ff' # Aqua
+    elif value == '[AW]':
+        color = '#ff0000' # Orange
+    elif value == 'NT 8':
+        color = '#82E0AA' # Green
+    elif value == 'NT 4':
+        color = '#7f8c9b' # Red
+    elif value == 'MG':
+        color = '#2ECC71' # Navy
+    elif value == 'txms':
+        color = '#00bfff' # Yellow
+    else:
+        color = '#9ba6b1'  # Grey
+    return ['background-color: {}'.format(color) for r in row]
+
+def plus_prefix(a):
+    if a > 0:
+        b = f"+{a}"
+    else:
+        b = a
+    return b
+
+def remove_T_from_positions(dataframe):
+    """
+    """
+    dataframe['position'] = dataframe['position'].str.replace('T', '')
+    return dataframe
+
+def get_inside_cut(live_merged):
+    """
+    """
+    live_merged = live_merged[live_merged['position'] != "WAITING"]
+    live_merged = live_merged[live_merged['position'] != "CUT"]
+    live_merged = remove_T_from_positions(live_merged)
+    live_merged['position'] = live_merged['position'].dropna().astype('int')
+    inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 66].team.value_counts()).reset_index()
+    inside_cut_df.columns = ['team','inside_cut']
+    
+    inside_cut_dict = dict(inside_cut_df.values)
+    return inside_cut_dict
+
+# Define a function to apply the transformations
+def clean_leaderboard_column(x):
+    x = x.apply(plus_prefix)
+    x = np.where(x == 0, "E", x)
+    return x.astype(str)
