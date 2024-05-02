@@ -49,9 +49,6 @@ teams = fx.loc[fx.status=='ACTIVE'].set_index('player_name')
 # merge current fantasy teams and live scoring
 live_merged = pd.merge(teams, live,how='left', left_index=True, right_index=True)[['team','team_short','matchup', 'position','total','round', 'thru', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott','sg_t2g']].fillna(0).sort_values('total').convert_dtypes().reset_index()
 
-# live_merged = live_merged.convert_dtypes().reset_index()
-# add columns matchup_num & holes_remaining
-# live_merged['matchup_num'] = live_merged.team.map(matchups)
 live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD', 0]), 'holes_remaining'] = 0
 
@@ -62,6 +59,7 @@ live_merged = live_merged[live_merged['position'] !=0]
 
 "#" # ensures refreshed page starts at top
 # st.caption("updates when tournament starts")
+
 st.markdown("<h3 style='text-align: center;;'>AT&T Byron Nelson</h3>", unsafe_allow_html=True)   
 st.markdown("<center>Week 16</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
@@ -101,7 +99,7 @@ team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
 team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 
-team_leaderboard = team_leaderboard.T.style.apply(highlight_rows_team_short,axis=0)
+team_leaderboard = team_leaderboard.T.style.apply(highlight_rows,axis=0)
 
 # 2 - player leaderboard
 player_leaderboard = live_merged[['player_name', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
