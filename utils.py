@@ -10,7 +10,7 @@ import plotly.express as px
 import streamlit as st
 import secrets
 
-from dict_utils import *
+import dict_utils
 
 _dir_pkg_root = os.path.dirname(__file__)
 
