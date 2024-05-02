@@ -7,26 +7,26 @@ import secrets
 
 dg_key = st.secrets.dg_key    
 
-def fix_names(live):
-    """
-    Takes in live datagolf scoring, cleans names, outputs list of active players this week
-    """
-    names = live['player'].str.split(expand=True)                  
-    names[0] = names[0].str.rstrip(",")
-    names[1] = names[1].str.rstrip(",")
-    names['player'] = names[1] + " " + names[0]
+# def fix_names(live):
+#     """
+#     Takes in live datagolf scoring, cleans names, outputs list of active players this week
+#     """
+#     names = live['player'].str.split(expand=True)                  
+#     names[0] = names[0].str.rstrip(",")
+#     names[1] = names[1].str.rstrip(",")
+#     names['player'] = names[1] + " " + names[0]
 
-    names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
-    names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
-    names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
-    names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
-    names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
-    names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
-    names['player'] = np.where(names['player']=='kevin Yu', 'Kevin Yu', names['player'])
-    names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
-    names['player'] = np.where(names['player']=='Jr Hale', 'Blane Hale Jr', names['player'])
-    names['player'] = np.where(names['player']=='de Dumont', 'Adrien Dumont de Chassart', names['player'])
-    return names.player
+#     names['player'] = np.where(names['player']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player'])
+#     names['player'] = np.where(names['player']=='Si Kim', 'Si Woo Kim', names['player'])
+#     names['player'] = np.where(names['player']=='Min Lee', 'Min Woo Lee', names['player'])
+#     names['player'] = np.where(names['player']=='Byeong An', 'Byeong Hun An', names['player'])
+#     names['player'] = np.where(names['player']=='Rooyen Van', 'Erik Van Rooyen', names['player'])
+#     names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
+#     names['player'] = np.where(names['player']=='kevin Yu', 'Kevin Yu', names['player'])
+#     names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
+#     names['player'] = np.where(names['player']=='Jr Hale', 'Blane Hale Jr', names['player'])
+#     names['player'] = np.where(names['player']=='de Dumont', 'Adrien Dumont de Chassart', names['player'])
+#     return names.player
 
 
 def highlight_rows(row):
