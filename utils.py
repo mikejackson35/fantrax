@@ -10,6 +10,8 @@ import plotly.express as px
 import streamlit as st
 import secrets
 
+from dict_utils import *
+
 _dir_pkg_root = os.path.dirname(__file__)
 
 dg_key = st.secrets.dg_key
@@ -165,47 +167,47 @@ def get_projections():
     projections['player_name'] = fix_names(projections)
     return projections
 
-team_color={
-     "Philly919": 'rgb(14,195,210)',
-     "unit_circle": 'rgb(194,139,221)',
-     "AlphaWired": 'rgb(247,160,93)',
-     "Snead's Foot": 'rgb(70,214,113)',
-     "New Team 4": 'rgb(247,94,56)',
-     "Team Gamble": 'rgb(38,147,190)',
-     "txmoonshine": 'rgb(219,197,48)',
-     "Putt Pirates": 'rgb(115,112,106)'
-     }
+# team_color={
+#      "Philly919": 'rgb(14,195,210)',
+#      "unit_circle": 'rgb(194,139,221)',
+#      "AlphaWired": 'rgb(247,160,93)',
+#      "Snead's Foot": 'rgb(70,214,113)',
+#      "New Team 4": 'rgb(247,94,56)',
+#      "Team Gamble": 'rgb(38,147,190)',
+#      "txmoonshine": 'rgb(219,197,48)',
+#      "Putt Pirates": 'rgb(115,112,106)'
+#      }
 
-# color dictionary
-active_color={
-    "ACTIVE":'rgb(146,146,143)',
-    "RESERVE":'rgb(220,222,202)'
-    }
+# # color dictionary
+# active_color={
+#     "ACTIVE":'rgb(146,146,143)',
+#     "RESERVE":'rgb(220,222,202)'
+#     }
 
-team_abbrev_dict = {
-        '919':'Philly919',
-        'u_c':'unit_circle',
-        'NT 4':'New Team 4',
-        'NT 8':"Snead's Foot",
-        'txms':'txmoonshine',
-        'MG':'Team Gamble',
-        'grrr':'Putt Pirates',
-        '[AW]':'AlphaWired'
-        }
+# team_abbrev_dict = {
+#         '919':'Philly919',
+#         'u_c':'unit_circle',
+#         'NT 4':'New Team 4',
+#         'NT 8':"Snead's Foot",
+#         'txms':'txmoonshine',
+#         'MG':'Team Gamble',
+#         'grrr':'Putt Pirates',
+#         '[AW]':'AlphaWired'
+#         }
 
-stats_dict = {
-    'bb_ratio':'Birdie Bogey Ratio',
-    'bird_num':'Birdies/wk',
-    'median_delta':'+/- Weekly Median',
-    'total_pts':'Fantasy Points',
-    'plc_pts':'Place Points/wk',
-    'cuts_made':'Cuts Made/Wk',
-    'pp_hole':'Points/Hole Played',
-    'pars_num':'Pars/wk',
-    'eag_num':'Eagles/wk',
-    'dbog_num':'Double Bogeys/wk',
-    'bog_num':'Bogeys/wk'
-}
+# stats_dict = {
+#     'bb_ratio':'Birdie Bogey Ratio',
+#     'bird_num':'Birdies/wk',
+#     'median_delta':'+/- Weekly Median',
+#     'total_pts':'Fantasy Points',
+#     'plc_pts':'Place Points/wk',
+#     'cuts_made':'Cuts Made/Wk',
+#     'pp_hole':'Points/Hole Played',
+#     'pars_num':'Pars/wk',
+#     'eag_num':'Eagles/wk',
+#     'dbog_num':'Double Bogeys/wk',
+#     'bog_num':'Bogeys/wk'
+# }
 
 def get_matchup_bar(rostered, week_num,matchup_num):
 
@@ -249,7 +251,7 @@ def get_team_bar(rostered, team):
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#b22222' # Purple
+        color = '#b22222'
     elif value == 'Philly919':
         color = '#1e90ff' # Aqua
     elif value == 'AlphaWired':
@@ -262,13 +264,7 @@ def highlight_rows(row):
         color = '#2ECC71' # Navy
     elif value == 'txmoonshine':
         color = '#00bfff' # Yellow 
-    else:
-        color = '#9ba6b1' # Grey
-    return ['background-color: {}'.format(color) for r in row]
-
-def highlight_rows_team_short(row):
-    value = row.loc['Team']
-    if value == 'u_c':
+    elif value == 'u_c':
         color = '#b22222' # Purple
     elif value == '919':
         color = '#1e90ff' # Aqua
@@ -283,8 +279,9 @@ def highlight_rows_team_short(row):
     elif value == 'txms':
         color = '#00bfff' # Yellow
     else:
-        color = '#9ba6b1'  # Grey
+        color = '#9ba6b1' # Grey
     return ['background-color: {}'.format(color) for r in row]
+
 
 def plus_prefix(a):
     if a > 0:

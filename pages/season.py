@@ -4,7 +4,7 @@ import plotly.express as px
 import streamlit as st
 import statsmodels.api as sm
 import streamlit_shadcn_ui as ui
-from utils import stats_dict, team_color
+from dict_utils import *
 import secrets
 
 st.set_page_config(
