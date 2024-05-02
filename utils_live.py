@@ -24,6 +24,8 @@ def fix_names(live):
     names['player'] = np.where(names['player']=='Vince Whaley', 'Vincent Whaley', names['player'])
     names['player'] = np.where(names['player']=='kevin Yu', 'Kevin Yu', names['player'])
     names['player'] = np.where(names['player']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player'])
+    names['player'] = np.where(names['player']=='Jr Hale', 'Blane Hale Jr', names['player'])
+    names['player'] = np.where(names['player']=='de Dumont', 'Adrien Dumont de Chassart', names['player'])
     return names.player
 
 

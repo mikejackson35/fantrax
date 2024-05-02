@@ -155,6 +155,8 @@ def fix_names(dg):
         names['player_name'] = np.where(names['player_name']=='Vince Whaley', 'Vincent Whaley', names['player_name'])
         names['player_name'] = np.where(names['player_name']=='kevin Yu', 'Kevin Yu', names['player_name'])
         names['player_name'] = np.where(names['player_name']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='Jr Hale', 'Blane Hale Jr', names['player_name'])
+        names['player_name'] = np.where(names['player_name']=='de Dumont', 'Adrien Dumont de Chassart', names['player_name'])
         return names.player_name
 
 def get_projections():
