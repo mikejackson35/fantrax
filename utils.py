@@ -10,7 +10,7 @@ import plotly.express as px
 import streamlit as st
 import secrets
 
-import dict_utils
+from dict_utils import *
 
 _dir_pkg_root = os.path.dirname(__file__)
 
@@ -179,10 +179,10 @@ def get_projections():
 #      }
 
 # # color dictionary
-# active_color={
-#     "ACTIVE":'rgb(146,146,143)',
-#     "RESERVE":'rgb(220,222,202)'
-#     }
+active_color={
+    "ACTIVE":'rgb(146,146,143)',
+    "RESERVE":'rgb(220,222,202)'
+    }
 
 # team_abbrev_dict = {
 #         '919':'Philly919',
