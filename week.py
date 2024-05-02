@@ -5,8 +5,8 @@ import pandas as pd
 import plotly.express as px
 
 import streamlit as st
-
-from utils import load_secrets, dump_to_json, rest_request, fetch_leagueInfo, fetch_teamRosters, get_rosters, get_matchups, fix_names, get_projections, team_color, active_color, get_matchup_bar, team_abbrev_dict, get_team_bar, stats_dict
+from utils import get_rosters, get_matchups, get_projections, team_color, active_color, get_matchup_bar, team_abbrev_dict, get_team_bar
+# from utils import load_secrets, dump_to_json, rest_request, fetch_leagueInfo, fetch_teamRosters, get_rosters, get_matchups, fix_names, get_projections, team_color, active_color, get_matchup_bar, team_abbrev_dict, get_team_bar, stats_dict
 
 ####   CURRENT WEEK INPUTS   ####
 tournament = "AT&T Byron Nelson"
