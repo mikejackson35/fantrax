@@ -63,7 +63,7 @@ median_delta_bar = px.bar(team_medians,
                           title='season-to-date'
                          ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
                          ).update_yaxes(showticklabels=False,showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856'
-                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),title_y=.75,title_x=.4, legend=dict(title='',font_color='#5A5856'))#,legend=dict(y=1.85, orientation='h',title='',font_color='#5A5856'))
+                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),title_y=.75,title_x=.4, legend=dict(title='',font_color='#5A5856'),legend=dict(y=1.85, orientation='h',title='',font_color='#5A5856'))
 
 ### WEEKLY SCORE VS WEEKLY MEDIAN FOR EACH TEAM ###
 team_weekly_deltas = pd.DataFrame(df[['team','week','median','median_delta']].groupby(['team','week'],as_index=False)[['median_delta','median']].sum())
