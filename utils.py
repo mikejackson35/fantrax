@@ -97,6 +97,46 @@ def fetch_teamRosters(
     )
     return teamRosters
 
+def fetch_leagueStandings(
+    leagueId=None,
+    secrets=load_secrets(),
+):
+    if leagueId is None:
+        leagueId = secrets["league_id"]
+
+    url_leagueStandings = (
+        f"https://www.fantrax.com/fxea/general/getStandings?leagueId={leagueId}"
+    )
+    body_leagueStandings = {
+        # "leagueId":secrets["league_id"],
+    }
+    leagueStandings = rest_request(
+        url_leagueStandings,
+        body_leagueStandings,
+        note="requesting league standings. ",
+    )
+    return leagueStandings
+
+def fetch_draftResults(
+    leagueId=None,
+    secrets=load_secrets(),
+):
+    if leagueId is None:
+        leagueId = secrets["league_id"]
+
+    url_draftResults = (
+        f"https://www.fantrax.com/fxea/general/getDraftResults?leagueId={leagueId}"
+    )
+    body_draftResults = {
+        # "leagueId":secrets["league_id"],
+    }
+    draftResults = rest_request(
+        url_draftResults,
+        body_draftResults,
+        note="requesting draft results. ",
+    )
+    return draftResults
+
 
 
 # get active/inactive rosters
@@ -147,7 +187,7 @@ def fix_names(dg):
         names = dg['player_name'].str.split(expand=True)                  
         names[0] = names[0].str.rstrip(",")
         names[1] = names[1].str.rstrip(",")
-        names['player_name'] = names[1] + " " + names[0]
+        names['player_name'] = names[1].str[0] + " " + names[0]
 
         names['player_name'] = np.where(names['player_name']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player_name'])
         names['player_name'] = np.where(names['player_name']=='Si Kim', 'Si Woo Kim', names['player_name'])
