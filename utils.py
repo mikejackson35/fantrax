@@ -256,11 +256,11 @@ def get_team_bar(rostered, team):
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#b22222'
+        color = '#e12729'
     elif value == 'Philly919':
-        color = '#1e90ff' # Aqua
+        color = '#057dcd' # Aqua
     elif value == 'AlphaWired':
-        color = '#ff0000' # Orange
+        color = '#ff595e' # Orange
     elif value == "Snead's Foot":
         color = '#82E0AA' # Green
     elif value == 'New Team 4':
@@ -270,11 +270,11 @@ def highlight_rows(row):
     elif value == 'txmoonshine':
         color = '#00bfff' # Yellow 
     elif value == 'u_c':
-        color = '#b22222' # Purple
+        color = '#e12729' # Purple
     elif value == '919':
-        color = '#1e90ff' # Aqua
+        color = '#057dcd' # Aqua
     elif value == '[AW]':
-        color = '#ff0000' # Orange
+        color = '#ff595e' # Orange
     elif value == 'NT 8':
         color = '#82E0AA' # Green
     elif value == 'NT 4':
