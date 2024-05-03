@@ -186,7 +186,7 @@ def get_matchups(week_num):
 def fix_names(dg):
         names = dg['player_name'].str.split(expand=True)                  
         names[0] = names[0].str.rstrip(",")
-        names[1] = names[1].str.rstrip(",")
+        names[1] = names[1].str.rstrip(",")[0]
         names['player_name'] = names[1] + " " + names[0]
 
         names['player_name'] = np.where(names['player_name']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player_name'])
