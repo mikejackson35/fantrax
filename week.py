@@ -8,6 +8,8 @@ import streamlit as st
 from utils import *
 from dict_utils import *
 
+import constants
+
 ####   CURRENT WEEK INPUTS   ####
 tournament = "Wells Fargo"
 week_num = 17
@@ -196,12 +198,12 @@ with matchups_container:
 
     col1,col2 = st.columns(2)
     with col1:
-        st.plotly_chart(get_matchup_bar(rostered,16,1),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,1),use_container_width=True,config = config)
     with col2:
-        st.plotly_chart(get_matchup_bar(rostered,16,2),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,2),use_container_width=True,config = config)
 
     col1,col2 = st.columns(2)
     with col1:
-        st.plotly_chart(get_matchup_bar(rostered,16,3),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,3),use_container_width=True,config = config)
     with col2:
-        st.plotly_chart(get_matchup_bar(rostered,16,4),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,4),use_container_width=True,config = config)
