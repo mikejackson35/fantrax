@@ -5,7 +5,6 @@ import streamlit as st
 import altair as alt
 from utils import *
 from dict_utils import *
-import secrets
 
 from constants import *
 
@@ -22,8 +21,8 @@ config = {'displayModeBar': False}                                              
 dg_key = st.secrets.dg_key               
 
 ## LIVE SCORING API ##
-path = f"https://feeds.datagolf.com/preds/live-tournament-stats?stats=sg_putt,sg_arg,sg_app,sg_ott,sg_t2g,sg_bs,sg_total,distance,accuracy,gir,prox_fw,prox_rgh,scrambling&round=event_avg&display=value&file_format=csv&key={dg_key}"
-
+# path = f"https://feeds.datagolf.com/preds/live-tournament-stats?stats=sg_putt,sg_arg,sg_app,sg_ott,sg_t2g,sg_bs,sg_total,distance,accuracy,gir,prox_fw,prox_rgh,scrambling&round=event_avg&display=value&file_format=csv&key={dg_key}"
+path = LIVE_STATS
 st.cache_data()
 def get_live():
     live = round(pd.read_csv(path),2)#.rename(columns={'player_name':'player'})
@@ -62,8 +61,8 @@ live_merged = live_merged[live_merged['position'] !=0]
 "#" # ensures refreshed page starts at top
 # st.caption("updates when tournament starts")
 
-st.markdown("<h3 style='text-align: center;;'>AT&T Byron Nelson</h3>", unsafe_allow_html=True)   
-st.markdown("<center>Week 16</center>",unsafe_allow_html=True)
+st.markdown(f"<h3 style='text-align: center;'>{TOURNAMENT_NAME}</h3>", unsafe_allow_html=True)   
+st.markdown(f"<center>{WEEK_NUMBER}</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
 
 # leaderboard and filter row
