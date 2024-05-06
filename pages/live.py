@@ -3,9 +3,9 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 import altair as alt
+
 from utils import *
 from dict_utils import *
-
 from constants import *
 
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
@@ -21,11 +21,9 @@ config = {'displayModeBar': False}                                              
 dg_key = st.secrets.dg_key               
 
 ## LIVE SCORING API ##
-# path = f"https://feeds.datagolf.com/preds/live-tournament-stats?stats=sg_putt,sg_arg,sg_app,sg_ott,sg_t2g,sg_bs,sg_total,distance,accuracy,gir,prox_fw,prox_rgh,scrambling&round=event_avg&display=value&file_format=csv&key={dg_key}"
-path = LIVE_STATS
 st.cache_data()
 def get_live():
-    live = round(pd.read_csv(path),2)#.rename(columns={'player_name':'player'})
+    live = round(pd.read_csv(LIVE_STATS),2)
     return live
 live = get_live()
 live = live.set_index(fix_names(live))

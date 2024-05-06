@@ -5,7 +5,6 @@ import streamlit as st
 import statsmodels.api as sm
 import streamlit_shadcn_ui as ui
 from dict_utils import *
-import secrets
 
 st.set_page_config(
     page_title="Season",
