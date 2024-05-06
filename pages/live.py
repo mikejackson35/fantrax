@@ -7,6 +7,8 @@ from utils import *
 from dict_utils import *
 import secrets
 
+from constants import *
+
 ##### LIBRARY CONFIGs AND SECRETS KEYS #####
 
 st.set_page_config(page_title="Live", layout="centered", initial_sidebar_state="expanded")              # streamlit
@@ -32,7 +34,7 @@ live = live.set_index(fix_names(live))
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
 rosters = get_rosters()
-matchups = get_matchups(15)
+matchups = get_matchups(WEEK_NUMBER)
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
 
