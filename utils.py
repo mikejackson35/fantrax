@@ -32,22 +32,15 @@ def dump_to_json(fn_json, data):
         json.dump(data, f_json, indent=4)
 
 
-def rest_request(
-    url,
-    body,
-    note="",
-    resp_format="json",
-):
+def rest_request(url,body,note="",resp_format="json",):
     if resp_format == "json":
         headers = {"Content-Type": "application/json"}
     elif resp_format == "csv":
         headers = {"Content-Type": "application/csv"}
 
-    response = requests.post(
-        url,
-        data=json.dumps(body),
-        headers=headers,
-    )
+    response = requests.post(url,
+                             data=json.dumps(body),
+                             headers=headers,)
     print(f"{note}status code:", response.status_code)
 
     if resp_format == "json":
@@ -57,24 +50,16 @@ def rest_request(
     else:
         return response
 
-def fetch_leagueInfo(
-    leagueId=None,
-    secrets=load_secrets(),
-):
+def fetch_leagueInfo(leagueId=None,secrets=load_secrets()):
     if leagueId is None:
         leagueId = secrets["league_id"]
 
-    url_leagueInfo = (
-        f"https://www.fantrax.com/fxea/general/getLeagueInfo?leagueId={leagueId}"
-    )
-    body_leagueInfo = {
-        # "leagueId":secrets["league_id"],
-    }
-    leagueInfo = rest_request(
-        url_leagueInfo,
-        body_leagueInfo,
-        note="requesting league info. ",
-    )
+    url_leagueInfo = (f"https://www.fantrax.com/fxea/general/getLeagueInfo?leagueId={leagueId}")
+    body_leagueInfo = {}
+
+    leagueInfo = rest_request(url_leagueInfo,
+                              body_leagueInfo,
+                              note="requesting league info. ")
     return leagueInfo
 
 def fetch_teamRosters(
