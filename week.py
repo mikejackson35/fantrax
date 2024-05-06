@@ -8,7 +8,7 @@ import streamlit as st
 from utils import *
 from dict_utils import *
 
-import constants
+from constants import *
 
 ####   CURRENT WEEK INPUTS   ####
 tournament = "Wells Fargo"
