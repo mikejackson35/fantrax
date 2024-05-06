@@ -196,12 +196,12 @@ with matchups_container:
 
     col1,col2 = st.columns(2)
     with col1:
-        st.plotly_chart(get_matchup_bar(rostered,15,1),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,16,1),use_container_width=True,config = config)
     with col2:
-        st.plotly_chart(get_matchup_bar(rostered,15,2),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,16,2),use_container_width=True,config = config)
 
     col1,col2 = st.columns(2)
     with col1:
-        st.plotly_chart(get_matchup_bar(rostered,15,3),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,16,3),use_container_width=True,config = config)
     with col2:
-        st.plotly_chart(get_matchup_bar(rostered,15,4),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,16,4),use_container_width=True,config = config)
