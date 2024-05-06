@@ -12,7 +12,7 @@ import constants
 
 ####   CURRENT WEEK INPUTS   ####
 tournament = "Wells Fargo"
-week_num = 17
+week_num = WEEK_NUMBER + 1
 page_title = f"fx wk{week_num}"
 
 #### ST, CSS, and PLOTLY CONFIGS
