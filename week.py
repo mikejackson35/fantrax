@@ -9,8 +9,8 @@ from utils import *
 from dict_utils import *
 
 ####   CURRENT WEEK INPUTS   ####
-tournament = "AT&T Byron Nelson"
-week_num = 16   
+tournament = "Wells Fargo"
+week_num = 17
 page_title = f"fx wk{week_num}"
 
 #### ST, CSS, and PLOTLY CONFIGS
@@ -93,7 +93,7 @@ best_projected_lineup_bar = px.bar(top_6_proj,
                                     color='team',
                                     template='plotly_dark',
                                     labels = {'index':" ",'player_name': '','proj_pts':''},
-                                    height=275,
+                                    height=250,
                                     color_discrete_map=team_color,
                                     log_y=True,
                                     )
@@ -115,7 +115,7 @@ top_25_bar = px.bar(top25,
                     labels = {'index':"", 'proj_pts':'Projected Pts'},
                     text='player_name',
                     template = 'plotly_dark',
-                    height=275,
+                    height=250,
                     hover_name='proj_pts'
                     )
 top_25_bar.update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'))
@@ -140,7 +140,7 @@ all_player_bar = px.bar(playing_this_week,
                         color = 'status',
                         color_discrete_map=active_color,
                         labels = {'index':"", 'proj_pts':''},
-                        height=275,
+                        height=250,
                         log_y=True,
                         hover_name=playing_this_week.player_name)
 
@@ -157,17 +157,18 @@ col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("#")
     st.markdown("")
-    st.markdown("<center><h3>AT&T<br>Byron Nelson</h3></center>",unsafe_allow_html=True)
+    st.markdown(f"<center><h3>{tournament}</h3></center>",unsafe_allow_html=True)
     st.markdown(f"<center>Week{week_num}</center>",unsafe_allow_html=True)
 with col2:
     st.plotly_chart(roster_projections_bar,use_container_width=True,config = config)
 with col3:
     st.plotly_chart(available_bar,use_container_width=True,config = config)
-"---" 
+# "---" 
 
 
 #### ROW 2 - WIDE BAR CHARTS / TABS  ####  
 st.markdown(f"<center>{len(rostered)} Rostered Players</center>",unsafe_allow_html=True) 
+"---" 
 st.write("")
 tab1, tab2, tab3 = st.tabs(['Top 25', 'Sit / Start', "Compare LU's"])
 with tab1:
