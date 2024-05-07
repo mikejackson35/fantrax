@@ -22,7 +22,7 @@ with open(r"styles/main.css") as f:
 config = {'displayModeBar': False}
 
 rosters = get_rosters()
-matchups = get_matchups(WEEK_NUMBER-1)
+matchups = get_matchups(WEEK_NUMBER)
 projections = get_projections()
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
@@ -196,12 +196,12 @@ with matchups_container:
 
     col1,col2 = st.columns(2)
     with col1:
-        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,1),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER-1,1),use_container_width=True,config = config)
     with col2:
-        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,2),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER-1,2),use_container_width=True,config = config)
 
     col1,col2 = st.columns(2)
     with col1:
-        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,3),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER-1,3),use_container_width=True,config = config)
     with col2:
-        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER,4),use_container_width=True,config = config)
+        st.plotly_chart(get_matchup_bar(rostered,WEEK_NUMBER-1,4),use_container_width=True,config = config)

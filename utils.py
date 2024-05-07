@@ -152,17 +152,17 @@ def get_rosters():
     return rosters
 
 # get weekly matchups
-def get_matchups(WEEKK_NUMBER):
+def get_matchups(WEEK_NUMBER):
     leagueInfo=fetch_leagueInfo()
 
     matches = []
     for matchup in range(0,4):
-        match = leagueInfo['matchups'][WEEKK_NUMBER]['matchupList'][matchup]
+        match = leagueInfo['matchups'][WEEK_NUMBER]['matchupList'][matchup]
         matches.append([match['away']['name'], match['home']['name']])
 
     matchups = pd.DataFrame(matches, index=[1,2,3,4]).reset_index()
     matchups.columns = ['matchup','away','home']
-    matchups['week'] = WEEKK_NUMBER
+    matchups['week'] = WEEK_NUMBER
 
     matchups = matchups.melt(id_vars=['matchup','week'], value_name='team')[['team','matchup']]
 
@@ -174,16 +174,10 @@ def fix_names(dg):
         names[1] = names[1].str.rstrip(",")
         names['player_name'] = names[1] + " " + names[0]
 
-        names['player_name'] = np.where(names['player_name']=='Matt Fitzpatrick', 'Matthew Fitzpatrick', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='Si Kim', 'Si Woo Kim', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='Min Lee', 'Min Woo Lee', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='Byeong An', 'Byeong Hun An', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='Rooyen Van', 'Erik Van Rooyen', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='Vince Whaley', 'Vincent Whaley', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='kevin Yu', 'Kevin Yu', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='Kyounghoon Lee', 'Kyoung-Hoon Lee', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='Jr Hale', 'Blane Hale Jr', names['player_name'])
-        names['player_name'] = np.where(names['player_name']=='de Dumont', 'Adrien Dumont de Chassart', names['player_name'])
+        # uses dictionary to correct known problem names (ie "Jr" or "Si Woo Kim")
+        for incorrect_name, correct_name in names_dict.items():
+            names['player_name'] = np.where(names['player_name'] == incorrect_name, correct_name, names['player_name'])
+
         return names.player_name
 
 def get_projections():
@@ -198,7 +192,7 @@ active_color={
     }
 
 
-def get_matchup_bar(rostered, week_num,matchup_num):
+def get_matchup_bar(rostered, week_num, matchup_num):
 
     all_matchups = get_matchups(week_num)
     one_matchup = all_matchups[all_matchups.matchup==matchup_num].team.to_list()

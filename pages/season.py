@@ -97,7 +97,7 @@ median_delta_by_team_bar = px.bar(
 
 ### CUTS MADE DISTRIBUTION  ###
 # df = df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False)
-cuts_made_hist1 = px.histogram(df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False),
+cuts_made_hist1 = px.histogram(df[(df.week !=4) & (df.week !=15) & (df.week !=17)].sort_values('cuts_made', ascending=False),
                               x='cuts_made',
                               template='plotly_dark',
                               labels={'cuts_made':'Players Thru Cut', 'count':''},
@@ -122,7 +122,7 @@ cuts_made_hist1.update_yaxes(showticklabels=False, showgrid=False, tickfont=dict
 ### CUTS MADE DISTRIBUTION  ###
 newnames={'0':'Loss','1':'Win'}
 
-cuts_made_hist = px.histogram(df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False),
+cuts_made_hist = px.histogram(df[(df.week !=4) & (df.week !=15) & (df.week !=17)].sort_values('cuts_made', ascending=False),
                     x='cuts_made',
                     text_auto='.2s',
                     title='Win % by Cuts Made',

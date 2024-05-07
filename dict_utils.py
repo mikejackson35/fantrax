@@ -41,3 +41,15 @@ stats_dict = {
     'dbog_num':'Double Bogeys/wk',
     'bog_num':'Bogeys/wk'
 }
+
+names_dict = {'Matt Fitzpatrick': 'Matthew Fitzpatrick',
+    'Si Kim': 'Si Woo Kim',
+    'Min Lee': 'Min Woo Lee',
+    'Byeong An': 'Byeong Hun An',
+    'Rooyen Van': 'Erik Van Rooyen',
+    'Vince Whaley': 'Vincent Whaley',
+    'kevin Yu': 'Kevin Yu',
+    'Kyounghoon Lee': 'Kyoung-Hoon Lee',
+    'Jr Hale': 'Blane Hale Jr',
+    'de Dumont': 'Adrien Dumont de Chassart'
+             }
