@@ -20,6 +20,7 @@ with open(r"styles/main.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
 config = {'displayModeBar': False}
+template = 'presentation'
 
 rosters = get_rosters()
 matchups = get_matchups(WEEK_NUMBER)
@@ -40,14 +41,14 @@ available.columns = ['player_name','proj_pts']
 available_bar = px.bar(
                 available.set_index('player_name'),
                 x='proj_pts',
-                title= "Top 8 Available",
-                template='plotly_dark',
+                title= "Best Available",
+                template=template,
                 color_continuous_scale=px.colors.sequential.Greys,
                 color = 'proj_pts',
-                text_auto='.1f',
+                text_auto='.0f',
                 labels={'player_name':'','proj_pts':''},
                 log_x=True,
-                height=350,
+                height=400,
                 # width=400
                 )
 
@@ -67,14 +68,14 @@ roster_projections_bar = px.bar(top_6_active.groupby('team',as_index=False)['pro
                     y='team',
                     x='proj_pts', 
                     color='team', 
-                    template='plotly_dark',
+                    template=template,
                     text_auto='.3s',
                     labels = {'team': '', 'proj_pts':''},
                     color_discrete_map=team_color,
                     log_x=True,
-                    height=350,
+                    height=400,
                     title='Projections',
-                    width=500
+                    # width=500
                     )
 roster_projections_bar.update_layout(showlegend=False,title_x=.33 )
 roster_projections_bar.update_xaxes(showticklabels=False)
@@ -91,7 +92,7 @@ best_projected_lineup_bar = px.bar(top_6_proj,
                                     x='player_name',
                                     y='proj_pts',
                                     color='team',
-                                    template='plotly_dark',
+                                    template=template,
                                     labels = {'index':" ",'player_name': '','proj_pts':''},
                                     height=250,
                                     color_discrete_map=team_color,
@@ -105,7 +106,7 @@ best_projected_lineup_bar.update_layout(legend=dict(y=1.5, orientation='h',title
 
 
 # HORIZONTAL BAR = TOP 25 PLAYS
-top25 = rostered[:30].reset_index(drop=True)
+top25 = rostered[:20].reset_index(drop=True)
 line = top25.proj_pts.mean()
 
 top_25_bar = px.bar(top25,
@@ -114,7 +115,7 @@ top_25_bar = px.bar(top25,
                     color_discrete_map=team_color,
                     labels = {'index':"", 'proj_pts':'Projected Pts'},
                     text='player_name',
-                    template = 'plotly_dark',
+                    template = template,
                     height=250,
                     hover_name='proj_pts'
                     )
@@ -136,7 +137,7 @@ playing_this_week = pd.merge(playing_this_week,temp,how='left',on='player_name')
 all_player_bar = px.bar(playing_this_week,
                         # x = rostered.index,
                         y = 'proj_pts',
-                        template='plotly_dark',
+                        template=template,
                         color = 'status',
                         color_discrete_map=active_color,
                         labels = {'index':"", 'proj_pts':''},
@@ -158,7 +159,11 @@ with col1:
     st.markdown("#")
     st.markdown("")
     st.markdown(f"<center><h3>{TOURNAMENT_NAME}</h3></center>",unsafe_allow_html=True)
+    st.markdown("#")
     st.markdown(f"<center>Week {WEEK_NUMBER}</center>",unsafe_allow_html=True)
+    st.markdown("##")
+    st.markdown("##")
+    st.markdown(f"<center>{len(rostered)} Rostered<br>Players</center>",unsafe_allow_html=True) 
 with col2:
     st.plotly_chart(roster_projections_bar,use_container_width=True,config = config)
 with col3:
@@ -167,10 +172,9 @@ with col3:
 
 
 #### ROW 2 - WIDE BAR CHARTS / TABS  ####  
-st.markdown(f"<center>{len(rostered)} Rostered Players</center>",unsafe_allow_html=True) 
 "---" 
 st.write("")
-tab1, tab2, tab3 = st.tabs(['Top 25', 'Sit / Start', "Compare LU's"])
+tab1, tab2, tab3 = st.tabs(['Top 20', 'Sit / Start', "Optimal LU's"])
 with tab1:
     st.plotly_chart(top_25_bar,use_container_width=True,config = config)
 with tab2:

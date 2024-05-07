@@ -203,7 +203,7 @@ def get_matchup_bar(rostered, week_num, matchup_num):
                             color_discrete_map=team_color,
                             labels = {'_index':"", 'proj_pts':''},
                             text='player_name',
-                            template = 'plotly_dark',
+                            template = 'presentation',
                             hover_name='proj_pts',
                             height=250,
                             log_y=True
@@ -221,7 +221,7 @@ def get_team_bar(rostered, team):
                         height=250,
                         color='status', 
                         text_auto='.2s',
-                        template = 'plotly_dark',
+                        template = 'presentation',
                         color_discrete_map=active_color,
                         log_y=True,
                         labels = {'proj_pts':'','player_name':""}
