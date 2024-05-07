@@ -11,9 +11,7 @@ from dict_utils import *
 from constants import *
 
 ####   CURRENT WEEK INPUTS   ####
-tournament = TOURNAMENT_NAME
-week_num = WEEK_NUMBER + 1
-page_title = f"fx wk {week_num}"
+page_title = f"fx wk {WEEK_NUMBER}"
 
 #### ST, CSS, and PLOTLY CONFIGS
 st.set_page_config(page_title=page_title, layout="centered", initial_sidebar_state="expanded")
@@ -24,7 +22,7 @@ with open(r"styles/main.css") as f:
 config = {'displayModeBar': False}
 
 rosters = get_rosters()
-matchups = get_matchups(week_num-1)
+matchups = get_matchups(WEEK_NUMBER-1)
 projections = get_projections()
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
@@ -159,8 +157,8 @@ col1,col2,col3 = st.columns(3)
 with col1:
     st.markdown("#")
     st.markdown("")
-    st.markdown(f"<center><h3>{tournament}</h3></center>",unsafe_allow_html=True)
-    st.markdown(f"<center>Week{week_num}</center>",unsafe_allow_html=True)
+    st.markdown(f"<center><h3>{TOURNAMENT_NAME}</h3></center>",unsafe_allow_html=True)
+    st.markdown(f"<center>Week {WEEK_NUMBER}</center>",unsafe_allow_html=True)
 with col2:
     st.plotly_chart(roster_projections_bar,use_container_width=True,config = config)
 with col3:

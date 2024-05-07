@@ -31,7 +31,7 @@ live = live.set_index(fix_names(live))
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
 rosters = get_rosters()
-matchups = get_matchups(WEEK_NUMBER)
+matchups = get_matchups(WEEK_NUMBER-1)
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
 
@@ -60,7 +60,7 @@ live_merged = live_merged[live_merged['position'] !=0]
 # st.caption("updates when tournament starts")
 
 st.markdown(f"<h3 style='text-align: center;'>{TOURNAMENT_NAME}</h3>", unsafe_allow_html=True)   
-st.markdown(f"<center>{WEEK_NUMBER}</center>",unsafe_allow_html=True)
+st.markdown(f"<center>Week {WEEK_NUMBER}</center>",unsafe_allow_html=True)
 st.markdown("<center></center>",unsafe_allow_html=True)
 
 # leaderboard and filter row

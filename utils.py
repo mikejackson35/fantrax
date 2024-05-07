@@ -8,9 +8,9 @@ import numpy as np
 import plotly.express as px
 
 import streamlit as st
-import secrets
 
 from dict_utils import *
+from constants import *
 
 _dir_pkg_root = os.path.dirname(__file__)
 
@@ -152,17 +152,17 @@ def get_rosters():
     return rosters
 
 # get weekly matchups
-def get_matchups(week_num):
+def get_matchups(WEEKK_NUMBER):
     leagueInfo=fetch_leagueInfo()
 
     matches = []
     for matchup in range(0,4):
-        match = leagueInfo['matchups'][week_num]['matchupList'][matchup]
+        match = leagueInfo['matchups'][WEEKK_NUMBER]['matchupList'][matchup]
         matches.append([match['away']['name'], match['home']['name']])
 
     matchups = pd.DataFrame(matches, index=[1,2,3,4]).reset_index()
     matchups.columns = ['matchup','away','home']
-    matchups['week'] = week_num
+    matchups['week'] = WEEKK_NUMBER
 
     matchups = matchups.melt(id_vars=['matchup','week'], value_name='team')[['team','matchup']]
 
@@ -187,8 +187,7 @@ def fix_names(dg):
         return names.player_name
 
 def get_projections():
-    path = f"https://feeds.datagolf.com/preds/fantasy-projection-defaults?tour=pga&site=draftkings&slate=main&file_format=csv&key={dg_key}"
-    projections = pd.read_csv(path, usecols=['player_name','proj_points_total'])
+    projections = pd.read_csv(FANTASY_PROJECTIONS, usecols=['player_name','proj_points_total'])
     projections['player_name'] = fix_names(projections)
     return projections
 
@@ -241,36 +240,70 @@ def get_team_bar(rostered, team):
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#e12729'
+        color = '#2ECC71'
     elif value == 'Philly919':
         color = '#057dcd' # Aqua
     elif value == 'AlphaWired':
         color = '#ff595e' # Orange
     elif value == "Snead's Foot":
-        color = '#82E0AA' # Green
+        color = '#e12729' # Green
     elif value == 'New Team 4':
-        color = '#7f8c9b' # Red
+        color = '#82E0AA' # Red
     elif value == 'Team Gamble':
-        color = '#2ECC71' # Navy
+        color = '#9ba6b1' # Navy
     elif value == 'txmoonshine':
-        color = '#00bfff' # Yellow 
+        color = '#7f8c9b' # Yellow 
     elif value == 'u_c':
-        color = '#e12729' # Purple
+        color = '#2ECC71' # Purple
     elif value == '919':
         color = '#057dcd' # Aqua
     elif value == '[AW]':
         color = '#ff595e' # Orange
     elif value == 'NT 8':
-        color = '#82E0AA' # Green
+        color = '#e12729' # Green
     elif value == 'NT 4':
-        color = '#7f8c9b' # Red
+        color = '#82E0AA' # Red
     elif value == 'MG':
-        color = '#2ECC71' # Navy
+        color = '#9ba6b1' # Navy
     elif value == 'txms':
-        color = '#00bfff' # Yellow
+        color = '#7f8c9b' # Yellow
     else:
-        color = '#9ba6b1' # Grey
+        color = '#00bfff' # Grey
     return ['background-color: {}'.format(color) for r in row]
+
+# def highlight_rows(row):
+#     value = row.loc['Team']
+#     if value == 'unit_circle':
+#         color = '#e12729'
+#     elif value == 'Philly919':
+#         color = '#057dcd' # Aqua
+#     elif value == 'AlphaWired':
+#         color = '#ff595e' # Orange
+#     elif value == "Snead's Foot":
+#         color = '#82E0AA' # Green
+#     elif value == 'New Team 4':
+#         color = '#7f8c9b' # Red
+#     elif value == 'Team Gamble':
+#         color = '#2ECC71' # Navy
+#     elif value == 'txmoonshine':
+#         color = '#00bfff' # Yellow 
+#     elif value == 'u_c':
+#         color = '#e12729' # Purple
+#     elif value == '919':
+#         color = '#057dcd' # Aqua
+#     elif value == '[AW]':
+#         color = '#ff595e' # Orange
+#     elif value == 'NT 8':
+#         color = '#82E0AA' # Green
+#     elif value == 'NT 4':
+#         color = '#7f8c9b' # Red
+#     elif value == 'MG':
+#         color = '#2ECC71' # Navy
+#     elif value == 'txms':
+#         color = '#00bfff' # Yellow
+#     else:
+#         color = '#9ba6b1' # Grey
+#     return ['background-color: {}'.format(color) for r in row]
 
 
 def plus_prefix(a):
