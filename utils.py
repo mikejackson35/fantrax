@@ -293,14 +293,14 @@ def get_inside_cut(live_merged):
     live_merged = live_merged[live_merged['position'] != "CUT"]
     live_merged = remove_T_from_positions(live_merged)
     live_merged['position'] = live_merged['position'].dropna().astype('int')
-    inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 66].team.value_counts()).reset_index()
+    inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 100].team.value_counts()).reset_index()
     inside_cut_df.columns = ['team','inside_cut']
     
     inside_cut_dict = dict(inside_cut_df.values)
     return inside_cut_dict
 
 # Define a function to apply the transformations
-def clean_leaderboard_column(x):
-    x = x.apply(plus_prefix)
-    x = np.where(x == 0, "  E", x)
-    return x.astype(str)
+def clean_leaderboard_column(column):
+    column = column.apply(plus_prefix)
+    column = np.where(column == 0, "  E", column)
+    return column.astype(str)

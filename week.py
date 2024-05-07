@@ -11,7 +11,7 @@ from dict_utils import *
 from constants import *
 
 ####   CURRENT WEEK INPUTS   ####
-tournament = "Wells Fargo"
+tournament = TOURNAMENT_NAME
 week_num = WEEK_NUMBER + 1
 page_title = f"fx wk {week_num}"
 
@@ -95,7 +95,7 @@ best_projected_lineup_bar = px.bar(top_6_proj,
                                     color='team',
                                     template='plotly_dark',
                                     labels = {'index':" ",'player_name': '','proj_pts':''},
-                                    height=275,
+                                    height=250,
                                     color_discrete_map=team_color,
                                     log_y=True,
                                     )
@@ -117,7 +117,7 @@ top_25_bar = px.bar(top25,
                     labels = {'index':"", 'proj_pts':'Projected Pts'},
                     text='player_name',
                     template = 'plotly_dark',
-                    height=275,
+                    height=250,
                     hover_name='proj_pts'
                     )
 top_25_bar.update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'))
@@ -142,7 +142,7 @@ all_player_bar = px.bar(playing_this_week,
                         color = 'status',
                         color_discrete_map=active_color,
                         labels = {'index':"", 'proj_pts':''},
-                        height=275,
+                        height=250,
                         log_y=True,
                         hover_name=playing_this_week.player_name)
 
