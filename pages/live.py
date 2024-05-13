@@ -106,7 +106,6 @@ player_leaderboard = live_merged[['player_name', 'total', 'position', 'round', '
 player_leaderboard[['total', 'round']] = player_leaderboard[['total', 'round']].apply(clean_leaderboard_column)
 player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAITING", "-", player_leaderboard['position'])
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
-player_leaderboard['player_name'] = player_leaderboard.assign(player_name=lambda x: fix_names(x['player_name']))
 
 player_leaderboard.columns = ['Player', 'Total', 'Pos', 'Rd', 'Thru', 'Team', 'Matchup']
 player_leaderboard = player_leaderboard.style.set_properties(**{'font-weight': 'bold'}).apply(highlight_rows,axis=1)
