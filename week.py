@@ -107,7 +107,7 @@ best_projected_lineup_bar.update_layout(legend=dict(y=1.5, orientation='h',title
 
 # HORIZONTAL BAR = TOP 25 PLAYS
 top25 = rostered[:20].reset_index(drop=True)
-line = top25.proj_pts.mean()
+# line = top25.proj_pts.mean()
 
 top_25_bar = px.bar(top25,
                     y = 'proj_pts',

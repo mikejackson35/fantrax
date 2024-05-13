@@ -25,8 +25,8 @@ def get_season_data():
 df = get_season_data()
 
 # constants
-tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson']
+tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo']
 
 # ###  PER TOURNAMENT AVERAGES  ###
 st.write("#")
