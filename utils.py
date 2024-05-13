@@ -170,7 +170,7 @@ def get_matchups(WEEK_NUMBER):
 
 def fix_names(dg):
         names = dg['player_name'].str.split(expand=True)                  
-        names[0] = names[0].str.rstrip(",")
+        names[0] = names[0].str[0].str.rstrip(",")
         names[1] = names[1].str.rstrip(",")
         names['player_name'] = names[1] + " " + names[0]
 
