@@ -22,6 +22,7 @@ with open(r"styles/main.css") as f:
 config = {'displayModeBar': False}
 template = 'presentation'
 
+#### READ IN DATA, MERGE, AND CLEAN  ####
 rosters = get_rosters()
 matchups = get_matchups(WEEK_NUMBER)
 projections = get_projections()
@@ -31,7 +32,7 @@ fantrax = pd.merge(rosters,matchups,how='left',on='team')
 rostered = pd.merge(fantrax,projections,how='left',on='player_name').dropna().sort_values('proj_points_total',ascending=False).reset_index(drop=True)
 rostered.columns = ['player_name','team','status','matchup','proj_pts']
 
-st.write("#")                                                                           # data loaded and ready
+st.write("#")       # ensures page starts at top on re-load
 
 ####  VERTICAL BAR - AVAILABLE PLAYERS  ####
 filt = rostered.player_name.to_list()
@@ -58,7 +59,7 @@ available_bar.update_layout(showlegend=False, coloraxis_showscale=False, title_x
 available_bar.update_traces(width=.7)
 
 
-# VERTICAL BAR - CURRENT ROSTERS                                                                            # begin make charts
+# VERTICAL BAR - CURRENT ROSTERS                                                              
 top_6_active = pd.DataFrame()
 for team in rostered.team.unique():
     temp = rostered[(rostered.team==team) & (rostered.status=='ACTIVE')][['team','player_name','proj_pts','status']]
@@ -174,7 +175,7 @@ with col3:
 #### ROW 2 - WIDE BAR CHARTS / TABS  ####  
 "---" 
 st.write("")
-tab1, tab2, tab3 = st.tabs(['Top 20', 'Sit / Start', "Optimal LU's"])
+tab1, tab2, tab3 = st.tabs(['Top 30', 'Sit / Start', "Optimal LU's"])
 with tab1:
     st.plotly_chart(top_25_bar,use_container_width=True,config = config)
 with tab2:
