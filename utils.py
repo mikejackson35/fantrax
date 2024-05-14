@@ -234,70 +234,71 @@ def get_team_bar(rostered, team):
 def highlight_rows(row):
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#2ECC71'
+        color = '#9ba6b1'
     elif value == 'Philly919':
         color = '#057dcd' # Aqua
     elif value == 'AlphaWired':
-        color = '#ff595e' # Orange
+        color = '#82E0AA' # Orange
     elif value == "Snead's Foot":
         color = '#e12729' # Green
     elif value == 'New Team 4':
-        color = '#82E0AA' # Red
+        color = '#ff595e' # Red
     elif value == 'Team Gamble':
-        color = '#9ba6b1' # Navy
+        color = '#00bfff' # Navy
     elif value == 'txmoonshine':
-        color = '#7f8c9b' # Yellow 
+        color = '#2ECC71' # Yellow 
     elif value == 'u_c':
-        color = '#2ECC71' # Purple
+        color = '#9ba6b1' # Purple
     elif value == '919':
         color = '#057dcd' # Aqua
     elif value == '[AW]':
-        color = '#ff595e' # Orange
+        color = '#82E0AA' # Orange
     elif value == 'NT 8':
         color = '#e12729' # Green
     elif value == 'NT 4':
-        color = '#82E0AA' # Red
+        color = '#ff595e' # Red
     elif value == 'MG':
-        color = '#9ba6b1' # Navy
+        color = '#00bfff' # Navy
     elif value == 'txms':
-        color = '#7f8c9b' # Yellow
+        color = '#2ECC71' # Yellow
     else:
-        color = '#00bfff' # Grey
+        color = '#7f8c9b' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
 # def highlight_rows(row):
 #     value = row.loc['Team']
 #     if value == 'unit_circle':
-#         color = '#e12729'
+#         color = '#2ECC71'
 #     elif value == 'Philly919':
 #         color = '#057dcd' # Aqua
 #     elif value == 'AlphaWired':
 #         color = '#ff595e' # Orange
 #     elif value == "Snead's Foot":
-#         color = '#82E0AA' # Green
+#         color = '#e12729' # Green
 #     elif value == 'New Team 4':
-#         color = '#7f8c9b' # Red
+#         color = '#82E0AA' # Red
 #     elif value == 'Team Gamble':
-#         color = '#2ECC71' # Navy
+#         color = '#9ba6b1' # Navy
 #     elif value == 'txmoonshine':
-#         color = '#00bfff' # Yellow 
+#         color = '#7f8c9b' # Yellow 
 #     elif value == 'u_c':
-#         color = '#e12729' # Purple
+#         color = '#2ECC71' # Purple
 #     elif value == '919':
 #         color = '#057dcd' # Aqua
 #     elif value == '[AW]':
 #         color = '#ff595e' # Orange
 #     elif value == 'NT 8':
-#         color = '#82E0AA' # Green
+#         color = '#e12729' # Green
 #     elif value == 'NT 4':
-#         color = '#7f8c9b' # Red
+#         color = '#82E0AA' # Red
 #     elif value == 'MG':
-#         color = '#2ECC71' # Navy
+#         color = '#9ba6b1' # Navy
 #     elif value == 'txms':
-#         color = '#00bfff' # Yellow
+#         color = '#7f8c9b' # Yellow
 #     else:
-#         color = '#9ba6b1' # Grey
+#         color = '#00bfff' # Grey
 #     return ['background-color: {}'.format(color) for r in row]
+
 
 
 def plus_prefix(a):
