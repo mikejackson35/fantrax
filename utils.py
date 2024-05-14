@@ -178,7 +178,7 @@ def fix_names(dg):
         for incorrect_name, correct_name in names_dict.items():
             names['player_name'] = np.where(names['player_name'] == incorrect_name, correct_name, names['player_name'])
 
-        names['player_name'] = names[1][0] + " " + names[0]
+        names['player_name'] = names[1].str[0] + " " + names[0]
 
         return names.player_name
 
