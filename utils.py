@@ -142,7 +142,8 @@ def get_team_bar(rostered, team):
                         template = 'presentation',
                         color_discrete_map=active_color,
                         log_y=True,
-                        labels = {'proj_pts':'','player_name':""}
+                        labels = {'proj_pts':'','player_name':""},
+                        hover_name='player_name'
                         ).update_yaxes(showticklabels=False,showgrid=False,
                                        tickfont=dict(color='#5A5856')
                         ).update_xaxes(tickfont=dict(color='#5A5856')

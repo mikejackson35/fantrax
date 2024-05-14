@@ -100,6 +100,7 @@ best_projected_lineup_bar = px.bar(top_6_proj,
                                     height=350,
                                     color_discrete_map=team_color,
                                     log_y=True,
+                                    hover_name='player_name'
                                     )
 best_projected_lineup_bar.add_hline(y=rostered.proj_pts.mean(),line_color='darkslategrey')
 best_projected_lineup_bar.update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'))

@@ -88,7 +88,7 @@ median_delta_by_team_bar = px.bar(
     template='plotly_dark',
     hover_name='week',
     ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
-    ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = tickvals,ticktext = ticktext
+    ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=False,tickmode='array',tickvals = tickvals,ticktext = ticktext
     ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
     ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", ""))
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
@@ -202,11 +202,13 @@ with weekly_bubble_container:
                                 ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),
                                                tickcolor='darkgrey', gridcolor='darkgrey'
                                 ).update_traces(marker=dict(size=14,opacity=.8,line=dict(width=1.25,color='darkslategrey'))
-                                ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+                                ).for_each_trace(lambda t: t.update(name = newnames[t.name],
+                                                                    legendgroup = newnames[t.name],
+                                                                    hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])
+                                                                    ))
     
         scatter_fig.update_traces(hovertemplate=
                             "<b>%{customdata[0]}</b> \
-                            <br>%{customdata[3]}</b> \
                             <br>vs. %{customdata[6]}</b> \
                             <br> \
                             <br>Scored %{customdata[5]} Points</b> \
@@ -242,7 +244,6 @@ with weekly_bubble_container:
 
         scatter_fig.update_traces(hovertemplate=
                             "<b>%{customdata[0]}</b> \
-                            <br>%{customdata[3]}</b> \
                             <br>vs. %{customdata[6]}</b> \
                             <br> \
                             <br>Scored %{customdata[5]} Points</b> \
