@@ -90,7 +90,7 @@ team_leaderboard = (
 team_leaderboard = (
     team_leaderboard
     .assign(inside_cut = team_leaderboard['team'].map(get_inside_cut(live_merged)).fillna(0).astype(int))
-    .assign(total = team_leaderboard['total'].apply([f"+{team_leaderboard['total']}" if team_leaderboard['total'] > 0 else team_leaderboard['total']])))
+    .assign(total = team_leaderboard['total'].apply(lambda x: f"+{x}" if x > 0 else x)))
     # .assign(total = team_leaderboard['total'].apply(plus_prefix))
 team_leaderboard['total'] = np.where(team_leaderboard['total'] == 0, "E", team_leaderboard['total']).astype(str)
 
