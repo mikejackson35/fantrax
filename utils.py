@@ -295,6 +295,7 @@ def get_inside_cut(live_merged):
 
 # Define a function to apply the transformations
 def clean_leaderboard_column(column):
-    column = column.apply(plus_prefix)
+    # column = column.apply(plus_prefix)
+    column = column.apply(lambda x: f"+{x}" if x > 0 else x)
     column = np.where(column == 0, "  E", column)
     return column.astype(str)
