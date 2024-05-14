@@ -178,6 +178,8 @@ def fix_names(dg):
         for incorrect_name, correct_name in names_dict.items():
             names['player_name'] = np.where(names['player_name'] == incorrect_name, correct_name, names['player_name'])
 
+        names['player_name'] = names[1][0] + " " + names[0]
+
         return names.player_name
 
 def get_projections():
@@ -264,40 +266,6 @@ def highlight_rows(row):
     else:
         color = '#7f8c9b' # Grey
     return ['background-color: {}'.format(color) for r in row]
-
-# def highlight_rows(row):
-#     value = row.loc['Team']
-#     if value == 'unit_circle':
-#         color = '#2ECC71'
-#     elif value == 'Philly919':
-#         color = '#057dcd' # Aqua
-#     elif value == 'AlphaWired':
-#         color = '#ff595e' # Orange
-#     elif value == "Snead's Foot":
-#         color = '#e12729' # Green
-#     elif value == 'New Team 4':
-#         color = '#82E0AA' # Red
-#     elif value == 'Team Gamble':
-#         color = '#9ba6b1' # Navy
-#     elif value == 'txmoonshine':
-#         color = '#7f8c9b' # Yellow 
-#     elif value == 'u_c':
-#         color = '#2ECC71' # Purple
-#     elif value == '919':
-#         color = '#057dcd' # Aqua
-#     elif value == '[AW]':
-#         color = '#ff595e' # Orange
-#     elif value == 'NT 8':
-#         color = '#e12729' # Green
-#     elif value == 'NT 4':
-#         color = '#82E0AA' # Red
-#     elif value == 'MG':
-#         color = '#9ba6b1' # Navy
-#     elif value == 'txms':
-#         color = '#7f8c9b' # Yellow
-#     else:
-#         color = '#00bfff' # Grey
-#     return ['background-color: {}'.format(color) for r in row]
 
 
 
