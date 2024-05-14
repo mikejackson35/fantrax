@@ -205,7 +205,7 @@ with tab2:
     st.plotly_chart(all_player_bar,use_container_width=True,config = config)
 with tab3:
     st.plotly_chart(best_projected_lineup_bar,use_container_width=True,config = config) 
-"---"
+"#"
 
 ####  ROW 3 - ROSTER CHOICES / TABS  #### 
 st.markdown(f"<center><h5>Active / Reserve Choices</center>",unsafe_allow_html=True) 
