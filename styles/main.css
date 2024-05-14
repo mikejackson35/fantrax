@@ -3,7 +3,7 @@
 }
             
 .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
-font-size:0.75rem;
+font-size:0.85rem;
 }
             
 [data-baseweb="tab-list"] {
@@ -11,8 +11,8 @@ font-size:0.75rem;
 }
 
 [data-baseweb="tab"] {
-    height: 20px;
-    width: 250px;
+    height: 25px;
+    width: 500px;
     white-space: pre-wrap;
     background-color: #A29F99;
     border-radius: 4px 4px 0px 0px;
