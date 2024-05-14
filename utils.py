@@ -180,13 +180,6 @@ def fix_names(dg):
 
         return names.player_name
 
-def first_init_only(player_name_column):
-        names = player_name_column.split(expand=True) 
-        names[0] = names[0].str.rstrip(",")
-        names[1] = names[1].str.rstrip(",")                 
-        names['player_name'] = names[0][0] + " " + names[1]
-        return names.player_name
-
 def get_projections():
     projections = pd.read_csv(FANTASY_PROJECTIONS, usecols=['player_name','proj_points_total'])
     projections['player_name'] = fix_names(projections)
