@@ -155,7 +155,7 @@ all_player_bar.update_layout(legend=dict(y=1.5, orientation='h',title='',font_co
 # begin UI
 
 ####  HEADER  ####
-st.markdown(f"<center>Week {WEEK_NUMBER}</center>",unsafe_allow_html=True)
+st.markdown(f"<center>Week {WEEK_NUMBER-1}</center>",unsafe_allow_html=True)
 st.markdown(f"<center><h1>{TOURNAMENT_NAME}</h1></center>",unsafe_allow_html=True)
 st.markdown(f"<center>{len(rostered)} Rostered Players</center>",unsafe_allow_html=True)
 
