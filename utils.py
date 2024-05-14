@@ -181,7 +181,9 @@ def fix_names(dg):
         return names.player_name
 
 def first_init_only(player_name_column):
-        names = player_name_column.str.split(expand=True)                  
+        names = player_name_column.str.split(expand=True) 
+        names[0] = names[0].str.rstrip(",")
+        names[1] = names[1].str.rstrip(",")                 
         names['player_name'] = names[0].str[0] + " " + names[1]
         return names.player_name
 
