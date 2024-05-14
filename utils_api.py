@@ -4,13 +4,14 @@ import requests
 
 import streamlit as st
 
-
-# _dir_pkg_root = os.path.dirname(__file__)
-
 dg_key = st.secrets.dg_key
 
 
 def load_secrets():
+    """
+    Input:  None
+    Output: dictionary with fantrax league id
+    """
     fn_secrets = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         "fantrax.secrets",
@@ -44,6 +45,12 @@ def rest_request(url,body,note="",resp_format="json",):
         return response
 
 def fetch_leagueInfo(leagueId=None,secrets=load_secrets()):
+
+    """
+    Input:  league id and secrets dictionary
+    Output: dictionary of league info (including this weeks matchups)
+    """
+
     if leagueId is None:
         leagueId = secrets["league_id"]
 
@@ -59,6 +66,12 @@ def fetch_teamRosters(
     leagueId=None,
     secrets=load_secrets(),
 ):
+    
+    """
+    Input:  league id and secrets file
+    Output: dictionary of player id's and current active/reserve status
+    """
+
     if leagueId is None:
         leagueId = secrets["league_id"]
 
@@ -79,6 +92,11 @@ def fetch_leagueStandings(
     leagueId=None,
     secrets=load_secrets(),
 ):
+    """
+    Input:  league id
+    Output: dictionary current league standings (not currently used)
+    """
+
     if leagueId is None:
         leagueId = secrets["league_id"]
 
@@ -99,6 +117,12 @@ def fetch_draftResults(
     leagueId=None,
     secrets=load_secrets(),
 ):
+    
+    """
+    Input:  league id
+    Output: dictionary draft results (not currently used)
+    """
+
     if leagueId is None:
         leagueId = secrets["league_id"]
 

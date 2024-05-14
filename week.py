@@ -26,19 +26,14 @@ matchups = get_matchups(WEEK_NUMBER)
 projections = get_projections()
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
-
 rostered = pd.merge(fantrax,projections,how='left',on='player_name').dropna().sort_values('proj_points_total',ascending=False).reset_index(drop=True)
 rostered.columns = ['player_name','team','status','matchup','proj_pts']
 
-# ensures page re-loads at top
-st.write("#")
+st.write("#")   # ensures page re-loads at top
 
 ####  VERTICAL BAR - AVAILABLE PLAYERS  ####
 rostered_filter = rostered.player_name.to_list()
-available = projections[~projections.player_name
-                        .isin(rostered_filter)
-                        ].sort_values('proj_points_total',ascending=True)[-8:]
-
+available = projections[~projections.player_name.isin(rostered_filter)].sort_values('proj_points_total',ascending=True)[-8:]
 available.columns = ['player_name','proj_pts']
 
 available_bar = px.bar(
@@ -52,7 +47,6 @@ available_bar = px.bar(
                 labels={'player_name':'','proj_pts':''},
                 log_x=True,
                 height=600,
-                # width=400
                 )
 
 available_bar.update_yaxes(tickfont=dict(color='#5A5856'))
@@ -210,6 +204,8 @@ with tab3:
 ####  ROW 3 - ROSTER CHOICES / TABS  #### 
 st.markdown(f"<center><h5>Active / Reserve Choices</center>",unsafe_allow_html=True) 
 st.write("#")
+
 team_tabs = st.tabs(list(team_abbrev_dict.keys()))
+
 for tab, team_name in zip(team_tabs, team_abbrev_dict.values()):
         tab.plotly_chart(get_team_bar(rostered, team_name), use_container_width=True, config=config) 
