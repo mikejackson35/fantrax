@@ -266,14 +266,6 @@ def highlight_rows(row):
     return ['background-color: {}'.format(color) for r in row]
 
 
-
-def plus_prefix(a):
-    if a > 0:
-        b = f"+{a}"
-    else:
-        b = a
-    return b
-
 def remove_T_from_positions(dataframe):
     """
     """
@@ -285,7 +277,8 @@ def get_inside_cut(live_merged):
     """
     live_merged = live_merged[live_merged['position'] != "WAITING"]
     live_merged = live_merged[live_merged['position'] != "CUT"]
-    live_merged = remove_T_from_positions(live_merged)
+    live_merged['position'] = live_merged['position'].apply(lambda x: x.replace('T', ''))
+    # live_merged = remove_T_from_positions(live_merged)
     live_merged['position'] = live_merged['position'].dropna().astype('int')
     inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 100].team.value_counts()).reset_index()
     inside_cut_df.columns = ['team','inside_cut']
@@ -295,7 +288,6 @@ def get_inside_cut(live_merged):
 
 # Define a function to apply the transformations
 def clean_leaderboard_column(column):
-    # column = column.apply(plus_prefix)
     column = column.apply(lambda x: f"+{x}" if x > 0 else x)
     column = np.where(column == 0, "  E", column)
     return column.astype(str)
