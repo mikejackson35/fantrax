@@ -99,10 +99,11 @@ best_projected_lineup_bar = px.bar(top_6_proj,
                                     labels = {'index':" ",'player_name': '','proj_pts':''},
                                     height=350,
                                     color_discrete_map=team_color,
-                                    log_y=True,
-                                    hover_name='player_name'
+                                    hover_name='player_name',
+                                    text_auto='.2s'
                                     )
-best_projected_lineup_bar.add_hline(y=rostered.proj_pts.mean(),line_color='darkslategrey')
+
+best_projected_lineup_bar.add_hline(y=np.median(top_6_proj.proj_pts),line_color='white', line_dash="dot",annotation_text='Median Optimal Lineups')
 best_projected_lineup_bar.update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'))
 best_projected_lineup_bar.update_yaxes(showgrid=False,tickfont=dict(color='#5A5856'))
 best_projected_lineup_bar.update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
@@ -122,6 +123,8 @@ top_25_bar = px.bar(top25,
                     height=350,
                     hover_name='proj_pts'
                     )
+
+top_25_bar.add_hline(y=np.median(rostered.proj_pts),line_color='white', line_dash="dot",annotation_text="Median All Rostered Players")
 top_25_bar.update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'))
 top_25_bar.update_yaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856')
 top_25_bar.update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
@@ -143,10 +146,10 @@ all_player_bar = px.bar(playing_this_week,
                         color_discrete_map=active_color,
                         labels = {'index':"", 'proj_pts':''},
                         height=350,
-                        log_y=True,
+                        # log_y=True,
                         hover_name=playing_this_week.player_name)
 
-all_player_bar.add_hline(y=rostered.proj_pts.mean(),line_color='darkslategrey')
+all_player_bar.add_hline(y=np.median(rostered.proj_pts),line_color='white', line_dash="dot",annotation_text="Median All Rostered Players")
 all_player_bar.update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856'))
 all_player_bar.update_yaxes(showgrid=False,tickfont=dict(color='#5A5856'))
 all_player_bar.update_layout(legend=dict(y=1.5, orientation='h',title='',font_color='#5A5856'))
@@ -195,7 +198,7 @@ st.write("##")
 st.markdown(f"<center><h5>Overview</center>",unsafe_allow_html=True) 
 st.write("#")
 
-tab1, tab2, tab3 = st.tabs(['Top 30', 'Sit / Start', "Optimal LU's"])
+tab1, tab2, tab3 = st.tabs(['Rostered Players', 'Sit / Start', "Optimal LU's"])
 with tab1:
     st.plotly_chart(top_25_bar,use_container_width=True,config = config)
 with tab2:
