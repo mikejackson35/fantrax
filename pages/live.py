@@ -88,7 +88,7 @@ team_leaderboard = (
     )
 
 team_leaderboard = (
-    team_leaderboard[team_leaderboard['total'] != "WD"]
+    team_leaderboard
     .assign(inside_cut = team_leaderboard['team'].map(get_inside_cut(live_merged)).fillna(0).astype(int))
     .assign(total = team_leaderboard['total'].apply(lambda x: f"+{x}" if x > 0 else x)))
     # .assign(total = team_leaderboard['total'].apply(plus_prefix))
