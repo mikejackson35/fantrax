@@ -203,7 +203,7 @@ def get_inside_cut(live_merged):
     Output: dictionary {team: count of players inside the cutline}
     """
 
-    live_merged = live_merged[(live_merged['position'] != "CUT") & (live_merged['position'] != "WAITING") & (live_merged['position'] != "WD")]
+    live_merged = live_merged[(live_merged['position'] != "CUT") & (live_merged['position'] != "WAITING")]
     live_merged['position'] = live_merged['position'].apply(lambda x: x.replace('T', '')).dropna().astype('int')
 
     inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 71].team.value_counts()).reset_index()
