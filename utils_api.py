@@ -10,6 +10,7 @@ dg_key = st.secrets.dg_key
 def load_secrets():
     """
     Input:  None
+    
     Output: dictionary with fantrax league id
     """
     fn_secrets = os.path.join(
@@ -120,6 +121,7 @@ def fetch_draftResults(
     
     """
     Input:  league id
+
     Output: dictionary draft results (not currently used)
     """
 
