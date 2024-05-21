@@ -8,6 +8,8 @@ from dict_utils import team_color,active_color,fix_names
 from constants import FANTASY_PROJECTIONS
 from utils_api import fetch_leagueInfo,fetch_teamRosters
 
+dg_key = "e297e933c3ad47d71ec1626c299e"
+
 def get_rosters():
 
     """
@@ -151,6 +153,37 @@ def get_team_bar(rostered, team):
                                                     title='',y=1.3,x=.33)
                         ).update_traces(width=.7)
     return fig
+
+    # if value == 'unit_circle':
+    #     color = '#9ba6b1'
+    # elif value == 'Philly919':
+    #     color = '#057dcd' # Aqua
+    # elif value == 'AlphaWired':
+    #     color = '#82E0AA' # Orange
+    # elif value == "Snead's Foot":
+    #     color = '#e12729' # Green
+    # elif value == 'New Team 4':
+    #     color = '#ff595e' # Red
+    # elif value == 'Team Gamble':
+    #     color = '#00bfff' # Navy
+    # elif value == 'txmoonshine':
+    #     color = '#2ECC71' # Yellow 
+    # elif value == 'u_c':
+    #     color = '#9ba6b1' # Purple
+    # elif value == '919':
+    #     color = '#057dcd' # Aqua
+    # elif value == '[AW]':
+    #     color = '#82E0AA' # Orange
+    # elif value == 'NT 8':
+    #     color = '#e12729' # Green
+    # elif value == 'NT 4':
+    #     color = '#ff595e' # Red
+    # elif value == 'MG':
+    #     color = '#00bfff' # Navy
+    # elif value == 'txms':
+    #     color = '#2ECC71' # Yellow
+    # else:
+    #     color = '#7f8c9b' # Grey
 
 
 def highlight_rows(row):
