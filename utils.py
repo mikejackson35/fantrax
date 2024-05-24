@@ -8,8 +8,6 @@ from dict_utils import team_color,active_color,fix_names
 from constants import FANTASY_PROJECTIONS
 from utils_api import fetch_leagueInfo,fetch_teamRosters
 
-dg_key = "e297e933c3ad47d71ec1626c299e"
-
 def get_rosters():
 
     """
@@ -154,12 +152,57 @@ def get_team_bar(rostered, team):
                         ).update_traces(width=.7)
     return fig
 
+
+def highlight_rows(row):
+
+    """
+    Input: 'Team' column of live leaderboard dataframe
+
+    Output: css background color for specified 'Team'
+    """
+
+    value = row.loc['Team']
+    if value == 'unit_circle':
+        color = '#1e90ff'
+    elif value == 'Philly919':
+        color = '#00bfff' # Aqua
+    elif value == 'AlphaWired':
+        color = '#a9a9a9' # Orange
+    elif value == "Snead's Foot":
+        color = '#32cd32' # Green
+    elif value == 'New Team 4':
+        color = '#b22222' # Red
+    elif value == 'Team Gamble':
+        color = '#7f8c9b' # Navy
+    elif value == 'txmoonshine':
+        color = '#dc143c' # Yellow 
+    elif value == 'u_c':
+        color = '#1e90ff' # Purple
+    elif value == '919':
+        color = '#00bfff' # Aqua
+    elif value == '[AW]':
+        color = '#a9a9a9' # Orange
+    elif value == 'NT 8':
+        color = '#32cd32' # Green
+    elif value == 'NT 4':
+        color = '#b22222' # Red
+    elif value == 'MG':
+        color = '#7f8c9b' # Navy
+    elif value == 'txms':
+        color = '#dc143c' # Yellow
+    else:
+        color = '#228b22' # Grey
+    return ['background-color: {}'.format(color) for r in row]
+
+
+
+    # value = row.loc['Team']
     # if value == 'unit_circle':
     #     color = '#9ba6b1'
     # elif value == 'Philly919':
     #     color = '#057dcd' # Aqua
     # elif value == 'AlphaWired':
-    #     color = '#82E0AA' # Orange
+    #     color = '#7f8c9b' # Orange
     # elif value == "Snead's Foot":
     #     color = '#e12729' # Green
     # elif value == 'New Team 4':
@@ -173,7 +216,7 @@ def get_team_bar(rostered, team):
     # elif value == '919':
     #     color = '#057dcd' # Aqua
     # elif value == '[AW]':
-    #     color = '#82E0AA' # Orange
+    #     color = '#7f8c9b' # Orange
     # elif value == 'NT 8':
     #     color = '#e12729' # Green
     # elif value == 'NT 4':
@@ -185,47 +228,6 @@ def get_team_bar(rostered, team):
     # else:
     #     color = '#7f8c9b' # Grey
 
-
-def highlight_rows(row):
-
-    """
-    Input: 'Team' column of live leaderboard dataframe
-
-    Output: css background color for specified 'Team'
-    """
-
-    value = row.loc['Team']
-    if value == 'unit_circle':
-        color = '#9ba6b1'
-    elif value == 'Philly919':
-        color = '#057dcd' # Aqua
-    elif value == 'AlphaWired':
-        color = '#82E0AA' # Orange
-    elif value == "Snead's Foot":
-        color = '#e12729' # Green
-    elif value == 'New Team 4':
-        color = '#ff595e' # Red
-    elif value == 'Team Gamble':
-        color = '#00bfff' # Navy
-    elif value == 'txmoonshine':
-        color = '#2ECC71' # Yellow 
-    elif value == 'u_c':
-        color = '#9ba6b1' # Purple
-    elif value == '919':
-        color = '#057dcd' # Aqua
-    elif value == '[AW]':
-        color = '#82E0AA' # Orange
-    elif value == 'NT 8':
-        color = '#e12729' # Green
-    elif value == 'NT 4':
-        color = '#ff595e' # Red
-    elif value == 'MG':
-        color = '#00bfff' # Navy
-    elif value == 'txms':
-        color = '#2ECC71' # Yellow
-    else:
-        color = '#7f8c9b' # Grey
-    return ['background-color: {}'.format(color) for r in row]
 
 
 def get_inside_cut(live_merged):
