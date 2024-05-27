@@ -31,7 +31,7 @@ live = live.set_index(fix_names(live))
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
 rosters = get_rosters()
-matchups = get_matchups(WEEK_NUMBER-1)
+matchups = get_matchups(WEEK_NUMBER-2)
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
 
