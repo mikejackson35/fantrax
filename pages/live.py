@@ -50,16 +50,19 @@ live_merged = pd.merge(teams, live,how='left', left_index=True, right_index=True
     ['team','team_short','matchup', 'position','total','round', 'thru', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott','sg_t2g']] \
     .fillna(0).sort_values('total').convert_dtypes().reset_index()
 
-live_merged['holes_remaining'] = (18 - (live_merged['thru']).fillna(0)).astype(int)
+live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD', 0]), 'holes_remaining'] = 0
 
 live_merged = live_merged[live_merged['position'] !=0]
 
-
+# Function to apply bold font to a specific column
+def bold_font(val):
+    # return 'font-weight: bold; font-family: Arial Black;'
+    return 'font-weight: bold; font-family: Arial; color: white;'
 
 
 "#" # ensures refreshed page starts at top
-# st.caption("updates when tournament starts")
+st.caption("***updates when <br> tournament <br> starts***",unsafe_allow_html=True)
 
 st.markdown(f"<h3 style='text-align: center;'>{TOURNAMENT_NAME}</h3>", unsafe_allow_html=True)   
 st.markdown(f"<center>Week {WEEK_NUMBER}</center>",unsafe_allow_html=True)
@@ -109,7 +112,7 @@ player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAI
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
 
 player_leaderboard.columns = ['Player', 'Total', 'Pos', 'Rd', 'Thru', 'Team', 'Matchup']
-player_leaderboard = player_leaderboard.style.set_properties(**{'font-weight': 'bold'}).apply(highlight_rows,axis=1)
+player_leaderboard = player_leaderboard.style.apply(highlight_rows,axis=1).applymap(bold_font, subset=['Total'])
 
 # 3 - strokes gained table
 strokes_gained_table = live_merged.groupby('team',as_index=False)[['sg_putt','sg_arg','sg_app','sg_t2g']].sum().reset_index(drop=True)
@@ -127,7 +130,7 @@ with placeholder:
                  hide_index=False,
                  height=180, 
                  use_container_width=True,
-                 column_config={0:'',1:'1st',2:'2nd',3:'3rd',4:'4th',5:'5th',6:'6th',7:'7th',8:'8th'})
+                 column_config={0:'Place',1:'1st',2:'2nd',3:'3rd',4:'4th',5:'5th',6:'6th',7:'7th',8:'8th'})
 
 # strokes gained expander
 with st.expander('click for Strokes Gained'):                                                                   
@@ -137,7 +140,7 @@ with st.expander('click for Strokes Gained'):
                  use_container_width=True)
     
 # player leaderboard
-st.dataframe(player_leaderboard,                                                                                
+st.dataframe(player_leaderboard,                                                                               
              hide_index=True,
              height=1750,
              use_container_width=True,

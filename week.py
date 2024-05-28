@@ -8,7 +8,7 @@ from utils import get_rosters,get_matchups,get_projections,get_matchup_bar,get_t
 from dict_utils import team_color,active_color,team_abbrev_dict
 from constants import TOURNAMENT_NAME,WEEK_NUMBER
 
-page_title = f"fx wk {WEEK_NUMBER}"
+page_title = f"Wk {WEEK_NUMBER}"
 
 #### CONFIGS - streamlit, css, plotly  ####
 st.set_page_config(page_title=page_title, layout="wide", initial_sidebar_state="expanded")
@@ -52,7 +52,7 @@ available_bar = px.bar(
 available_bar.update_yaxes(tickfont=dict(color='#5A5856'))
 available_bar.update_xaxes(showticklabels=False,showgrid=False, tickfont=dict(color='#5A5856'))
 available_bar.update_layout(showlegend=False, coloraxis_showscale=False, title_x=.33, legend=dict(orientation='h',title='',y=1.3,x=.33))
-available_bar.update_traces(width=.7)
+available_bar.update_traces(textfont_size=14, textfont_family='Arial Black',width=.7)
 
 
 # VERTICAL BAR - CURRENT ROSTERS                                                              
@@ -77,6 +77,7 @@ roster_projections_bar = px.bar(top_6_active.groupby('team',as_index=False)['pro
 roster_projections_bar.update_layout(showlegend=False,title_x=.33 )
 roster_projections_bar.update_xaxes(showticklabels=False)
 roster_projections_bar.update_yaxes(tickfont=dict(color='#5A5856'),title_font_color='#5A5856',title_font_size=22)
+roster_projections_bar.update_traces(textfont_size=14, textfont_family='Arial Black')#, textfont_color='black')
 
 
 # HORIZONTAL BAR - LINEUP COMPARISONS (optimals)
@@ -152,7 +153,7 @@ all_player_bar.update_layout(legend=dict(y=1.5, orientation='h',title='',font_co
 # begin UI
 
 ####  HEADER  ####
-st.markdown(f"<center>Week {WEEK_NUMBER-1}</center>",unsafe_allow_html=True)
+st.markdown(f"<center>Week {WEEK_NUMBER}</center>",unsafe_allow_html=True)
 st.markdown(f"<center><h1>{TOURNAMENT_NAME}</h1></center>",unsafe_allow_html=True)
 st.markdown(f"<center>{len(rostered)} Rostered Players</center>",unsafe_allow_html=True)
 
