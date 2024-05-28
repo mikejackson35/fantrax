@@ -31,7 +31,7 @@ live = live.set_index(fix_names(live))
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
 rosters = get_rosters()
-matchups = get_matchups(WEEK_NUMBER-2)
+matchups = get_matchups(WEEK_NUMBER-1)
 
 fantrax = pd.merge(rosters,matchups,how='left',on='team')
 
@@ -57,7 +57,6 @@ live_merged = live_merged[live_merged['position'] !=0]
 
 # Function to apply bold font to a specific column
 def bold_font(val):
-    # return 'font-weight: bold; font-family: Arial Black;'
     return 'font-weight: bold; font-family: Arial; color: white;'
 
 
