@@ -110,6 +110,10 @@ player_leaderboard[['total', 'round']] = player_leaderboard[['total', 'round']].
 player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAITING", "-", player_leaderboard['position'])
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
 
+player_leaderboard['player_name'] = (player_leaderboard['player_name']
+                                     .str.split(expand=True)
+                                     .apply(lambda x: x[0][0] + " " + x[1], axis=1))
+
 player_leaderboard.columns = ['Player', 'Total', 'Pos', 'Rd', 'Thru', 'Team', 'Matchup']
 player_leaderboard = player_leaderboard.style.apply(highlight_rows,axis=1).applymap(bold_font)
 
