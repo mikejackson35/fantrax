@@ -25,8 +25,8 @@ def get_season_data():
 df = get_season_data()
 
 # constants
-tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo','PGA Championship']
+tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo','PGA Championship','Charles Schwab']
 
 # ###  PER TOURNAMENT AVERAGES  ###
 st.write("#")
@@ -79,16 +79,17 @@ median_delta_by_team_bar = px.bar(
     color='win_loss',
     color_discrete_sequence=px.colors.qualitative.Safe, 
     facet_col='team',
-    facet_col_wrap=2,
-    facet_col_spacing=.1,
-    facet_row_spacing=.16,
-    height=1000,
-    width=800,
+    facet_col_wrap=1,
+    # facet_col_spacing=.1,
+    # facet_row_spacing=.16,
+    height=3000,
+    # width=800,
     labels={'median_delta':'','week':''},
     template='plotly_dark',
     hover_name='week',
+    text_auto='.0f'
     ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
-    ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=False,tickmode='array',tickvals = tickvals,ticktext = ticktext
+    ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = tickvals,ticktext = ticktext
     ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
     ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", ""))
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
