@@ -231,3 +231,7 @@ def clean_leaderboard_column(column):
     column = column.apply(lambda x: f"+{x}" if x > 0 else x)
     column = np.where(column == 0, "  E", column)
     return column.astype(str)
+
+# Define the bold_font function
+def bold_font(val):
+    return 'font-weight: bold; font-family: Arial; color: white;'

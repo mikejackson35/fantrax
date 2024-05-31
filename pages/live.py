@@ -4,7 +4,7 @@ import plotly.express as px
 import streamlit as st
 import altair as alt
 
-from utils import get_rosters,get_matchups,highlight_rows,get_inside_cut,clean_leaderboard_column
+from utils import get_rosters,get_matchups,highlight_rows,get_inside_cut,clean_leaderboard_column, bold_font
 from dict_utils import team_abbrev_dict,fix_names
 from constants import LIVE_STATS,TOURNAMENT_NAME,WEEK_NUMBER
 
@@ -55,11 +55,6 @@ live_merged.loc[live_merged['position'].isin(['CUT', 'WD', 0]), 'holes_remaining
 
 live_merged = live_merged[live_merged['position'] !=0]
 
-# Function to apply bold font to a specific column
-def bold_font(val):
-    return 'font-weight: bold; font-family: Arial; color: white;'
-
-
 "#" # ensures refreshed page starts at top
 # st.caption("***updates when <br> tournament <br> starts***",unsafe_allow_html=True)
 
@@ -101,7 +96,8 @@ team_leaderboard.drop(columns='team',inplace=True)
 team_leaderboard.rename(columns={'team_short':'team'},inplace=True)
 team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 
-team_leaderboard = team_leaderboard.T.style.apply(highlight_rows,axis=0).applymap(bold_font)
+# Apply styling to team_leaderboard
+team_leaderboard = team_leaderboard.T.style.apply(highlight_rows, axis=0).applymap(bold_font)
 
 # 2 - player leaderboard
 player_leaderboard = live_merged[['player_name', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
