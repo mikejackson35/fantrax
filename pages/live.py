@@ -61,7 +61,7 @@ def bold_font(val):
 
 
 "#" # ensures refreshed page starts at top
-st.caption("***updates when <br> tournament <br> starts***",unsafe_allow_html=True)
+# st.caption("***updates when <br> tournament <br> starts***",unsafe_allow_html=True)
 
 st.markdown(f"<h3 style='text-align: center;'>{TOURNAMENT_NAME}</h3>", unsafe_allow_html=True)   
 st.markdown(f"<center>Week {WEEK_NUMBER}</center>",unsafe_allow_html=True)
