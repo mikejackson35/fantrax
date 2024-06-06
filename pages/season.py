@@ -59,10 +59,11 @@ median_delta_bar = px.bar(team_medians,
                           template='plotly_dark',
                           labels={'index':'', 'value':''},
                           height=350,
-                          title='season-to-date'
+                          title='Season to Date'
                          ).update_xaxes(showticklabels=False,tickfont=dict(color='#5A5856')
                          ).update_yaxes(showticklabels=False,showgrid=False,tickfont=dict(color='#5A5856'),title_font_color='#5A5856'
-                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),title_y=.75,title_x=.4, legend=dict(y=1.85, orientation='h',title='',font_color='#5A5856'))#legend=dict(title='',font_color='#5A5856'),
+                         ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),title_y=.75,title_x=.4, legend=dict(y=1.85, orientation='h',title='',font_color='#5A5856')
+                         ).update_traces(textfont_size=12, textfont_family='Arial Black',width=.7)
 
 ### WEEKLY SCORE VS WEEKLY MEDIAN FOR EACH TEAM ###
 team_weekly_deltas = pd.DataFrame(df[['team','week','median','median_delta']].groupby(['team','week'],as_index=False)[['median_delta','median']].sum())
@@ -92,7 +93,8 @@ median_delta_by_team_bar = px.bar(
     ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = tickvals,ticktext = ticktext
     ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
     ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", ""))
-    ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
+    ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name]))
+    ).update_traces(textfont_family='Arial Black',width=.75)
 
 
 
@@ -198,7 +200,7 @@ with weekly_bubble_container:
                                 render_mode='svg'
                                 ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
                                                 legend=dict(orientation='h',yanchor="bottom",y=1.1,x=.33,title='',font_color='#5A5856')
-                                ).update_xaxes(tickangle= -45,tickvals = tickvals,ticktext = ticktext,
+                                ).update_xaxes(tickvals = tickvals,ticktext = ticktext,
                                                tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                                 ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),
                                                tickcolor='darkgrey', gridcolor='darkgrey'
@@ -235,7 +237,7 @@ with weekly_bubble_container:
                                 height=400
                                 ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,
                                                 legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
-                                ).update_xaxes(tickangle= -45,tickvals = tickvals,ticktext = ticktext,
+                                ).update_xaxes(tickvals = tickvals,ticktext = ticktext,
                                                tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                                 ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),
                                                tickcolor='darkgrey', gridcolor='darkgrey'
@@ -260,28 +262,52 @@ with weekly_bubble_container:
 ### FINISHING POSITION COMPARISON
 finish_place_container = st.container(border=True)
 with finish_place_container:
-    finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
-    finish_medians.columns = 'Team','Best Finisher','2nd','3rd','4th','5th','Worst Finisher'
-    melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Best Finisher','2nd','3rd','4th','5th','Worst Finisher'])
+    tab1,tab2 = st.tabs(['Log Scale', 'Regular Scale'])
+    with tab1:
+        finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
+        finish_medians.columns = 'Team','Best Finisher','2nd','3rd','4th','5th','Worst Finisher'
+        melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Best Finisher','2nd','3rd','4th','5th','Worst Finisher'])
 
-    fin_place_scatter = px.scatter(melted_finish_medians,
-            x='variable',
-            y='value',
-            color='Team',
-            color_discrete_map=team_color,
-            template='plotly_white',
-            labels={'value':'Finish Place<br>(log scale)','variable':''},
-            log_y=True,
-            height=550,
-            ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
-            ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856',title="",orientation='h',y=1.15)
-            ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
-            ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
+        fin_place_scatter = px.scatter(melted_finish_medians,
+                x='variable',
+                y='value',
+                color='Team',
+                color_discrete_map=team_color,
+                template='plotly_white',
+                labels={'value':'Finish Place<br>(log scale)','variable':''},
+                log_y=True,
+                height=550,
+                ).update_traces(marker=dict(size=13,opacity=.75,line=dict(width=1,color='darkslategrey'))
+                ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856',title="",orientation='h',y=1.15)
+                ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
+                ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
 
-    st.markdown("##")
-    st.markdown("##")
-    st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
-    st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
+        st.markdown("##")
+        st.markdown("##")
+        st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
+        st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
+    with tab2:
+        finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
+        finish_medians.columns = 'Team','Best Finisher','2nd','3rd','4th','5th','Worst Finisher'
+        melted_finish_medians = finish_medians.melt(id_vars='Team',value_vars=['Best Finisher','2nd','3rd','4th','5th','Worst Finisher'])
+
+        fin_place_scatter = px.scatter(melted_finish_medians,
+                x='variable',
+                y='value',
+                color='Team',
+                color_discrete_map=team_color,
+                template='plotly_white',
+                labels={'value':'Finish Place<br>','variable':''},
+                height=550,
+                ).update_traces(marker=dict(size=13,opacity=.75,line=dict(width=1,color='darkslategrey'))
+                ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856',title="",orientation='h',y=1.15)
+                ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
+                ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
+
+        st.markdown("##")
+        st.markdown("##")
+        st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
+        st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)        
 
 corr_container = st.container(border=True)
 with corr_container:
@@ -317,7 +343,7 @@ with corr_container:
                     color_discrete_map=team_color,
                     trendline='ols',trendline_scope='overall',trendline_color_override='black',
                     labels={'win_loss':'Wins',radio_value:stats_dict[radio_value]}
-                ).update_traces(marker=dict(size=15,opacity=.75,line=dict(width=1,color='darkslategrey'))
+                ).update_traces(marker=dict(size=20,opacity=.75,line=dict(width=1,color='darkslategrey'))
                 ).update_layout(showlegend=False#legend=dict(title=None,orientation='h',x=0,y=1.3))
                 ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14), tickvals=tickvals
                 ).update_xaxes(showgrid=True,gridcolor="#B1A999",tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
