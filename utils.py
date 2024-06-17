@@ -163,36 +163,69 @@ def highlight_rows(row):
 
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#32cd32'
+        color = '#dc143c'
     elif value == 'Philly919':
         color = '#00bfff' # Aqua
     elif value == 'AlphaWired':
-        color = '#7f8c9b' # Orange
+        color = '#b22222' # Orange
     elif value == "Snead's Foot":
-        color = '#1e90ff' # Green
+        color = '#32cd32' # Green
     elif value == 'New Team 4':
         color = '#a9a9a9' # Red
     elif value == 'Team Gamble':
-        color = '#dc143c' # Navy
+        color = '#228b22' # Navy
     elif value == 'txmoonshine':
-        color = '#228b22' # Yellow 
+        color = '#1e90ff' # Yellow 
     elif value == 'u_c':
-        color = '#32cd32' # Purple
+        color = '#dc143c' # Purple
     elif value == '919':
         color = '#00bfff' # Aqua
     elif value == '[AW]':
-        color = '#7f8c9b' # Orange
+        color = '#b22222' # Orange
     elif value == 'NT 8':
-        color = '#1e90ff' # Green
+        color = '#32cd32' # Green
     elif value == 'NT 4':
         color = '#a9a9a9' # Red
     elif value == 'MG':
-        color = '#dc143c' # Navy
+        color = '#228b22' # Navy
     elif value == 'txms':
-        color = '#228b22' # Yellow
+        color = '#1e90ff' # Yellow
     else:
-        color = '#b22222' # Grey
+        color = '#7f8c9b' # Grey
     return ['background-color: {}'.format(color) for r in row]
+
+    # value = row.loc['Team']
+    # if value == 'unit_circle':
+    #     color = '#32cd32'
+    # elif value == 'Philly919':
+    #     color = '#00bfff' # Aqua
+    # elif value == 'AlphaWired':
+    #     color = '#7f8c9b' # Orange
+    # elif value == "Snead's Foot":
+    #     color = '#1e90ff' # Green
+    # elif value == 'New Team 4':
+    #     color = '#a9a9a9' # Red
+    # elif value == 'Team Gamble':
+    #     color = '#dc143c' # Navy
+    # elif value == 'txmoonshine':
+    #     color = '#228b22' # Yellow 
+    # elif value == 'u_c':
+    #     color = '#32cd32' # Purple
+    # elif value == '919':
+    #     color = '#00bfff' # Aqua
+    # elif value == '[AW]':
+    #     color = '#7f8c9b' # Orange
+    # elif value == 'NT 8':
+    #     color = '#1e90ff' # Green
+    # elif value == 'NT 4':
+    #     color = '#a9a9a9' # Red
+    # elif value == 'MG':
+    #     color = '#dc143c' # Navy
+    # elif value == 'txms':
+    #     color = '#228b22' # Yellow
+    # else:
+    #     color = '#b22222' # Grey
+    # return ['background-color: {}'.format(color) for r in row]
 
 def get_inside_cut(live_merged):
 

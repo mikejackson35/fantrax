@@ -50,7 +50,7 @@ live_merged = pd.merge(teams, live,how='left', left_index=True, right_index=True
     ['team','team_short','matchup', 'position','total','round', 'thru', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott','sg_t2g']] \
     .fillna(0).sort_values('total').convert_dtypes().reset_index()
 
-live_merged['holes_remaining'] = (36 - (live_merged['thru']).fillna(0)).astype(int)
+live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD', 0]), 'holes_remaining'] = 0
 
 live_merged = live_merged[live_merged['position'] !=0]
