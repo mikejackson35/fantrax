@@ -1,4 +1,5 @@
 import streamlit as st
+
 dg_key = st.secrets.dg_key
 
 TOURNAMENT_NAME = "The Travelers"
