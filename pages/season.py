@@ -25,8 +25,8 @@ def get_season_data():
 df = get_season_data()
 
 # constants
-tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
-ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo','PGA Championship','Charles Schwab','RBC Canadian', 'The Memorial','US Open']
+tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo','PGA Championship','Charles Schwab','RBC Canadian', 'The Memorial','US Open','Travelers']
 
 # ###  PER TOURNAMENT AVERAGES  ###
 st.write("#")
@@ -100,7 +100,7 @@ median_delta_by_team_bar = px.bar(
 
 ### CUTS MADE DISTRIBUTION  ###
 # df = df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False)
-cuts_made_hist1 = px.histogram(df[(df.week !=4) & (df.week !=15) & (df.week !=17) & (df.week !=21)].sort_values('cuts_made', ascending=False),
+cuts_made_hist1 = px.histogram(df[(df.week !=4) & (df.week !=15) & (df.week !=17) & (df.week !=21) & (df.week !=23)].sort_values('cuts_made', ascending=False),
                               x='cuts_made',
                               template='plotly_dark',
                               labels={'cuts_made':'Players Thru Cut', 'count':''},
@@ -125,7 +125,7 @@ cuts_made_hist1.update_yaxes(showticklabels=False, showgrid=False, tickfont=dict
 ### CUTS MADE DISTRIBUTION  ###
 newnames={'0':'Loss','1':'Win'}
 
-cuts_made_hist = px.histogram(df[(df.week !=4) & (df.week !=15) & (df.week !=17) & (df.week !=21)].sort_values('cuts_made', ascending=False),
+cuts_made_hist = px.histogram(df[(df.week !=4) & (df.week !=15) & (df.week !=17) & (df.week !=21) & (df.week !=23)].sort_values('cuts_made', ascending=False),
                     x='cuts_made',
                     text_auto='.2s',
                     title='Win % by Cuts Made',
