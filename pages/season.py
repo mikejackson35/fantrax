@@ -160,7 +160,7 @@ with col1:
 with blank:
     st.markdown("#")
     # st.markdown("#")
-    st.markdown("<center><small>*no cut events<br> exluded",unsafe_allow_html=True)
+    st.markdown("<center><small>*no cut events<br> excluded",unsafe_allow_html=True)
 with col2:
     # st.markdown("<center><h5>Win % by Cuts Made</h5></center>",unsafe_allow_html=True)
     st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
