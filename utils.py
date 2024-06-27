@@ -5,7 +5,7 @@ import plotly.express as px
 import streamlit as st
 
 from dict_utils import team_color,active_color,fix_names
-from constants import FANTASY_PROJECTIONS
+from constants import FANTASY_PROJECTIONS, CUTLINE
 from utils_api import fetch_leagueInfo,fetch_teamRosters
 
 def get_rosters():
@@ -194,39 +194,6 @@ def highlight_rows(row):
         color = '#1e90ff' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
-    # value = row.loc['Team']
-    # if value == 'unit_circle':
-    #     color = '#dc143c'
-    # elif value == 'Philly919':
-    #     color = '#00bfff' # Aqua
-    # elif value == 'AlphaWired':
-    #     color = '#b22222' # Orange
-    # elif value == "Snead's Foot":
-    #     color = '#32cd32' # Green
-    # elif value == 'New Team 4':
-    #     color = '#a9a9a9' # Red
-    # elif value == 'Team Gamble':
-    #     color = '#228b22' # Navy
-    # elif value == 'txmoonshine':
-    #     color = '#1e90ff' # Yellow 
-    # elif value == 'u_c':
-    #     color = '#dc143c' # Purple
-    # elif value == '919':
-    #     color = '#00bfff' # Aqua
-    # elif value == '[AW]':
-    #     color = '#b22222' # Orange
-    # elif value == 'NT 8':
-    #     color = '#32cd32' # Green
-    # elif value == 'NT 4':
-    #     color = '#a9a9a9' # Red
-    # elif value == 'MG':
-    #     color = '#228b22' # Navy
-    # elif value == 'txms':
-    #     color = '#1e90ff' # Yellow
-    # else:
-    #     color = '#7f8c9b' # Grey
-    # return ['background-color: {}'.format(color) for r in row]
-
 
 def get_inside_cut(live_merged):
 
@@ -236,16 +203,16 @@ def get_inside_cut(live_merged):
     Output: dictionary {team: count of players inside the cutline}
     """
 
-    # Filter out rows where 'position' is "CUT", "WAITING", or "WD"
+    # Filter out positions "CUT", "WAITING", and "WD"
     live_merged = live_merged[(live_merged['position'] != "CUT") & 
                               (live_merged['position'] != "WAITING") & 
                               (live_merged['position'] != "WD")]
 
-    # Apply lambda function to remove 'T', drop NaN values, and convert to integer
+    # remove 'T', drop NaN values, and convert to integer
     live_merged.loc[:, 'position'] = live_merged['position'].apply(lambda x: x.replace('T', '')).dropna().astype('int')
 
-    # Create a dataframe with counts of players inside the cutline per team
-    inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < 51].team.value_counts()).reset_index()
+    # Get num players inside the cutline per team
+    inside_cut_df = pd.DataFrame(live_merged[live_merged['position'] < CUTLINE].team.value_counts()).reset_index()
     inside_cut_df.columns = ['team', 'inside_cut']
 
     # Convert the dataframe to a dictionary
