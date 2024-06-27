@@ -50,7 +50,7 @@ live_merged = pd.merge(teams, live,how='left', left_index=True, right_index=True
     ['team','team_short','matchup', 'position','total','round', 'thru', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott','sg_t2g']] \
     .fillna(0).sort_values('total').convert_dtypes().reset_index()
 
-live_merged['holes_remaining'] = (18 - (live_merged['thru']).fillna(0)).astype(int)
+live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
 live_merged.loc[live_merged['position'].isin(['CUT', 'WD', 0]), 'holes_remaining'] = 0
 
 live_merged = live_merged[live_merged['position'] !=0]
@@ -106,9 +106,9 @@ player_leaderboard[['total', 'round']] = player_leaderboard[['total', 'round']].
 player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAITING", "-", player_leaderboard['position'])
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
 
-player_leaderboard['player_name'] = (player_leaderboard['player_name']
-                                     .str.split(expand=True)
-                                     .apply(lambda x: x[0][0] + " " + x[1], axis=1))
+# player_leaderboard['player_name'] = (player_leaderboard['player_name']
+#                                      .str.split(expand=True)
+#                                      .apply(lambda x: x[0][0] + " " + x[1], axis=1))
 
 player_leaderboard.columns = ['Player', 'Total', 'Pos', 'Rd', 'Thru', 'Team', 'Matchup']
 player_leaderboard = player_leaderboard.style.apply(highlight_rows,axis=1).applymap(bold_font)
