@@ -62,13 +62,13 @@ def fix_names(dg):
     Output: list of player names as first_name, last_name
     """
 
-    names = dg['player_name_rev'].str.split(expand=True)                  
+    names = dg['player_name'].str.split(expand=True)                  
     names[0] = names[0].str.rstrip(",")
     names[1] = names[1].str.rstrip(",")
-    names['player_name_rev'] = names[1] + " " + names[0]
+    names['player_name'] = names[1] + " " + names[0]
 
     # manually correct known problem names (ie "Jr" or "Si Woo Kim")
     for incorrect_name, correct_name in names_dict.items():
-        names['player_name_rev'] = np.where(names['player_name_rev'] == incorrect_name, correct_name, names['player_name_rev'])
+        names['player_name'] = np.where(names['player_name'] == incorrect_name, correct_name, names['player_name'])
 
-    return names.player_name_rev
+    return names.player_name

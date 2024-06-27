@@ -26,9 +26,8 @@ def get_live():
     live = round(pd.read_csv(LIVE_STATS),2)
     return live
 live = get_live()
-live = live.rename(columns={'player_name':'player_name_rev'})
 live = live.set_index(fix_names(live))
-# live = live.rename(columns={'player_name':'player_name_rev'})
+live = live.rename(columns={'player_name':'player'})
 
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
@@ -49,7 +48,7 @@ teams = fx.loc[fx.status=='ACTIVE'].set_index('player_name')
 
 # merge current fantasy teams and live scoring
 live_merged = pd.merge(teams, live,how='left', left_index=True, right_index=True)[
-    ['player_name_rev','team','team_short','matchup', 'position','total','round', 'thru', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott','sg_t2g']] \
+    ['player','team','team_short','matchup', 'position','total','round', 'thru', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott','sg_t2g']] \
     .fillna(0).sort_values('total').convert_dtypes().reset_index()
 
 live_merged['holes_remaining'] = (72 - (live_merged['thru']).fillna(0)).astype(int)
@@ -102,15 +101,16 @@ team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 team_leaderboard = team_leaderboard.T.style.apply(highlight_rows, axis=0).applymap(bold_font)
 
 # 2 - player leaderboard
-player_leaderboard = live_merged[['player_name_rev', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
+player_leaderboard = live_merged[['player_name','total', 'position', 'round', 'thru','team','matchup']].fillna(0)
 
 player_leaderboard[['total', 'round']] = player_leaderboard[['total', 'round']].apply(clean_leaderboard_column)
 player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAITING", "-", player_leaderboard['position'])
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
 
-player_leaderboard['player_name_rev'] = fix_names(player_leaderboard)
+# player_leaderboard['player_name_rev'] = fix_names(player_leaderboard)
 
-player_leaderboard['player_name_rev'] = (player_leaderboard['player_name_rev']
+# shorten first name to first initial
+player_leaderboard['player_name'] = (player_leaderboard['player_name']
                                      .str.split(expand=True)
                                      .apply(lambda x: x[0][0] + " " + x[1], axis=1))
 
