@@ -26,8 +26,9 @@ def get_live():
     live = round(pd.read_csv(LIVE_STATS),2)
     return live
 live = get_live()
-live = live.set_index(fix_names(live))
 live = live.rename(columns={'player_name':'player_name_rev'})
+live = live.set_index(fix_names(live))
+# live = live.rename(columns={'player_name':'player_name_rev'})
 
 
 ## CURRENT WEEK FANTASY ROSTERS & MATCHUPS ##
@@ -101,15 +102,17 @@ team_leaderboard.columns = ['Team','Total','PHR','Cut+']
 team_leaderboard = team_leaderboard.T.style.apply(highlight_rows, axis=0).applymap(bold_font)
 
 # 2 - player leaderboard
-player_leaderboard = live_merged[['player_name', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
+player_leaderboard = live_merged[['player_name_rev', 'total', 'position', 'round', 'thru','team','matchup']].fillna(0)
 
 player_leaderboard[['total', 'round']] = player_leaderboard[['total', 'round']].apply(clean_leaderboard_column)
 player_leaderboard['position'] = np.where(player_leaderboard['position'] == "WAITING", "-", player_leaderboard['position'])
 player_leaderboard['thru'] = np.where(player_leaderboard['thru'] == 0, "-", player_leaderboard['thru']).astype(str)
 
-# player_leaderboard['player_name'] = (player_leaderboard['player_name']
-#                                      .str.split(expand=True)
-#                                      .apply(lambda x: x[0][0] + " " + x[1], axis=1))
+player_leaderboard['player_name_rev'] = fix_names(player_leaderboard)
+
+player_leaderboard['player_name_rev'] = (player_leaderboard['player_name_rev']
+                                     .str.split(expand=True)
+                                     .apply(lambda x: x[0][0] + " " + x[1], axis=1))
 
 player_leaderboard.columns = ['Player', 'Total', 'Pos', 'Rd', 'Thru', 'Team', 'Matchup']
 player_leaderboard = player_leaderboard.style.apply(highlight_rows,axis=1).applymap(bold_font)
