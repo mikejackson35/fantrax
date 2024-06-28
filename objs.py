@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from .exceptions import FantraxException
+from exceptions import FantraxException
 
 
 

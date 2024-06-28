@@ -89,7 +89,7 @@ class FantraxAPI:
             self._teams.append(Team(self, team_id, data["name"], data["shortName"], data["logoUrl512"]))
         for period_data in response["tableList"]:
             period = ScoringPeriod(self, period_data)
-            periods[period.week] = period
+            periods[period] = period
         return periods
 
     def standings(self, week: Optional[Union[int, str]] = None) -> Standings:
