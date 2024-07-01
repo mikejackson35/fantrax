@@ -5,6 +5,7 @@ import streamlit as st
 import statsmodels.api as sm
 import streamlit_shadcn_ui as ui
 from dict_utils import *
+from constants import *
 
 st.set_page_config(
     page_title="Season",
@@ -25,8 +26,12 @@ def get_season_data():
 df = get_season_data()
 
 # constants
-tickvals = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS','Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo','PGA Championship','Charles Schwab','RBC Canadian', 'The Memorial','US Open','Travelers']
+# tickvals = [1,2,3,4,5,6,7,8,9,10, \
+#             11,12,13,14,15,16,17,18,19,20, \
+#             21,22,23]
+# ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS', \
+#             'Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo','PGA Championship','Charles Schwab', 'RBC Canadian', \
+#             'The Memorial','US Open','Travelers']
 
 # ###  PER TOURNAMENT AVERAGES  ###
 st.write("#")
@@ -162,7 +167,6 @@ with blank:
     # st.markdown("#")
     st.markdown("<center><small>*no cut events<br> excluded",unsafe_allow_html=True)
 with col2:
-    # st.markdown("<center><h5>Win % by Cuts Made</h5></center>",unsafe_allow_html=True)
     st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
 
 container = st.container(border=True)
@@ -191,7 +195,7 @@ with weekly_bubble_container:
                                 color='win_loss',
                                 template='plotly_dark',
                                 size='total_pts',
-                                size_max=12,
+                                size_max=9,
                                 hover_name=ticktext*8,
                                 color_discrete_sequence=px.colors.qualitative.Pastel1,
                                 labels={'week':'','total_pts':'Points Scored'},
