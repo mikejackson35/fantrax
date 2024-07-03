@@ -163,35 +163,35 @@ def highlight_rows(row):
 
     value = row.loc['Team']
     if value == 'unit_circle':
-        color = '#32cd32'
+        color = '#a9a9a9'
     elif value == 'Philly919':
         color = '#00bfff' # Aqua
     elif value == 'AlphaWired':
-        color = '#b22222' # Orange
+        color = '#228b22' # Orange
     elif value == "Snead's Foot":
         color = '#dc143c' # Green
     elif value == 'New Team 4':
         color = '#228b22' # Red
     elif value == 'Team Gamble':
-        color = '#a9a9a9' # Navy
+        color = '#1e90ff' # Navy
     elif value == 'txmoonshine':
         color = '#7f8c9b' # Yellow 
     elif value == 'u_c':
-        color = '#32cd32' # Purple
+        color = '#a9a9a9' # Purple
     elif value == '919':
         color = '#00bfff' # Aqua
     elif value == '[AW]':
-        color = '#b22222' # Orange
+        color = '#228b22' # Orange
     elif value == 'NT 8':
         color = '#dc143c' # Green
     elif value == 'NT 4':
         color = '#228b22' # Red
     elif value == 'MG':
-        color = '#a9a9a9' # Navy
+        color = '#1e90ff' # Navy
     elif value == 'txms':
         color = '#7f8c9b' # Yellow
     else:
-        color = '#1e90ff' # Grey
+        color = '#7f8c9b' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
     # value = row.loc['Team']
