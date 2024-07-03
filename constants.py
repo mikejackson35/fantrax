@@ -16,3 +16,5 @@ tickvals = [1,2,3,4,5,6,7,8,9,10, \
 ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open','Cognizant','Arnold Palmer','PLAYERS', \
             'Valspar','Houston Open','Valero','The Masters','RBC Heritage','AT&T Byron Nelson','Wells Fargo','PGA Championship','Charles Schwab', 'RBC Canadian', \
             'The Memorial','US Open','Travelers','Rocket Mortgage']
+
+no_cut_weeks = [4,15,17,21,23]
