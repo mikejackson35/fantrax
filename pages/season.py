@@ -208,7 +208,7 @@ with weekly_bubble_container:
                                                tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                                 ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),
                                                tickcolor='darkgrey', gridcolor='darkgrey'
-                                ).update_traces(marker=dict(size=14,opacity=.8,line=dict(width=1.25,color='darkslategrey'))
+                                ).update_traces(marker=dict(size=10,opacity=.8,line=dict(width=.5,color='darkslategrey'))
                                 ).for_each_trace(lambda t: t.update(name = newnames[t.name],
                                                                     legendgroup = newnames[t.name],
                                                                     hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])
@@ -245,7 +245,7 @@ with weekly_bubble_container:
                                                tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14)
                                 ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),
                                                tickcolor='darkgrey', gridcolor='darkgrey'
-                                ).update_traces(marker=dict(size=12,opacity=.75,line=dict(width=1,color='darkslategrey'))
+                                ).update_traces(marker=dict(size=10,opacity=.75,line=dict(width=.5,color='darkslategrey'))
                                 )
 
 
@@ -281,7 +281,7 @@ with finish_place_container:
                 labels={'value':'Finish Place<br>(log scale)','variable':''},
                 log_y=True,
                 height=550,
-                ).update_traces(marker=dict(size=13,opacity=.75,line=dict(width=1,color='darkslategrey'))
+                ).update_traces(marker=dict(size=11,opacity=.75,line=dict(width=.5,color='darkslategrey'))
                 ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856',title="",orientation='h',y=1.15)
                 ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
                 ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
@@ -303,7 +303,7 @@ with finish_place_container:
                 template='plotly_white',
                 labels={'value':'Finish Place<br>','variable':''},
                 height=550,
-                ).update_traces(marker=dict(size=13,opacity=.75,line=dict(width=1,color='darkslategrey'))
+                ).update_traces(marker=dict(size=11,opacity=.75,line=dict(width=.5,color='darkslategrey'))
                 ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),legend=dict(font_color='#5A5856',title="",orientation='h',y=1.15)
                 ).update_yaxes(gridcolor="#B1A999", tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14)
                 ).update_xaxes(showgrid=False,tickfont=dict(color='#5A5856'),title_font=dict(color='#5A5856',size=14))
