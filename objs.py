@@ -173,9 +173,12 @@ class Record:
         self.win = int(data[0]["content"])
         self.loss = int(data[1]["content"])
         self.tie = int(data[2]["content"])
-        self.points = int(data[3]["content"])
+        self.points = float(data[3]["content"])  # Changed from int to float
         self.win_percentage = float(data[4]["content"])
-        self.games_back = int(data[5]["content"])
+        self.games_back = float(data[5]["content"])  # Changed from int to float if necessary
+#         self.points = int(data[3]["content"])
+#         self.win_percentage = float(data[4]["content"])
+#         self.games_back = int(data[5]["content"])    
         self.wavier_wire_order = int(data[6]["content"])
         self.points_for = float(data[7]["content"].replace(",", ""))
         self.points_against = float(data[8]["content"].replace(",", ""))

@@ -75,7 +75,7 @@ class FantraxAPI:
         if response.status_code >= 400:
             raise FantraxException(f"({response.status_code} [{response.reason}]) {response_json}")
         return response_json["responses"][0]["data"]
-
+    
     def scoring_periods(self) -> Dict[int, ScoringPeriod]:
         """ :class:`~ScoringPeriod` Objects for the league.
 
