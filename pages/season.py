@@ -93,6 +93,10 @@ median_delta_by_team_bar = px.bar(
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name]))
     ).update_traces(textfont_family='Arial Black',width=.75)
 
+# Update facet titles to be larger and bold
+for annotation in median_delta_by_team_bar.layout.annotations:
+    annotation.update(font=dict(size=20, family='Arial Black'))
+
 
 
 ### CUTS MADE DISTRIBUTION  ###
