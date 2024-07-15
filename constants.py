@@ -19,4 +19,4 @@ ticktext = ['Sony','Amex','Farmers','AT&T','Waste Mgmt','Genesis','Mexico Open',
             'Wells Fargo','PGA Championship','Charles Schwab', 'RBC Canadian', \
             'The Memorial','US Open','Travelers','Rocket Mortgage','John Deere Classic', 'Scottish Open']
 
-no_cut_weeks = [4,15,17,21,23]
+no_cut_weeks = [4,6,15,17,21,23]
