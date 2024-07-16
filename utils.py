@@ -194,38 +194,6 @@ def highlight_rows(row):
         color = '#b22222' # Grey
     return ['background-color: {}'.format(color) for r in row]
 
-    # value = row.loc['Team']
-    # if value == 'unit_circle':
-    #     color = '#1e90ff'
-    # elif value == 'Philly919':
-    #     color = '#00bfff' # Aqua
-    # elif value == 'AlphaWired':
-    #     color = '#228b22' # Orange
-    # elif value == "Snead's Foot":
-    #     color = '#a9a9a9' # Green
-    # elif value == 'New Team 4':
-    #     color = '#b22222' # Red
-    # elif value == 'Team Gamble':
-    #     color = '#32cd32' # Navy
-    # elif value == 'txmoonshine':
-    #     color = '#dc143c' # Yellow 
-    # elif value == 'u_c':
-    #     color = '#1e90ff' # Purple
-    # elif value == '919':
-    #     color = '#00bfff' # Aqua
-    # elif value == '[AW]':
-    #     color = '#228b22' # Orange
-    # elif value == 'NT 8':
-    #     color = '#a9a9a9' # Green
-    # elif value == 'NT 4':
-    #     color = '#b22222' # Red
-    # elif value == 'MG':
-    #     color = '#32cd32' # Navy
-    # elif value == 'txms':
-    #     color = '#dc143c' # Yellow
-    # else:
-    #     color = '#7f8c9b' # Grey
-
 
 def get_inside_cut(live_merged):
 
@@ -263,6 +231,6 @@ def clean_leaderboard_column(column):
     column = np.where(column == 0, "  E", column)
     return column.astype(str)
 
-# Define the bold_font function
+# bold_font 
 def bold_font(val):
     return 'font-weight: bold; font-family: Arial; color: white;'
