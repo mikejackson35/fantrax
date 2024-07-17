@@ -310,7 +310,7 @@ with finish_place_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>Median Finishing Place<br>for each roster spot</h5></center>",unsafe_allow_html=True)
+        st.markdown("<center><h5>Median Finishing Place</center><br><center>for each roster spot</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
     with tab2:
         finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
