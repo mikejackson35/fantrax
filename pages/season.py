@@ -58,6 +58,23 @@ with tab2:
     st.dataframe(team_stat_medians,use_container_width=True)
 ##################
 
+# get scores for each week #
+df_slice = df[['week','team','total_pts','opponent']]
+
+opp_pts = df[['week','team','total_pts']]
+opp_pts.columns = ['week','opponent','opp_pts']
+
+all_scoring = pd.merge(df_slice, opp_pts, how='left', on=['week','opponent'])
+
+all_scoring['matchup_id'] = all_scoring.apply(lambda x: tuple(sorted([(x['team'], x['total_pts']), (x['opponent'], x['opp_pts'])])), axis=1)
+all_scoring = all_scoring.drop_duplicates(subset=['week', 'matchup_id']).drop(columns='matchup_id')
+all_scoring = all_scoring.sort_values(by=['week','total_pts'],ascending=[True,False]).reset_index(drop=True)
+all_scoring.columns = ['Week','Team','Score','Opp','Opp Score']
+
+with st.expander("EXPAND for all scores for all weeks"):
+    st.dataframe(all_scoring.set_index('Week'),use_container_width=True)
+
+
 ### SEASON TO DATE SCORE VS WEEKLY MEDIAN  ###
 team_medians = pd.DataFrame(df.groupby('team',as_index=False)['median_delta'].sum()).sort_values(by='median_delta',ascending=False).reset_index(drop=True)
 median_delta_bar = px.bar(team_medians,
@@ -170,7 +187,6 @@ with col1:
     st.plotly_chart(cuts_made_hist1,use_container_width=True, config=config)
 with blank:
     st.markdown("#")
-    # st.markdown("#")
     st.markdown("<center><small>*no cut events<br> excluded",unsafe_allow_html=True)
 with col2:
     st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
