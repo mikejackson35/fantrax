@@ -38,7 +38,7 @@ st.markdown("##")
 
 # ###  PER TOURNAMENT AVERAGES  ###
 # st.write("#")
-st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
+st.markdown("<center><h5>WEEKLY STATS</h5></center>",unsafe_allow_html=True)
 team_stat_avgs = df.groupby('team')[['total_pts','cuts_made','total_holes','pp_hole','bird_num','eag_num','bog_num','dbog_num','plc_pts']].mean()
 team_stat_avgs.columns = 'Total Pts','Cuts Made','Holes Played','Pts/Hole','Birdies','Eagles','Bogeys','Doubles','Plc Pts'
 team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']] = team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']].astype('int')
@@ -71,7 +71,7 @@ all_scoring = all_scoring.drop_duplicates(subset=['week', 'matchup_id']).drop(co
 all_scoring = all_scoring.sort_values(by=['week','total_pts'],ascending=[True,False]).reset_index(drop=True)
 all_scoring.columns = ['Week','Team','Score','Opp','Opp Score']
 
-with st.expander("EXPAND for all scores for all weeks"):
+with st.expander("EXPAND for all game scores for all weeks"):
     st.dataframe(all_scoring.set_index('Week'),use_container_width=True)
 
 
@@ -247,7 +247,7 @@ with weekly_bubble_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>LEAGUE SCORING</h5></center>",unsafe_allow_html=True)
+        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(scatter_fig,use_container_width=True, config=config)
 
     with tab2:
@@ -282,7 +282,7 @@ with weekly_bubble_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>LEAGUE SCORING</h5></center>",unsafe_allow_html=True)
+        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(scatter_fig,use_container_width=True, config=config)
 
 ### FINISHING POSITION COMPARISON
@@ -310,7 +310,7 @@ with finish_place_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
+        st.markdown("<center><h5>Median Finishing Place<br>for each roster spot</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
     with tab2:
         finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
