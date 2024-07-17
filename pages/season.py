@@ -25,9 +25,20 @@ def get_season_data():
     return season_data
 df = get_season_data()
 
-# ###  PER TOURNAMENT AVERAGES  ###
 st.write("#")
-st.markdown("<center><h5>WEEKLY</h5></center>",unsafe_allow_html=True)
+##  STANDINGS  ##
+st.markdown("<center><h5>STANDINGS</h5></center>",unsafe_allow_html=True)
+standings = df.groupby('team')[['win_loss','total_pts']].sum().sort_values('win_loss',ascending=False)
+standings['loss'] = (WEEK_NUMBER - 1) - standings['win_loss']
+standings.columns = ['Win','Points','Loss']
+standings = standings[['Win','Loss','Points']]
+
+st.dataframe(standings,use_container_width=True)
+st.markdown("##")
+
+# ###  PER TOURNAMENT AVERAGES  ###
+# st.write("#")
+st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
 team_stat_avgs = df.groupby('team')[['total_pts','cuts_made','total_holes','pp_hole','bird_num','eag_num','bog_num','dbog_num','plc_pts']].mean()
 team_stat_avgs.columns = 'Total Pts','Cuts Made','Holes Played','Pts/Hole','Birdies','Eagles','Bogeys','Doubles','Plc Pts'
 team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']] = team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']].astype('int')
@@ -100,8 +111,6 @@ for annotation in median_delta_by_team_bar.layout.annotations:
 
 
 ### CUTS MADE DISTRIBUTION  ###
-# df = df[(df.week !=4) & (df.week !=15)].sort_values('cuts_made', ascending=False)
-# cuts_made_hist1 = px.histogram(df[(df.week !=4) & (df.week !=15) & (df.week !=17) & (df.week !=21) & (df.week !=23)].sort_values('cuts_made', ascending=False),
 cuts_made_hist1 = px.histogram(df[~df.week.isin(no_cut_weeks)].sort_values('cuts_made', ascending=False),
                               x='cuts_made',
                               template='plotly_dark',
@@ -170,7 +179,7 @@ container = st.container(border=True)
 with container:
     st.markdown('<center><h5>vs. WEEKLY MEDIAN SCORE</h5></center>',unsafe_allow_html=True)
     st.plotly_chart(median_delta_bar,config=config,use_container_width=True)
-    with st.expander("CLICK for WEEKLY by TEAM"):
+    with st.expander("EXPAND for team by team"):
         st.plotly_chart(median_delta_by_team_bar,config=config, use_container_width=True)
 ##################
 
@@ -222,7 +231,7 @@ with weekly_bubble_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
+        st.markdown("<center><h5>LEAGUE SCORING</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(scatter_fig,use_container_width=True, config=config)
 
     with tab2:
@@ -257,7 +266,7 @@ with weekly_bubble_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
+        st.markdown("<center><h5>LEAGUE SCORING</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(scatter_fig,use_container_width=True, config=config)
 
 ### FINISHING POSITION COMPARISON
