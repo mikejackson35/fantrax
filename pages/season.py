@@ -183,14 +183,16 @@ cuts_made_hist.update_yaxes(showticklabels=False, showgrid=False,visible= False)
 st.markdown("##")
 st.markdown("##")
 st.markdown("<center><h5>CUTLINE</h5></center>",unsafe_allow_html=True)
-col1,blank,col2 = st.columns([1.9,1.2,1.9])
-with col1:
-    st.plotly_chart(cuts_made_hist1,use_container_width=True, config=config)
-with blank:
-    st.markdown("#")
-    st.markdown("<center><small>*no cut events<br> excluded",unsafe_allow_html=True)
-with col2:
-    st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
+container = st.container(border=True)
+with container:
+    col1,blank,col2 = st.columns([1.9,1.2,1.9])
+    with col1:
+        st.plotly_chart(cuts_made_hist1,use_container_width=True, config=config)
+    with blank:
+        st.markdown("#")
+        st.markdown("<center><small>*no cut events<br> excluded",unsafe_allow_html=True)
+    with col2:
+        st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
 
 
 st.markdown("##")
