@@ -33,7 +33,7 @@ standings['loss'] = (WEEK_NUMBER - 1) - standings['win_loss']
 standings.columns = ['Win','Points','Loss']
 standings = standings[['Win','Loss','Points']]
 
-st.dataframe(standings,use_container_width=True)
+st.sidebar.dataframe(standings,use_container_width=True)
 st.markdown("##")
 
 # ###  PER TOURNAMENT AVERAGES  ###
