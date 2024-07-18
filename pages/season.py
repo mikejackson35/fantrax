@@ -350,7 +350,7 @@ with corr_container:
 
     col1,col2 = st.columns([1,2])
     with col1:
-        # "#"
+        "#"
         # "#"
         # "#"
         st.markdown(f"Choose a Statistic<br>",unsafe_allow_html=True)
