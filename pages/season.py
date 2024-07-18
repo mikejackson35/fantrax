@@ -25,22 +25,36 @@ def get_season_data():
     return season_data
 df = get_season_data()
 
-# st.write("#")
-
 ##  STANDINGS  ##
-st.write("#")
-st.sidebar.markdown("<center><h5>STANDINGS</h5></center>",unsafe_allow_html=True)
+
 standings = df.groupby('team')[['win_loss','total_pts']].sum().sort_values('win_loss',ascending=False)
 standings['loss'] = (WEEK_NUMBER - 1) - standings['win_loss']
 standings.columns = ['Win','Points','Loss']
 standings = standings[['Win','Loss','Points']]
 
+st.sidebar.markdown("<indent><h5>STANDINGS</h5></indent>",unsafe_allow_html=True)
 st.sidebar.dataframe(standings)#,use_container_width=True)
-st.markdown("##")
 
 # ###  PER TOURNAMENT AVERAGES  ###
-# st.write("#")
+st.write("#")
 st.markdown("<center><h5>WEEKLY STATS</h5></center>",unsafe_allow_html=True)
+
+# get scores for each week #
+df_slice = df[['week','team','total_pts','opponent']]
+
+opp_pts = df[['week','team','total_pts']]
+opp_pts.columns = ['week','opponent','opp_pts']
+
+all_scoring = pd.merge(df_slice, opp_pts, how='left', on=['week','opponent'])
+
+all_scoring['matchup_id'] = all_scoring.apply(lambda x: tuple(sorted([(x['team'], x['total_pts']), (x['opponent'], x['opp_pts'])])), axis=1)
+all_scoring = all_scoring.drop_duplicates(subset=['week', 'matchup_id']).drop(columns='matchup_id')
+all_scoring = all_scoring.sort_values(by=['week','total_pts'],ascending=[True,False]).reset_index(drop=True)
+all_scoring.columns = ['Week','Team','Score','Opp','Opp Score']
+
+with st.expander("EXPAND for all game scores for all weeks"):
+    st.dataframe(all_scoring.set_index('Week'),use_container_width=True)
+
 team_stat_avgs = df.groupby('team')[['total_pts','cuts_made','total_holes','pp_hole','bird_num','eag_num','bog_num','dbog_num','plc_pts']].mean()
 team_stat_avgs.columns = 'Total Pts','Cuts Made','Holes Played','Pts/Hole','Birdies','Eagles','Bogeys','Doubles','Plc Pts'
 team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']] = team_stat_avgs[['Total Pts','Holes Played','Bogeys','Birdies','Plc Pts']].astype('int')
@@ -59,22 +73,6 @@ with tab1:
 with tab2:
     st.dataframe(team_stat_medians,use_container_width=True)
 ##################
-
-# get scores for each week #
-df_slice = df[['week','team','total_pts','opponent']]
-
-opp_pts = df[['week','team','total_pts']]
-opp_pts.columns = ['week','opponent','opp_pts']
-
-all_scoring = pd.merge(df_slice, opp_pts, how='left', on=['week','opponent'])
-
-all_scoring['matchup_id'] = all_scoring.apply(lambda x: tuple(sorted([(x['team'], x['total_pts']), (x['opponent'], x['opp_pts'])])), axis=1)
-all_scoring = all_scoring.drop_duplicates(subset=['week', 'matchup_id']).drop(columns='matchup_id')
-all_scoring = all_scoring.sort_values(by=['week','total_pts'],ascending=[True,False]).reset_index(drop=True)
-all_scoring.columns = ['Week','Team','Score','Opp','Opp Score']
-
-with st.expander("EXPAND for all game scores for all weeks"):
-    st.dataframe(all_scoring.set_index('Week'),use_container_width=True)
 
 
 ### SEASON TO DATE SCORE VS WEEKLY MEDIAN  ###
@@ -118,7 +116,7 @@ median_delta_by_team_bar = px.bar(
     text_auto='.0f'
     ).update_yaxes(tickfont=dict(color='#5A5856', size=13),title_font=dict(color='#5A5856',size=14),tickcolor='darkgrey', gridcolor='darkgrey'
     ).update_xaxes(tickfont=dict(color='#5A5856', size=11),title_font=dict(color='#5A5856',size=14),showticklabels=True,tickmode='array',tickvals = tickvals,ticktext = ticktext
-    ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.1,xanchor="center",x=.5,title='',font_color='#5A5856')
+    ).update_layout(hoverlabel=dict(font_size=18,font_family="Rockwell"),showlegend=True,legend=dict(orientation='h',yanchor="bottom",y=1.03,xanchor="center",x=.5,title='',font_color='#5A5856')
     ).for_each_annotation(lambda a: a.update(text=a.text.replace("team=", ""))
     ).for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name]))
     ).update_traces(textfont_family='Arial Black',width=.75)
@@ -194,16 +192,21 @@ with blank:
 with col2:
     st.plotly_chart(cuts_made_hist,use_container_width=True, config=config)
 
+
+st.markdown("##")
+st.markdown("##")
+st.markdown('<center><h5>TEAM SCORES<br><small>vs.</small><br>WEEKLY MEDIAN</h5></center>',unsafe_allow_html=True)
 container = st.container(border=True)
 with container:
-    st.markdown('<center><h5>vs. WEEKLY MEDIAN SCORE</h5></center>',unsafe_allow_html=True)
     st.plotly_chart(median_delta_bar,config=config,use_container_width=True)
     with st.expander("EXPAND for team by team"):
         st.plotly_chart(median_delta_by_team_bar,config=config, use_container_width=True)
 ##################
 
 ### WEEKLY BUBBLES WIN / LOSS  ###
-st.write("#")
+st.markdown("##")
+st.markdown("##")
+st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
 weekly_bubble_container = st.container(border=True)
 
 temp_df = df.copy()
@@ -250,7 +253,6 @@ with weekly_bubble_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(scatter_fig,use_container_width=True, config=config)
 
     with tab2:
@@ -285,10 +287,13 @@ with weekly_bubble_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
+        # st.markdown("<center><h5>WEEKLY SCORING</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(scatter_fig,use_container_width=True, config=config)
 
 ### FINISHING POSITION COMPARISON
+st.markdown("##")
+st.markdown("##")
+st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
 finish_place_container = st.container(border=True)
 with finish_place_container:
     tab1,tab2 = st.tabs(['Log Scale', 'Regular Scale'])
@@ -313,7 +318,6 @@ with finish_place_container:
 
         st.markdown("##")
         st.markdown("##")
-        st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)
     with tab2:
         finish_medians = round(df[['team','fin_1','fin_2','fin_3','fin_4','fin_5','fin_6']].groupby('team').median(),1).reset_index()
@@ -338,13 +342,16 @@ with finish_place_container:
         st.markdown("<center><h5>Median Finishing Place</h5></center>",unsafe_allow_html=True)
         st.plotly_chart(fin_place_scatter,use_container_width=True, config=config)        
 
+st.markdown("##")
+st.markdown("##")
+st.markdown(f"<center><h5>CORRELATION<br>TO WINS</h5></center>",unsafe_allow_html=True)
 corr_container = st.container(border=True)
 with corr_container:
 
     col1,col2 = st.columns([1,2])
     with col1:
         "#"
-        st.markdown(f"<center><h5>Correlation<br>to WINS</h5></center>",unsafe_allow_html=True)
+        "#"
         "#"
         st.markdown(f"Choose a Statistic<br>",unsafe_allow_html=True)
         radio_options = [
