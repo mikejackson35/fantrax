@@ -344,13 +344,13 @@ with finish_place_container:
 
 st.markdown("##")
 st.markdown("##")
-st.markdown(f"<center><h5>CORRELATION<br>TO WINS</h5></center>",unsafe_allow_html=True)
+st.markdown(f"<center><h5>CORRELATION TO WINS</h5></center>",unsafe_allow_html=True)
 corr_container = st.container(border=True)
 with corr_container:
 
     col1,col2 = st.columns([1,2])
     with col1:
-        "#"
+        # "#"
         # "#"
         # "#"
         st.markdown(f"Choose a Statistic<br>",unsafe_allow_html=True)
@@ -368,7 +368,7 @@ with corr_container:
         radio_value = ui.radio_group(options=radio_options, default_value="bb_ratio", key="radio1")
 
     with col2:
-        "#"
+        # "#"
         r_squared = st.empty()
         df['bb_ratio'] = round(df.bird_num / df.bog_num,1)
         # df['avg_place_pts'] = round(df.plc_pts / df.TP)
