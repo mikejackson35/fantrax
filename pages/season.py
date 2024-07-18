@@ -28,7 +28,7 @@ df = get_season_data()
 st.write("#")
 
 ##  STANDINGS  ##
-st.sidebar.write("#")
+st.write("#")
 st.sidebar.markdown("<center><h5>STANDINGS</h5></center>",unsafe_allow_html=True)
 standings = df.groupby('team')[['win_loss','total_pts']].sum().sort_values('win_loss',ascending=False)
 standings['loss'] = (WEEK_NUMBER - 1) - standings['win_loss']
