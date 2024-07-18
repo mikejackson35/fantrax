@@ -25,7 +25,7 @@ def get_season_data():
     return season_data
 df = get_season_data()
 
-st.write("#")
+# st.write("#")
 
 ##  STANDINGS  ##
 st.write("#")
