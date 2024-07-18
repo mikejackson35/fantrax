@@ -26,14 +26,16 @@ def get_season_data():
 df = get_season_data()
 
 st.write("#")
+
 ##  STANDINGS  ##
-st.markdown("<center><h5>STANDINGS</h5></center>",unsafe_allow_html=True)
+st.sidebar.write("#")
+st.sidebar.markdown("<center><h5>STANDINGS</h5></center>",unsafe_allow_html=True)
 standings = df.groupby('team')[['win_loss','total_pts']].sum().sort_values('win_loss',ascending=False)
 standings['loss'] = (WEEK_NUMBER - 1) - standings['win_loss']
 standings.columns = ['Win','Points','Loss']
 standings = standings[['Win','Loss','Points']]
 
-st.sidebar.dataframe(standings,use_container_width=True)
+st.sidebar.dataframe(standings)#,use_container_width=True)
 st.markdown("##")
 
 # ###  PER TOURNAMENT AVERAGES  ###
@@ -132,13 +134,13 @@ cuts_made_hist1 = px.histogram(df[~df.week.isin(no_cut_weeks)].sort_values('cuts
                               x='cuts_made',
                               template='plotly_dark',
                               labels={'cuts_made':'Players Thru Cut', 'count':''},
-                              title="Distribution Cuts Made",
+                              title="Distribution",
                               color_discrete_sequence=['#5A5856'],
                               height=275,
                               text_auto='.0f'
                              )
 
-cuts_made_hist1.update_layout(bargap=0.2, legend=dict(title="", x=.45, y=1.3, orientation='h'),title_x=.25)
+cuts_made_hist1.update_layout(bargap=0.2, legend=dict(title="", x=.45, y=1.3, orientation='h'),title_x=.33, title_y=.9)
 cuts_made_hist1.update_xaxes(tickvals = [1,2,3,4,5,6],
                             ticktext = ['1/6','2/6','3/6','4/6','5/6','6/6'],
                             showgrid=False,
@@ -156,7 +158,7 @@ newnames={'0':'Loss','1':'Win'}
 cuts_made_hist = px.histogram(df[~df.week.isin(no_cut_weeks)].sort_values('cuts_made', ascending=False),
                     x='cuts_made',
                     text_auto='.2s',
-                    title='Win % by Cuts Made',
+                    title='Win %',
                     template='plotly_dark',
                     labels={'cuts_made':'Players Thru Cut','count':''},
                     histfunc='count',
@@ -166,7 +168,7 @@ cuts_made_hist = px.histogram(df[~df.week.isin(no_cut_weeks)].sort_values('cuts_
                     color_discrete_sequence=px.colors.qualitative.Safe,
                     height=275)
 
-cuts_made_hist.update_layout(legend=dict(title="",x=.25,y=1.4,orientation='h',font_color='#5A5856'),title_x=.25,bargap=0.2)
+cuts_made_hist.update_layout(legend=dict(title="",x=.25,y=1.4,orientation='h',font_color='#5A5856'),title_x=.5, title_y=.9,bargap=0.2)
 cuts_made_hist.for_each_trace(lambda t: t.update(name = newnames[t.name],legendgroup = newnames[t.name],hovertemplate = t.hovertemplate.replace(t.name, newnames[t.name])))
 
 cuts_made_hist.update_xaxes(tickvals = [1,2,3,4,5,6],
@@ -182,6 +184,7 @@ cuts_made_hist.update_yaxes(showticklabels=False, showgrid=False,visible= False)
 
 st.markdown("##")
 st.markdown("##")
+st.markdown("<center><h5>CUTLINE</h5></center>",unsafe_allow_html=True)
 col1,blank,col2 = st.columns([1.9,1.2,1.9])
 with col1:
     st.plotly_chart(cuts_made_hist1,use_container_width=True, config=config)
