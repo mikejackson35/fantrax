@@ -197,7 +197,7 @@ with container:
 
 st.markdown("##")
 st.markdown("##")
-st.markdown('<center><h5>TEAM SCORES<br><center><small>vs.</small><br><center>WEEKLY MEDIAN</h5></center>',unsafe_allow_html=True)
+st.markdown('<center><h5>TEAM SCORES<br><center><small>vs.</small><br><center><br>WEEKLY MEDIAN</h5></center>',unsafe_allow_html=True)
 container = st.container(border=True)
 with container:
     st.plotly_chart(median_delta_bar,config=config,use_container_width=True)
